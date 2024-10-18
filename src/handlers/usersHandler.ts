@@ -47,7 +47,7 @@ export async function createUser(req: Request<{}, {}, User>, res: Response) {
         }
 
         const newUser = new User(username, displayName);
-        await em.persistAndFlush(newUser);
+        await userRepository.getEntityManager().persistAndFlush(newUser);
 
         return res.status(201).send({ message: `User ${newUser.username} successfully created` });
     } catch (error) {

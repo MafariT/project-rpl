@@ -8,7 +8,6 @@ export async function initORM() {
   return orm;
 }
 
-
 export function getORM() {
   if (!orm) {
     throw new Error('ORM is not initialized. Please call initORM() first.');
