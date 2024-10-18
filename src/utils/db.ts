@@ -1,16 +1,17 @@
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
+import { MikroORM } from '@mikro-orm/mysql';
+import mikroOrmConfig from './mikro-orm.config';
 
-dotenv.config();
+let orm: MikroORM;
 
-const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
+export async function initORM() {
+  orm = await MikroORM.init(mikroOrmConfig);
+  return orm;
+}
 
-export default db;
+
+export function getORM() {
+  if (!orm) {
+    throw new Error('ORM is not initialized. Please call initORM() first.');
+  }
+  return orm;
+}

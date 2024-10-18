@@ -1,15 +1,24 @@
 import express from 'express';
+import viewRouter from './routes/view';
 import userRouter from './routes/users';
-import navRouter from './routes/view';
+import { logging } from './middlewares/logging';
+import { initORM } from './utils/db';
 
 const app = express();
-const PORT = 5000;
+const PORT = 5000
 
+// Initialize database
+initORM();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/', navRouter)
+app.use(logging);
+
+// View
+app.use('/', viewRouter)
+
+// REST API
 app.use('/api/users', userRouter)
 
 app.listen(PORT, () => {

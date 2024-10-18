@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { createUserView, homeView } from "../handlers/viewHandler";
+import { createUserView, homeView, userListView } from "../handlers/viewHandler";
 
-const navRouter = Router();
+const viewRouter = Router();
 
 // /
-navRouter.get('/', homeView);
+viewRouter.get('/', homeView);
 
-navRouter.get('/createUser', createUserView);
+viewRouter.get('/createUser', createUserView);
 
-export default navRouter;
+viewRouter.get('/userlist', userListView)
+
+export default viewRouter;
