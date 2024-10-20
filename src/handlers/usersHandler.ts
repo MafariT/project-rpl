@@ -1,57 +1,45 @@
-import { Request, Response } from 'express';
-import { QueryParams } from '../types/query-params';
-import { User } from '../models/users';
-import { getORM } from '../utils/db';
+import { Request, Response } from "express";
+import { QueryParams } from "../types/query-params";
+import { User } from "../models/user.entity";
+import { initORM } from "../utils/db";
+import z, { ZodError } from "zod";
+import { UserExistsError } from "../models/user.repository";
+
+const userSchema = z.object({
+    username: z.string().min(1).max(100),
+    displayName: z.string().min(1).max(100),
+});
 
 export async function getUsers(req: Request<{}, {}, {}, QueryParams>, res: Response) {
-    const {
-        query: { filter, value }
-    } = req;
+    const db = await initORM();
+    const { filter, value } = req.query;
 
     try {
-        const orm = getORM();
-        const em = orm.em.fork(); // Forking the EntityManager for this request
-        const userRepository = em.getRepository(User);
-        let users: User[];
-
-        if (filter && value && User.isValidFilter(filter)) {
-            users = await userRepository.find({ [filter]: { $like: `%${value}%` } });
-        } else {
-            users = await userRepository.findAll();
-        }
-
+        const users = await db.user.fetchUsers(filter, value);
         return res.status(200).send(users);
     } catch (error) {
-        console.error(error);
+        console.error("Error fetching users:", error);
         return res.sendStatus(500);
     }
 }
 
 export async function createUser(req: Request<{}, {}, User>, res: Response) {
-    const {
-        body: { username, displayName }
-    } = req;
-
-    if (!username || !displayName) {
-        return res.status(400).send({ message: 'Username and display name are required' });
-    }
+    const db = await initORM();
+    const { username, displayName } = req.body;
 
     try {
-        const orm = getORM();
-        const em = orm.em.fork(); // Forking the EntityManager for this request
-        const userRepository = em.getRepository(User);
-        const existingUser = await userRepository.findOne({ username });
+        userSchema.parse({ username, displayName }); // Validation
 
-        if (existingUser) {
-            return res.status(409).send({ message: 'Username already exists' });
-        }
-
-        const newUser = new User(username, displayName);
-        await userRepository.getEntityManager().persistAndFlush(newUser);
-
-        return res.status(201).send({ message: `User ${newUser.username} successfully created` });
+        await db.user.saveUser(username, displayName);
+        return res.status(201).send(`User ${username} successfully created`);
     } catch (error) {
-        console.error(error);
+        if (error instanceof ZodError) {
+            return res.status(400).send(error.errors.map((err) => err.message));
+        }
+        if (error instanceof UserExistsError) {
+            return res.status(409).send(error.message);
+        }
+        console.error("Error creating user:", error);
         return res.sendStatus(500);
     }
 }

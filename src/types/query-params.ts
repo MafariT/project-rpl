@@ -1,4 +1,4 @@
 export interface QueryParams {
-    filter?: string,
-    value?: string
+    filter?: string;
+    value?: string;
 }
