@@ -13,17 +13,23 @@ export class UserRepository extends EntityRepository<User> {
         if (filter && value && User.validFilter.safeParse(filter).success) {
             return this.find({ [filter]: { $like: `%${value}%` } });
         } else {
-            return this.findAll();
+            return this.findAll({ limit: 10000 });
         }
     }
 
-    async saveUser(username: string, displayName: string): Promise<void> {
+    async saveUser(
+        username: string,
+        email: string,
+        password: string,
+        displayName: string,
+    ): Promise<void> {
         if (await this.exists(username)) {
             throw new UserExistsError(username);
         }
 
-        const newUser = new User(username, displayName);
-        await this.getEntityManager().persistAndFlush(newUser);
+        const newUser = new User(username, email, password, displayName);
+        this.create(newUser);
+        await this.em.flush();
     }
 
     async exists(username: string): Promise<boolean> {

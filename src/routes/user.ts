@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { createUser, getUsers } from "../handlers/usersHandler";
+import { createUser, getUser } from "../handlers/usersHandler";
 
 const userRouter = Router();
 
-// /api/users
-userRouter.get("/", getUsers as any);
+// /api/user
+userRouter.get("/", getUser as any);
 
 userRouter.post("/", createUser as any);
 

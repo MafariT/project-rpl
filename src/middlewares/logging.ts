@@ -1,5 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import logger from "../utils/logger";
+import pino from "pino";
+
+const logger = pino({
+    transport: {
+        target: "pino-pretty",
+        options: {
+            colorize: true, // Enables colored output
+            levelFirst: true,
+            translateTime: "SYS:standard",
+        },
+    },
+});
 
 export function logging(req: Request, res: Response, next: NextFunction) {
     const { method, url } = req;

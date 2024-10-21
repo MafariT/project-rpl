@@ -1,8 +1,15 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import path from "path";
 
+declare module "express-session" {
+    interface SessionData {
+        visited: boolean;
+    }
+}
+
 export function homeView(req: Request, res: Response) {
-    res.cookie("hello", "world", { maxAge: 10000 });
+    req.session.visited = true;
+    res.cookie("hello", "world", { maxAge: 30000, signed: true });
     return res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 }
 
@@ -11,5 +18,8 @@ export function createUserView(req: Request, res: Response) {
 }
 
 export function userListView(req: Request, res: Response) {
-    return res.sendFile(path.join(__dirname, "..", "public", "usersList.html"));
+    if (req.signedCookies.hello === "world") {
+        return res.sendFile(path.join(__dirname, "..", "public", "usersList.html"));
+    }
+    return res.redirect("/");
 }

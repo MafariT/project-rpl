@@ -1,6 +1,6 @@
 .vscode
 .env
 .eslintrc.json
-log
+logs
 dist
 node_modules

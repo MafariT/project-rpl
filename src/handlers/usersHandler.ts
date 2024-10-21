@@ -6,11 +6,13 @@ import z, { ZodError } from "zod";
 import { UserExistsError } from "../models/user.repository";
 
 const userSchema = z.object({
-    username: z.string().min(1).max(100),
-    displayName: z.string().min(1).max(100),
+    username: z.string().min(1).max(255),
+    email: z.string().min(1).max(255),
+    password: z.string().min(1).max(255),
+    displayName: z.string().min(1).max(255),
 });
 
-export async function getUsers(req: Request<{}, {}, {}, QueryParams>, res: Response) {
+export async function getUser(req: Request<{}, {}, {}, QueryParams>, res: Response) {
     const db = await initORM();
     const { filter, value } = req.query;
 
@@ -25,12 +27,12 @@ export async function getUsers(req: Request<{}, {}, {}, QueryParams>, res: Respo
 
 export async function createUser(req: Request<{}, {}, User>, res: Response) {
     const db = await initORM();
-    const { username, displayName } = req.body;
+    const { username, email, password, displayName } = req.body;
 
     try {
-        userSchema.parse({ username, displayName }); // Validation
+        userSchema.parse({ username, email, password, displayName }); // Validation
 
-        await db.user.saveUser(username, displayName);
+        await db.user.saveUser(username, email, password, displayName);
         return res.status(201).send(`User ${username} successfully created`);
     } catch (error) {
         if (error instanceof ZodError) {
