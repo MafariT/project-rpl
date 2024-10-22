@@ -1,19 +1,15 @@
 import { EntityRepository } from "@mikro-orm/mysql";
 import { Pasien } from "./pasien.entity";
-
-export class PasienExistsError extends Error {
-    constructor(nik: string) {
-        super(`${nik} already exists`);
-        this.name = "UserExistsError";
-    }
-}
+import { ExistsError } from "../../utils/erros";
+import z from "zod";
 
 export class PasienRepository extends EntityRepository<Pasien> {
+    static validFilter = z.enum(["nik"]);
     async fetch(filter?: string, value?: string): Promise<Pasien[]> {
-        if (filter && value && Pasien.validFilter.safeParse(filter).success) {
-            return this.find({ [filter]: { $like: `%${value}%` } });
+        if (filter && value && PasienRepository.validFilter.safeParse(filter).success) {
+            return this.find({ [filter]: value });
         } else {
-            return this.findAll({ limit: 10000 });
+            return this.findAll({ limit: 100 });
         }
     }
 
@@ -26,7 +22,7 @@ export class PasienRepository extends EntityRepository<Pasien> {
         jenisKelamin: string,
     ): Promise<void> {
         if (await this.exists(nik)) {
-            throw new PasienExistsError(nik);
+            throw new ExistsError(nik);
         }
 
         const newPasien = new Pasien(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin);

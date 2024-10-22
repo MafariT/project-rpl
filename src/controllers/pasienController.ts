@@ -3,7 +3,7 @@ import { QueryParams } from "../types/query-params";
 import { Pasien } from "../models/pasien/pasien.entity";
 import { initORM } from "../utils/db";
 import z, { ZodError } from "zod";
-import { PasienExistsError } from "../models/pasien/pasien.repository";
+import { ExistsError } from "../utils/erros";
 
 const pasienSchema = z.object({
     nik: z.string().min(1).max(255),
@@ -37,14 +37,18 @@ export async function createPasien(req: Request<{}, {}, Pasien>, res: Response) 
         pasienSchema.parse({ nik, nama, alamat, noTel, tanggalLahir, jenisKelamin }); // Validation
 
         await db.pasien.save(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin);
-        return res.status(201).send(`Pasien ${nama} successfully created`);
+        return res.status(201).send({ message: `Pasien ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
             console.error(error);
-            return res.status(400).send(error.errors.map((err) => err.path));
+            const errorMessages = error.errors.map((err) => {
+                return `${err.path.join(".")} - ${err.message}`;
+            });
+
+            return res.status(400).send({ message: "Validation failed", errors: errorMessages });
         }
-        if (error instanceof PasienExistsError) {
-            return res.status(409).send(error.message);
+        if (error instanceof ExistsError) {
+            return res.status(409).send({ message: error.message });
         }
         console.error("Error creating pasien:", error);
         return res.sendStatus(500);

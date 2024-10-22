@@ -1,25 +1,21 @@
 import { EntityRepository } from "@mikro-orm/mysql";
 import { User } from "./user.entity";
-
-export class UserExistsError extends Error {
-    constructor(username: string) {
-        super(`${username} already exists`);
-        this.name = "UserExistsError";
-    }
-}
+import { ExistsError } from "../../utils/erros";
+import z from "zod";
 
 export class UserRepository extends EntityRepository<User> {
+    static validFilter = z.enum(["id"]);
     async fetch(filter?: string, value?: string): Promise<User[]> {
-        if (filter && value && User.validFilter.safeParse(filter).success) {
-            return this.find({ [filter]: { $like: `%${value}%` } });
+        if (filter && value && UserRepository.validFilter.safeParse(filter).success) {
+            return this.find({ [filter]: value });
         } else {
-            return this.findAll({ limit: 10000 });
+            return this.findAll({ limit: 100 });
         }
     }
 
     async save(username: string, email: string, password: string): Promise<void> {
         if (await this.exists(username)) {
-            throw new UserExistsError(username);
+            throw new ExistsError(username);
         }
 
         const newUser = new User(username, email, password);

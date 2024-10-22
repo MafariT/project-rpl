@@ -4,7 +4,6 @@ import {
     Property,
 } from "@mikro-orm/core";
 import { PasienRepository } from "./pasien.repository";
-import z from "zod";
 
 @Entity({ repository: () => PasienRepository })
 export class Pasien {
@@ -41,6 +40,4 @@ export class Pasien {
         this.tanggalLahir = tanggalLahir;
         this.jenisKelamin = jenisKelamin;
     }
-
-    static validFilter = z.enum(["username", "displayName"]);
 }

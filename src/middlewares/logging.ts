@@ -5,7 +5,7 @@ const logger = pino({
     transport: {
         target: "pino-pretty",
         options: {
-            colorize: true, // Enables colored output
+            colorize: true,
             levelFirst: true,
             translateTime: "SYS:standard",
         },

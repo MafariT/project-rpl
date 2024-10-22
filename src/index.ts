@@ -5,6 +5,7 @@ import { initORM } from "./utils/db";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import userRouter from "./routes/user";
+import path from "path";
 
 const app = express();
 const PORT = 3000;
@@ -15,7 +16,7 @@ initORM();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
-    express.static("./src/public", {
+    express.static(path.join(__dirname, "public"), {
         extensions: ["html"],
     }),
 );

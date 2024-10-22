@@ -12,7 +12,9 @@ import { hash, verify } from "argon2";
 
 @Entity({ repository: () => UserRepository })
 export class User {
-    @PrimaryKey({ nullable: false, hidden: true })
+    @PrimaryKey({ autoincrement: true })
+        id!: number;
+    @Property({ nullable: false, hidden: true })
         username!: string;
 
     @Property({ nullable: false, hidden: true })
@@ -21,16 +23,14 @@ export class User {
     @Property({ nullable: false, hidden: true })
         password!: string;
 
-    @Property({ onCreate: () => Date.now() })
-        created!: number;
+    @Property({ onCreate: () => new Date() })
+        created!: Date;
 
     constructor(username: string, email: string, password: string) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
-    static validFilter = z.enum(["username", "displayName"]);
 
     @BeforeCreate()
     @BeforeUpdate()
