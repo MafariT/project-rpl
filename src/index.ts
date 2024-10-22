@@ -1,10 +1,10 @@
 import express from "express";
-import viewRouter from "./routes/view";
 import pasienRouter from "./routes/pasien";
 import { logging } from "./middlewares/logging";
 import { initORM } from "./utils/db";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import userRouter from "./routes/user";
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +14,11 @@ initORM();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(
+    express.static("./src/public", {
+        extensions: ["html"],
+    }),
+);
 
 app.use(logging);
 app.use(cookieParser("secret"));
@@ -26,11 +31,8 @@ app.use(
     }),
 );
 
-// View
-app.use("/", viewRouter);
-
-// pasien API
 app.use("/api/pasien", pasienRouter);
+app.use("/api/user", userRouter);
 
 app.listen(PORT, () => {
     console.log(`Running on http://localhost:${PORT}`);

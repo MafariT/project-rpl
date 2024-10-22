@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { createPasien, getPasien } from "../handlers/pasienHandler";
+import { createPasien, getPasien } from "../controllers/pasienController";
 
-const userRouter = Router();
+const pasienRouter = Router();
 
-// /api/user
-userRouter.get("/", getPasien as any);
+// /api/pasien
+pasienRouter.get("/", getPasien as any);
 
-userRouter.post("/", createPasien as any);
+pasienRouter.post("/", createPasien as any);
 
-export default userRouter;
+export default pasienRouter;

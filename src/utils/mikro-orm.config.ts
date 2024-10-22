@@ -1,10 +1,11 @@
 import dotenv from "dotenv";
-import { Pasien } from "../models/pasien.entity";
+import { Pasien } from "../models/pasien/pasien.entity";
+import { User } from "../models/user/user.entity";
 
 dotenv.config();
 
 export default {
-    entities: [Pasien],
+    entities: [Pasien, User],
     dbName: process.env.DB_NAME,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

@@ -7,7 +7,8 @@
         "build": "tsc",
         "start": "node ./dist/index.js",
         "dev": "nodemon ./src/index.ts",
-        "seed": "ts-node ./src/__test__/seed.ts"
+        "seed": "ts-node ./src/__test__/seed.ts",
+        "create-db": "ts-node ./src/__test__/create-schema.ts"
     },
     "keywords": [],
     "author": "",

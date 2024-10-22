@@ -1,31 +1,33 @@
 import { faker } from "@faker-js/faker";
 import { initORM } from "../utils/db";
-import { Pasien } from "../models/pasien.entity";
+import { Pasien } from "../models/pasien/pasien.entity";
 
-async function seedUsers(count: number) {
+async function seedpasiens(count: number) {
     const db = await initORM({
         debug: false,
     });
-    const users: Pasien[] = [];
+    const pasiens: Pasien[] = [];
 
     for (let i = 0; i < count; i++) {
-        const username = faker.internet.userName();
-        const email = faker.internet.email();
-        const displayName = faker.person.fullName();
-        const password = faker.internet.password({ length: 5, memorable: true });
+        const nik = faker.internet.userName();
+        const nama = faker.person.fullName();
+        const alamat = faker.location.streetAddress();
+        const noTel = faker.number.int({ max: 12 });
+        const tanggalLahir = faker.date.birthdate().toDateString();
+        const jenisKelamin = faker.person.sex();
 
-        const user = new Pasien(username, email, password, displayName);
-        users.push(user);
+        const pasien = new Pasien(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin);
+        pasiens.push(pasien);
     }
 
-    await db.user.getEntityManager().persistAndFlush(users);
-    console.log(`${count} users seeded.`);
+    await db.pasien.getEntityManager().persistAndFlush(pasiens);
+    console.log(`${count} pasiens seeded.`);
 }
 
-const USER_COUNT = 1000000; // Number of users to seed
-seedUsers(USER_COUNT)
+const pasien_COUNT = 100000; // Number of pasiens to seed
+seedpasiens(pasien_COUNT)
     .catch((error) => {
-        console.error("Error seeding users:", error);
+        console.error("Error seeding pasiens:", error);
     })
     .finally(() => {
         process.exit(0);
