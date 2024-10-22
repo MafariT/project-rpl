@@ -1,12 +1,12 @@
 import { MikroORM } from "@mikro-orm/mysql";
-import { User } from "../models/user.entity";
+import { Pasien } from "../models/pasien.entity";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 (async () => {
     const orm = await MikroORM.init({
-        entities: [User],
+        entities: [Pasien],
         dbName: process.env.DB_NAME,
         host: process.env.DB_HOST,
         user: process.env.DB_USER,

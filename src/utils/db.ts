@@ -1,7 +1,7 @@
 import { MikroORM, Options, EntityManager } from "@mikro-orm/mysql";
 import config from "./mikro-orm.config";
-import { UserRepository } from "../models/user.repository";
-import { User } from "../models/user.entity";
+import { PasienRepository } from "../models/pasien.repository";
+import { Pasien } from "../models/pasien.entity";
 // import { User } from './modules/user/user.entity.js';
 // import { Comment } from './modules/article/comment.entity.js';
 // import { Article } from './modules/article/article.entity.js';
@@ -12,7 +12,7 @@ import { User } from "../models/user.entity";
 export interface Services {
     orm: MikroORM;
     em: EntityManager;
-    user: UserRepository;
+    pasien: PasienRepository;
     // comment: EntityRepository<Comment>;
 }
 
@@ -33,7 +33,7 @@ export async function initORM(options?: Options): Promise<Services> {
     return (cache = {
         orm,
         em: orm.em,
-        user: orm.em.fork().getRepository(User),
+        pasien: orm.em.fork().getRepository(Pasien),
         // article: orm.em.getRepository(Article),
         // comment: orm.em.getRepository(Comment)
         // tag: orm.em.getRepository(Tag),

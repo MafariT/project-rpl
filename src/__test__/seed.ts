@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker";
 import { initORM } from "../utils/db";
-import { User } from "../models/user.entity";
+import { Pasien } from "../models/pasien.entity";
 
 async function seedUsers(count: number) {
     const db = await initORM({
         debug: false,
     });
-    const users: User[] = [];
+    const users: Pasien[] = [];
 
     for (let i = 0; i < count; i++) {
         const username = faker.internet.userName();
@@ -14,7 +14,7 @@ async function seedUsers(count: number) {
         const displayName = faker.person.fullName();
         const password = faker.internet.password({ length: 5, memorable: true });
 
-        const user = new User(username, email, password, displayName);
+        const user = new Pasien(username, email, password, displayName);
         users.push(user);
     }
 
