@@ -14,7 +14,6 @@ const userSchema = z.object({
 export async function getUser(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
     const db = await initORM();
     const { filter, value } = request.query;
-
     try {
         const users = await db.user.fetch(filter, value);
         return reply.status(200).send(users);

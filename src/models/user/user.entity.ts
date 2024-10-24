@@ -16,6 +16,9 @@ export class User {
     @Property({ nullable: false, hidden: true })
         password!: string;
 
+    @Property({ default: "user" })
+        role!: string;
+
     @Property({ onCreate: () => new Date() })
         created!: Date;
 

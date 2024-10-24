@@ -24,7 +24,7 @@ export class UserRepository extends EntityRepository<User> {
     }
 
     async delete(username: string, email: string, password: string): Promise<void> {
-        const user = this.findOne // TODO: ADD DELETE
+        const user = this.findOne; // TODO: ADD DELETE
     }
 
     async exists(username: string): Promise<boolean> {

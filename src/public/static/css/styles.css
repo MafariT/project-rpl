@@ -1,0 +1,97 @@
+/* Reset default margin and padding */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background: #1e1e1e; /* Slightly lighter dark background for the container */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #00aaff; /* Light blue color */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #00aaff; /* Light blue color */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #333; /* Darker border color */
+    border-radius: 0.25rem;
+    background: #333; /* Dark input background */
+    color: #e0e0e0; /* Light text in inputs */
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #00aaff; /* Light blue border on focus */
+    outline: none;
+}
+
+button {
+    background-color: #00aaff; /* Light blue button */
+    color: #121212; /* Dark text color for button */
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #0088cc; /* Slightly darker blue on hover */
+}
+
+.error-message {
+    color: #ff4c4c; /* Bright red for error messages */
+    margin-bottom: 1rem;
+}
+
+a {
+    color: #00aaff; /* Light blue color for links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
+}
