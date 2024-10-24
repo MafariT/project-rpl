@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { FastifyRequest, FastifyReply } from "fastify";
 import { QueryParams } from "../types/query-params";
 import { Pasien } from "../models/pasien/pasien.entity";
 import { initORM } from "../utils/db";
@@ -16,28 +16,28 @@ const pasienSchema = z.object({
     jenisKelamin: z.string().min(1).max(255),
 });
 
-export async function getPasien(req: Request<{}, {}, {}, QueryParams>, res: Response) {
+export async function getPasien(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
     const db = await initORM();
-    const { filter, value } = req.query;
+    const { filter, value } = request.query;
 
     try {
         const pasiens = await db.pasien.fetch(filter, value);
-        return res.status(200).send(pasiens);
+        return reply.status(200).send(pasiens);
     } catch (error) {
         console.error("Error fetching pasiens:", error);
-        return res.sendStatus(500);
+        return reply.status(500).send("Internal Server Error");
     }
 }
 
-export async function createPasien(req: Request<{}, {}, Pasien>, res: Response) {
+export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, reply: FastifyReply) {
     const db = await initORM();
-    const { nik, nama, alamat, noTel, tanggalLahir, jenisKelamin } = req.body;
+    const { nik, nama, alamat, noTel, tanggalLahir, jenisKelamin } = request.body;
 
     try {
         pasienSchema.parse({ nik, nama, alamat, noTel, tanggalLahir, jenisKelamin }); // Validation
 
         await db.pasien.save(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin);
-        return res.status(201).send({ message: `Pasien ${nama} successfully created` });
+        return reply.status(201).send({ message: `Pasien ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
             console.error(error);
@@ -45,12 +45,12 @@ export async function createPasien(req: Request<{}, {}, Pasien>, res: Response) 
                 return `${err.path.join(".")} - ${err.message}`;
             });
 
-            return res.status(400).send({ message: "Validation failed", errors: errorMessages });
+            return reply.status(400).send({ message: "Validation failed", errors: errorMessages });
         }
         if (error instanceof ExistsError) {
-            return res.status(409).send({ message: error.message });
+            return reply.status(409).send({ message: error.message });
         }
         console.error("Error creating pasien:", error);
-        return res.sendStatus(500);
+        return reply.status(500).send("Internal Server Error");
     }
 }

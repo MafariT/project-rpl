@@ -1,11 +1,16 @@
-import { Router } from "express";
+import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import { createUser, getUser } from "../controllers/userController";
+import { QueryParams } from "../types/query-params";
+import { User } from "../models/user/user.entity";
 
-const userRouter = Router();
+export default async function userRouter(fastify: FastifyInstance) {
+    // GET /api/user
+    fastify.get("/", async (request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) => {
+        return getUser(request, reply);
+    });
 
-// /api/user
-userRouter.get("/", getUser as any);
-
-userRouter.post("/", createUser as any);
-
-export default userRouter;
+    // POST /api/user
+    fastify.post("/", async (request: FastifyRequest<{ Body: User }>, reply: FastifyReply) => {
+        return createUser(request, reply);
+    });
+}
