@@ -8,7 +8,6 @@ export default async function userRouter(fastify: FastifyInstance) {
     fastify.get("/", async (request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) => {
         return getUser(request, reply);
     });
-
     // POST /api/user
     fastify.post("/", async (request: FastifyRequest<{ Body: User }>, reply: FastifyReply) => {
         return createUser(request, reply);

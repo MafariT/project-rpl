@@ -23,26 +23,13 @@ fastify.register(fastifyStatic, {
 //     reply.sendFile(filePath);
 // });
 
-// // Register cookie and session plugins
-// fastify.register(cookie);
-// fastify.register(fastifySession, {
-//     secret: "your-secret-key-here", // Replace with a secure secret
-//     saveUninitialized: false,
-//     resave: false,
-//     cookie: {
-//         maxAge: 1000 * 60, // 1 minute
-//     },
-// });
-
-// Register routes
+// Routes
 fastify.register(pasienRouter, { prefix: "/api/pasien" });
 fastify.register(userRouter, { prefix: "/api/user" });
 
-// Start server
 fastify.listen({ port: PORT }, (err, address) => {
     if (err) {
         fastify.log.error(err);
         process.exit(1);
     }
-    fastify.log.info(`Server running at ${address}`);
 });
