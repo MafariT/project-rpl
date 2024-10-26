@@ -13,8 +13,7 @@ export async function isAuthenticated(request: FastifyRequest, reply: FastifyRep
 }
 
 export async function isAdmin(request: FastifyRequest, reply: FastifyReply) {
-    const user = request.user;
-    if (!user || user.role !== "admin") {
+    if (request.user?.role !== "admin") {
         return reply.status(403).send({ message: "Forbidden" });
     }
 }

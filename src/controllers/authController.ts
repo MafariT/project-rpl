@@ -10,5 +10,5 @@ export const validateUser = {
 };
 
 export async function login(request: FastifyRequest, reply: FastifyReply) {
-    reply.send({ message: "Login successful" });
+    return reply.send({ message: "Login successful" });
 }

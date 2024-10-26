@@ -1,4 +1,4 @@
-import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import Fastify, { FastifyInstance } from "fastify";
 import path from "path";
 import fastifyStatic from "@fastify/static";
 import { initORM } from "./utils/db";
@@ -9,39 +9,45 @@ import fastifyFormbody from "@fastify/formbody";
 import authRouter from "./routes/auth";
 import viewRouter from "./routes/view";
 
-const fastify: FastifyInstance = Fastify({ logger: true });
+const envToLogger = {
+    development: {
+        transport: {
+            target: "pino-pretty",
+            options: {
+                colorize: true,
+                translateTime: "HH:MM:ss Z",
+                ignore: "pid,hostname",
+            },
+        },
+    },
+    production: true,
+    test: false,
+};
+const fastify: FastifyInstance = Fastify({ logger: envToLogger["development"] });
 const PORT = 3000;
 
-// Initialize database
 initORM();
-
-fastify.register(fastifyFormbody);
 
 configurePassport(fastify);
 
+fastify.register(fastifyFormbody);
 fastify.register(fastifyStatic, {
-    root: path.join(__dirname, "public"), // Path to your static folder
-    setHeaders: (res, filepath) => {
-        // Check if the file is an HTML file
-        if (filepath.endsWith(".html")) {
-            res.statusCode = 404; // Set status to 404
-        }
-    },
+    root: path.join(__dirname, "public"),
 });
-// fastify.get("/*", (request: FastifyRequest<{ Params: { "*": string } }>, reply) => {
-//     const requestedFile = request.params["*"];
-//     const filePath = `${requestedFile}.html`; // Append .html to the requested path
 
-//     // Serve the requested HTML file
-//     reply.sendFile(filePath);
-// });
+fastify.get("/view/*", (request, reply) => {
+    reply.status(403).send({ message: "Forbidden" });
+});
+
+fastify.get("/health", async (request, reply) => {
+    reply.send({ status: "OK" });
+});
 
 // Routes
 fastify.register(viewRouter);
 fastify.register(authRouter, { prefix: "/api/auth" });
 fastify.register(pasienRouter, { prefix: "/api/pasien" });
 fastify.register(userRouter, { prefix: "/api/user" });
-// fastify.addHook("preHandler", isAuthenticated);
 
 fastify.listen({ port: PORT }, (err, address) => {
     if (err) {
