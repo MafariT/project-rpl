@@ -1,6 +1,6 @@
 import { EntityRepository } from "@mikro-orm/mysql";
 import { Dokter } from "./dokter.entity";
-import { ExistsError } from "../../utils/erros";
+import { EntityExistsError } from "../../utils/erros";
 import z from "zod";
 
 export class DokterRepository extends EntityRepository<Dokter> {
@@ -17,21 +17,21 @@ export class DokterRepository extends EntityRepository<Dokter> {
         idDokter: string,
         nama: string,
         poliKlinik: string,
-        alamat: string,
-        noTel: number,
-        tanggalLahir: string,
-        jenisKelamin: string,
+        // alamat: string,
+        // noTel: number,
+        // tanggalLahir: string,
+        // jenisKelamin: string,
     ): Promise<void> {
         if (await this.exists(idDokter)) {
-            throw new ExistsError(idDokter);
+            throw new EntityExistsError(idDokter);
         }
 
-        const newDokter = new Dokter(idDokter, nama, poliKlinik, alamat, noTel, tanggalLahir, jenisKelamin);
+        const newDokter = new Dokter(idDokter, nama, poliKlinik);
         this.create(newDokter);
         await this.em.flush();
     }
 
-    async exists(idDokter: string): Promise<boolean> {
+    private async exists(idDokter: string): Promise<boolean> {
         const count = await this.qb().where({ idDokter }).getCount();
         return count > 0;
     }

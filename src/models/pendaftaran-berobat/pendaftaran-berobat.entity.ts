@@ -1,17 +1,20 @@
 import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/mysql";
-import { PasienRepository } from "./pasien.repository";
-import { User } from "../user/user.entity";
+import { PendaftaranBerobatRepository } from "./pendaftaran-berobat.repository";
+import { Pasien } from "../pasien/pasien.entity";
 
-@Entity({ repository: () => PasienRepository })
-export class Pasien {
+@Entity({ repository: () => PendaftaranBerobatRepository })
+export class PendaftaranBerobat {
     @PrimaryKey({ autoincrement: true })
-        idPasien!: number;
+        idPendaftaran!: number;
+
+    @Property({ onCreate: () => new Date() })
+        tanggal!: Date;
 
     @Property({ nullable: false })
-        nik!: string;
+        keluhan!: string;
 
     @Property({ nullable: false })
-        nama!: string;
+        poliklinik!: string;
 
     @Property({ nullable: false })
         alamat!: string;
@@ -25,23 +28,26 @@ export class Pasien {
     @Property({ nullable: false })
         jenisKelamin!: string;
 
-    @ManyToOne(() => User, { nullable: false })
-        userId!: number;
+    @ManyToOne(() => Pasien, { nullable: false })
+        nik!: string;
+
     constructor(
-        nik: string,
-        nama: string,
+        // idPendaftaran: number,
+        keluhan: string,
+        poliklinik: string,
         alamat: string,
         noTel: number,
         tanggalLahir: string,
         jenisKelamin: string,
-        userId: number,
+        nik: string,
     ) {
+        // this.idPendaftaran = idPendaftaran;
         this.nik = nik;
-        this.nama = nama;
+        this.keluhan = keluhan;
+        this.poliklinik = poliklinik;
         this.alamat = alamat;
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
         this.jenisKelamin = jenisKelamin;
-        this.userId = userId;
     }
 }

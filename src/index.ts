@@ -8,6 +8,7 @@ import { configurePassport } from "./middlewares/passport";
 import fastifyFormbody from "@fastify/formbody";
 import authRouter from "./routes/auth";
 import viewRouter from "./routes/view";
+import PendaftaranBerobatRouter from "./routes/pendaftaran-berobat";
 
 const envToLogger = {
     development: {
@@ -35,7 +36,7 @@ fastify.register(fastifyStatic, {
     root: path.join(__dirname, "public"),
 });
 
-fastify.get("/view/*", (request, reply) => {
+fastify.get("/view/*", async (request, reply) => {
     reply.status(403).send({ message: "Forbidden" });
 });
 
@@ -47,11 +48,7 @@ fastify.get("/health", async (request, reply) => {
 fastify.register(viewRouter);
 fastify.register(authRouter, { prefix: "/api/auth" });
 fastify.register(pasienRouter, { prefix: "/api/pasien" });
+fastify.register(PendaftaranBerobatRouter, { prefix: "/api/pendaftaran-berobat" });
 fastify.register(userRouter, { prefix: "/api/user" });
 
-fastify.listen({ port: PORT }, (err, address) => {
-    if (err) {
-        fastify.log.error(err);
-        process.exit(1);
-    }
-});
+fastify.listen({ port: PORT });

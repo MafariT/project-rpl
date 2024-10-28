@@ -1,6 +1,6 @@
 import { EntityRepository } from "@mikro-orm/mysql";
 import { User } from "./user.entity";
-import { ExistsError } from "../../utils/erros";
+import { EntityExistsError, EntityNotFound } from "../../utils/erros";
 import z from "zod";
 
 export class UserRepository extends EntityRepository<User> {
@@ -15,7 +15,7 @@ export class UserRepository extends EntityRepository<User> {
 
     async save(username: string, email: string, password: string): Promise<void> {
         if (await this.exists(username)) {
-            throw new ExistsError(username);
+            throw new EntityExistsError(username);
         }
 
         const newUser = new User(username, email, password);
@@ -23,11 +23,16 @@ export class UserRepository extends EntityRepository<User> {
         await this.em.flush();
     }
 
-    async delete(username: string, email: string, password: string): Promise<void> {
-        const user = this.findOne; // TODO: ADD DELETE
+    async delete(id: number): Promise<void> {
+        const user = await this.findOne(id);
+
+        if (!user) {
+            throw new EntityNotFound(id);
+        }
+        await this.em.removeAndFlush(user);
     }
 
-    async exists(username: string): Promise<boolean> {
+    private async exists(username: string): Promise<boolean> {
         const count = await this.qb().where({ username }).getCount();
         return count > 0;
     }

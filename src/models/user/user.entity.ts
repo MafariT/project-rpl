@@ -1,12 +1,12 @@
-import { BeforeCreate, BeforeUpdate, Entity, EventArgs, PrimaryKey, Property } from "@mikro-orm/core";
+import { BeforeCreate, BeforeUpdate, Entity, EventArgs, PrimaryKey, Property } from "@mikro-orm/mysql";
 import { UserRepository } from "./user.repository";
-import z from "zod";
 import { hash, verify } from "argon2";
 
 @Entity({ repository: () => UserRepository })
 export class User {
     @PrimaryKey({ autoincrement: true })
         id!: number;
+    
     @Property({ nullable: false, hidden: true })
         username!: string;
 
@@ -16,7 +16,7 @@ export class User {
     @Property({ nullable: false, hidden: true })
         password!: string;
 
-    @Property({ default: "user" })
+    @Property({ default: "pasien" })
         role!: string;
 
     @Property({ onCreate: () => new Date() })

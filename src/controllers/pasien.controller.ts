@@ -3,7 +3,7 @@ import { QueryParams } from "../types/query-params";
 import { Pasien } from "../models/pasien/pasien.entity";
 import { initORM } from "../utils/db";
 import z, { ZodError } from "zod";
-import { ExistsError } from "../utils/erros";
+import { EntityExistsError } from "../utils/erros";
 
 const pasienSchema = z.object({
     nik: z.string().min(1).max(255),
@@ -34,9 +34,19 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
     const { nik, nama, alamat, noTel, tanggalLahir, jenisKelamin } = request.body;
 
     try {
-        pasienSchema.parse({ nik, nama, alamat, noTel, tanggalLahir, jenisKelamin }); // Validation
+        const userId: any = request.user?.id; // Also to check if the current logged user is accociated
 
-        await db.pasien.save(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin);
+        // const existingPasien = await db.pasien.findOne(userId);
+
+        // if (existingPasien) {
+        //     return reply.status(400).send({ message: "You can only create one Pasien record" });
+        // }
+        // if (!userId) {
+        //     return reply.send("NO");
+        // }
+
+        pasienSchema.parse({ nik, nama, alamat, noTel, tanggalLahir, jenisKelamin }); // Validation
+        await db.pasien.save(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin, userId);
         return reply.status(201).send({ message: `Pasien ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
@@ -47,10 +57,31 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
 
             return reply.status(400).send({ message: "Validation failed", errors: errorMessages });
         }
-        if (error instanceof ExistsError) {
+        if (error instanceof EntityExistsError) {
             return reply.status(409).send({ message: error.message });
         }
         console.error("Error creating pasien:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
+export async function getPasienByUser(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const userId: any = request.user?.id;
+
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
+
+    try {
+        const pasien = await db.pasien.findOne(userId);
+        if (!pasien) {
+            return reply.status(404).send({ message: "Pasien record not found" });
+        }
+
+        return reply.status(200).send(pasien);
+    } catch (error) {
+        console.error("Error fetching pasien:", error);
         return reply.status(500).send("Internal Server Error");
     }
 }

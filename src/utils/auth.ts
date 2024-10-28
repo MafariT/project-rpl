@@ -3,6 +3,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 declare module "fastify" {
     interface PassportUser {
         role?: string;
+        id?: number;
     }
 }
 
