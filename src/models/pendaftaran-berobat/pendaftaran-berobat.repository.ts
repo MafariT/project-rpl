@@ -14,6 +14,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
     }
 
     async save(
+        nama: string,
         keluhan: string,
         poliklinik: string,
         alamat: string,
@@ -27,6 +28,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         }
 
         const newPendaftaranBerobat = new PendaftaranBerobat(
+            nama,
             keluhan,
             poliklinik,
             alamat,

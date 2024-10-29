@@ -7,6 +7,9 @@ export class PendaftaranBerobat {
     @PrimaryKey({ autoincrement: true })
         idPendaftaran!: number;
 
+    @Property({ nullable: false})
+        nama!: string;
+
     @Property({ onCreate: () => new Date() })
         tanggal!: Date;
 
@@ -33,6 +36,7 @@ export class PendaftaranBerobat {
 
     constructor(
         // idPendaftaran: number,
+        nama: string,
         keluhan: string,
         poliklinik: string,
         alamat: string,
@@ -42,12 +46,13 @@ export class PendaftaranBerobat {
         nik: string,
     ) {
         // this.idPendaftaran = idPendaftaran;
-        this.nik = nik;
+        this.nama = nama;
         this.keluhan = keluhan;
         this.poliklinik = poliklinik;
         this.alamat = alamat;
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
         this.jenisKelamin = jenisKelamin;
+        this.nik = nik;
     }
 }

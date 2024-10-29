@@ -4,10 +4,9 @@ import { PendaftaranBerobat } from "../models/pendaftaran-berobat/pendaftaran-be
 import { initORM } from "../utils/db";
 import z, { ZodError } from "zod";
 import { EntityExistsError } from "../utils/erros";
-import { Pasien } from "../models/pasien/pasien.entity";
 
 const pendaftaranBerobatSchema = z.object({
-    nik: z.string().min(1).max(255),
+    nama: z.string().min(1).max(255),
     keluhan: z.string().min(1).max(255),
     poliklinik: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
@@ -16,6 +15,7 @@ const pendaftaranBerobatSchema = z.object({
         message: "Must be in DD-MM-YYYY format",
     }),
     jenisKelamin: z.string().min(1).max(255),
+    nik: z.string().min(1).max(255),
 });
 
 export async function getPendaftaranBerobat(
@@ -39,11 +39,11 @@ export async function createPendaftaranBerobat(
     reply: FastifyReply,
 ) {
     const db = await initORM();
-    const { keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, nik } = request.body;
+    const { nama, keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, nik } = request.body;
 
     try {
-        pendaftaranBerobatSchema.parse({ keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, nik }); // Validation
-        await db.pendaftaranBerobat.save(keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, nik);
+        pendaftaranBerobatSchema.parse({ nama, keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, nik }); // Validation
+        await db.pendaftaranBerobat.save(nama, keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, nik);
         return reply.status(201).send({ message: `pendaftaranBerobat ${keluhan} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
