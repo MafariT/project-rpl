@@ -26,7 +26,7 @@ export class Pasien {
         jenisKelamin!: string;
 
     @ManyToOne(() => User, { nullable: false })
-        userId!: number;
+        fk!: number;
     constructor(
         nik: string,
         nama: string,
@@ -34,7 +34,7 @@ export class Pasien {
         noTel: number,
         tanggalLahir: string,
         jenisKelamin: string,
-        userId: number,
+        fk: number,
     ) {
         this.nik = nik;
         this.nama = nama;
@@ -42,6 +42,6 @@ export class Pasien {
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
         this.jenisKelamin = jenisKelamin;
-        this.userId = userId;
+        this.fk = fk;
     }
 }

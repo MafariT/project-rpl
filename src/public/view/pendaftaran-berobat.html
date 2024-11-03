@@ -4,58 +4,41 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pendaftaran Berobat</title>
-        <script>
-            async function fetchPasien() {
-                try {
-                    const response = await fetch("/api/pasien/logged", {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                    });
-
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch Pasien data");
-                    }
-
-                    const pasien = await response.json();
-                    document.getElementById("idPasien").value = pasien.idPasien;
-                    document.getElementById("nama").innerText = pasien.nama;
-                    document.getElementById("alamat").innerText = pasien.alamat;
-                    document.getElementById("noTel").innerText = pasien.noTel;
-                    document.getElementById("tanggalLahir").innerText = pasien.tanggalLahir;
-                    document.getElementById("jenisKelamin").innerText = pasien.jenisKelamin;
-                } catch (error) {
-                    console.error("Error fetching Pasien data:", error);
-                    alert("Unable to fetch Pasien data");
-                }
-            }
-
-            window.onload = fetchPasien;
-        </script>
     </head>
     <body>
         <h1>Pendaftaran Berobat</h1>
         <form action="/api/pendaftaran-berobat" method="POST">
-            <input type="hidden" id="idPasien" name="idPasien" />
+            <label for="fk">idPasien:</label>
+            <input type="text" id="fk" name="fk" required /><br /><br />
 
-            <div><strong>Name:</strong> <span id="nama"></span></div>
-            <div><strong>Address:</strong> <span id="alamat"></span></div>
-            <div><strong>Phone Number:</strong> <span id="noTel"></span></div>
-            <div><strong>Date of Birth:</strong> <span id="tanggalLahir"></span></div>
-            <div><strong>Gender:</strong> <span id="jenisKelamin"></span></div>
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required /><br /><br />
 
-            <div>
-                <label for="keluhan">Keluhan:</label>
-                <input type="text" id="keluhan" name="keluhan" required />
-            </div>
-            <div>
-                <label for="poliklinik">Poliklinik:</label>
-                <input type="text" id="poliklinik" name="poliklinik" required />
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
+            <label for="keluhan">Keluhan:</label>
+            <textarea id="keluhan" name="keluhan" required></textarea><br /><br />
+
+            <label for="poliklinik">Poliklinik:</label>
+            <input type="text" id="poliklinik" name="poliklinik" required /><br /><br />
+
+            <label for="alamat">Alamat:</label>
+            <input type="text" id="alamat" name="alamat" required /><br /><br />
+
+            <label for="noTel">No. Telepon:</label>
+            <input type="tel" id="noTel" name="noTel" required /><br /><br />
+
+            <label for="tanggalLahir">Tanggal Lahir:</label>
+            <input type="text" id="tanggalLahir" name="tanggalLahir" required /><br /><br />
+
+            <label for="jenisKelamin">Jenis Kelamin:</label>
+            <select id="jenisKelamin" name="jenisKelamin" required>
+                <option value="Laki-laki">Pria</option>
+                <option value="Perempuan">Wanita</option></select
+            ><br /><br />
+
+            <!-- <label for="nik">NIK:</label>
+            <input type="text" id="nik" name="nik" required /><br /><br /> -->
+
+            <button type="submit">Daftar</button>
         </form>
     </body>
 </html>

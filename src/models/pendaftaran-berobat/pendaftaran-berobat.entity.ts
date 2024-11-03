@@ -7,6 +7,9 @@ export class PendaftaranBerobat {
     @PrimaryKey({ autoincrement: true })
         idPendaftaran!: number;
 
+    @Property({ nullable: false })
+        nama!: string;
+
     @Property({ onCreate: () => new Date() })
         tanggal!: Date;
 
@@ -28,21 +31,23 @@ export class PendaftaranBerobat {
     @Property({ nullable: false })
         jenisKelamin!: string;
 
-    @ManyToOne(() => Pasien, { nullable: false })
-        nik!: string;
+    @ManyToOne(() => Pasien, { nullable: false }) // TODO to ID FK
+        fk!: string;
 
     constructor(
         // idPendaftaran: number,
+        nama: string,
         keluhan: string,
         poliklinik: string,
         alamat: string,
         noTel: number,
         tanggalLahir: string,
         jenisKelamin: string,
-        nik: string,
+        fk: string,
     ) {
         // this.idPendaftaran = idPendaftaran;
-        this.nik = nik;
+        this.nama = nama;
+        this.fk = fk;
         this.keluhan = keluhan;
         this.poliklinik = poliklinik;
         this.alamat = alamat;

@@ -20,13 +20,13 @@ export class PasienRepository extends EntityRepository<Pasien> {
         noTel: number,
         tanggalLahir: string,
         jenisKelamin: string,
-        userId: number,
+        fk: number,
     ): Promise<void> {
         if (await this.exists(nik)) {
             throw new EntityExistsError(nik);
         }
 
-        const newPasien = new Pasien(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin, userId);
+        const newPasien = new Pasien(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin, fk);
         this.create(newPasien);
         await this.em.flush();
     }

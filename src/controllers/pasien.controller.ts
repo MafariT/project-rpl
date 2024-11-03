@@ -34,7 +34,9 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
     const { nik, nama, alamat, noTel, tanggalLahir, jenisKelamin } = request.body;
 
     try {
-        const userId: any = request.user?.id; // Also to check if the current logged user is accociated
+        // Also to check if the current logged user is accociated
+        // FK USER ID
+        const fk: any = request.user?.id;
 
         // const existingPasien = await db.pasien.findOne(userId);
 
@@ -46,7 +48,7 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
         // }
 
         pasienSchema.parse({ nik, nama, alamat, noTel, tanggalLahir, jenisKelamin }); // Validation
-        await db.pasien.save(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin, userId);
+        await db.pasien.save(nik, nama, alamat, noTel, tanggalLahir, jenisKelamin, fk);
         return reply.status(201).send({ message: `Pasien ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
