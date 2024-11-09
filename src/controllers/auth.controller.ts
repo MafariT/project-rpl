@@ -14,7 +14,7 @@ const userSchema = z.object({
 export const validateUser = {
     preValidation: FastifyPassport.authenticate("local", {
         failureRedirect: "/login?error=invalid-credential",
-        // successRedirect: "/home",
+        successRedirect: "/home",
         session: true,
     }),
 };
@@ -30,7 +30,7 @@ export async function register(request: FastifyRequest<{ Body: User }>, reply: F
     try {
         userSchema.parse({ username, email, password });
         await db.user.save(username, email, password);
-        return reply.status(201).send({ message: `Account ${username} successfully created` });
+        return reply.redirect("/login");
     } catch (error) {
         if (error instanceof ZodError) {
             console.error(error);
