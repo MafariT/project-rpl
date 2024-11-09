@@ -29,7 +29,7 @@ export async function createUser(request: FastifyRequest<{ Body: User }>, reply:
     const { username, email, password } = request.body;
 
     try {
-        userSchema.parse({ username, email, password }); // ValuserIdation
+        userSchema.parse({ username, email, password }); 
         await db.user.save(username, email, password);
         return reply.status(201).send({ message: `User ${username} successfully created` });
     } catch (error) {
