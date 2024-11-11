@@ -7,13 +7,13 @@ export class User {
     @PrimaryKey({ autoincrement: true })
         id!: number;
     
-    @Property({ nullable: false, hidden: true })
+    @Property({ nullable: false })
         username!: string;
 
-    @Property({ nullable: false, hidden: true })
+    @Property({ nullable: false })
         email!: string;
 
-    @Property({ nullable: false, hidden: true })
+    @Property({ nullable: false, hidden: true})
         password!: string;
 
     @Property({ default: "pasien" })

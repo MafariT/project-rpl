@@ -1,11 +1,11 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { isAdmin } from "../utils/auth";
+import { isAdmin, isAuthenticated } from "../utils/auth";
 
 export default async function viewRouter(fastify: FastifyInstance) {
     fastify.get("/", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("index.html");
     });
-    fastify.get("/home", (request: FastifyRequest, reply: FastifyReply) => {
+    fastify.get("/home", {preHandler: isAuthenticated}, (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("home.html");
     });
     fastify.get("/login", (request: FastifyRequest, reply: FastifyReply) => {
