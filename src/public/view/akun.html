@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>PuskeSmart</title>
+        <!-- My CSS -->
+        <link rel="stylesheet" href="../css/myCSS/akun.css" />
+
+        <!-- Custom fonts for this template-->
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet"
+        />
+
+        <!-- Custom styles for this template-->
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet" />
+
+        <!-- My font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600&family=Julius+Sans+One&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body id="" style="font-family: &quot;Poppins&quot;, serif; padding-top: 100px">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #68a3f3">
+            <div class="container-lg p-3">
+                <!-- Logo -->
+                <div>
+                    <img src="../img/asset/logo.png" alt="Logo" class="" style="width: auto; height: 40px" />
+                </div>
+
+                <!-- Toggler for mobile view -->
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    style="border: 1px solid aliceblue"
+                >
+                    <span class="" style="color: aliceblue"><i class="fa-solid fa-bars"></i></span>
+                </button>
+
+                <!-- Navbar links centered with mx-auto -->
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav mx-auto">
+                        <a class="nav-tengah linknya" href="/home" style="font-size: 20px">Beranda</a>
+                        <a class="nav-tengah linknya" href="/pendaftaran" style="font-size: 20px">Pendaftaran</a>
+                        <a class="nav-tengah linknya" href="#" style="font-size: 20px">Informasi</a>
+                        <a class="nav-tengah linknya" href="#" style="font-size: 20px">Ulasan</a>
+                    </div>
+
+                    <!-- Masuk button aligned to the right -->
+                    <a
+                        class="tombol nav-link btn btn-primary font-weight-bold shadow"
+                        href="#"
+                        style="color: aliceblue; font-size: 1.2rem"
+                        >Akun</a
+                    >
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <!-- Section Profile -->
+        <form class="container-lg mt-4 mb-5">
+            <div class="p-5" style="background-color: #c6dcfa; border-radius: 20px">
+                <div class="row align-items-center">
+                    <div class="col-md-3">
+                        <img
+                            src="../img/asset/testimonial/1.jpg"
+                            class="img-thumbnail rounded-circle mx-auto d-block mb-3"
+                            alt="Foto Profil"
+                            style="width: 180px; height: 180px"
+                            id="profile-pic"
+                        />
+                    </div>
+                    <div class="col-md-9 d-flex">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="labelFoto btn" for="foto">Perbarui Foto</label>
+                                <input class="btn d-none" type="file" id="foto" name="fotoProfil" />
+                            </div>
+                            <div class="col-md-6">
+                                <button class="hapusFoto btn">Hapus Foto</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- rows input -->
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <!-- NIK -->
+                        <div class="form-group">
+                            <label for="nik" style="font-weight: bold; color: black">NIK</label>
+                            <input
+                                type="type"
+                                class="form-control"
+                                id="nik"
+                                style="border: 1px solid black"
+                                name="nik"
+                            />
+                            <small id="nik" class="form-text text-muted">Kami akan menjaga privasi NIK anda.</small>
+                        </div>
+                        <!-- nama Lengkap -->
+                        <div class="form-group">
+                            <label for="nama" style="font-weight: bold; color: black">Nama Lengkap</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="nama"
+                                style="border: 1px solid black"
+                                name="nama"
+                            />
+                        </div>
+                        <!-- Username -->
+                        <div class="form-group">
+                            <label for="userName" style="font-weight: bold; color: black">Username</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="userName"
+                                style="border: 1px solid black"
+                                name="username"
+                                disabled="true"
+                            />
+                        </div>
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for="email" style="font-weight: bold; color: black">Email</label>
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                style="border: 1px solid black"
+                                name="email"
+                                disabled="true"
+                            />
+                        </div>
+                        <!-- Alamat -->
+                        <div class="form-group">
+                            <label for="alamat" style="font-weight: bold; color: black">Alamat</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="alamat"
+                                style="border: 1px solid black"
+                                name="alamat"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- No Telp -->
+                        <div class="form-group">
+                            <label for="noTel" style="font-weight: bold; color: black">No Telp</label>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                id="noTel"
+                                style="border: 1px solid black; margin-bottom: 39px"
+                                name="noTel"
+                            />
+                        </div>
+                        <!-- Tanggal Lahir -->
+                        <div class="form-group">
+                            <label for="tanggalLahir" style="font-weight: bold; color: black">Tanggal Lahir</label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="tanggalLahir"
+                                style="border: 1px solid black"
+                                name="tanggalLahir"
+                            />
+                        </div>
+                        <button
+                            type="submit"
+                            class="btn btn-success float-right"
+                            style="margin-top: 205px; font-weight: 600"
+                        >
+                            Update Profil
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger float-right mr-3"
+                            style="margin-top: 205px; font-weight: 600"
+                        >
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- End Section -->
+
+        <!-- Footer -->
+        <footer class="footer pt-10 pb-5 mt-auto footer-light" style="background-color: #68a3f3">
+            <div class="container-lg">
+                <div class="row gx-5 py-5">
+                    <div class="col-lg-6">
+                        <div class="footer-brand mb-2">
+                            <img src="../img/asset/logoVer.png" alt="" style="width: auto; height: 40px" />
+                        </div>
+                        <!-- Almat -->
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-location-dot" style="font-size: 15px; color: white"></i>
+                            <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px">
+                                Jl. Yunus Sanis No.9, Handil Jaya, <br />Kec. Jelutung, Kota Jambi, Jambi, 36125
+                            </p>
+                        </div>
+                        <!-- no telp -->
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-phone-volume" style="font-size: 15px; color: white"></i>
+                            <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px">
+                                (021) 123-4567
+                            </p>
+                        </div>
+                        <!-- Email -->
+                        <div class="d-flex align-items-center">
+                            <i class="fa-solid fa-envelope" style="font-size: 15px; color: white"></i>
+                            <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px">
+                                info@puskesmaskebunhandil.co.id
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row gx-2">
+                            <div class="col-md-4 mb-5 mb-lg-0">
+                                <div
+                                    class="text-uppercase-expanded text-lg mb-4"
+                                    style="color: white; font-weight: bold"
+                                >
+                                    Layanan
+                                </div>
+                                <ul class="list-unstyled text-light" style="font-weight: 600">
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Poli Umum</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Poli Anak</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Poli Gigi</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Poli Bidan</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Laboratorium</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 mb-5 mb-md-0">
+                                <div
+                                    class="text-uppercase-expanded text-lg mb-4"
+                                    style="color: white; font-weight: bold"
+                                >
+                                    Dukungan
+                                </div>
+                                <ul class="list-unstyled text-light" style="font-weight: 600">
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Pusat Bantuan</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>FAQ</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Kontak Kami</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <div
+                                    class="text-uppercase-expanded text-lg mb-4"
+                                    style="color: white; font-weight: bold"
+                                >
+                                    Tentang Kami
+                                </div>
+                                <ul class="list-unstyled text-light" style="font-weight: 600">
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Visi Misi</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Tim Kami</p>
+                                    </li>
+                                    <li class="" style="margin-bottom: -10px">
+                                        <p>Bantuan & Artikel</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-5" style="background-color: white" />
+                <div class="row gx-5 align-items-center">
+                    <div class="col-md-6 small" style="color: white">
+                        Copyright © PuskeSmart, 2024 - Hak Cipta Dilindungi.
+                    </div>
+                    <div class="col-md-6 text-right small">
+                        <a href="#!" style="color: white; text-decoration: none">Privacy Policy</a> ·
+                        <a href="#!" style="color: white; text-decoration: none">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+        <!-- My JS -->
+        <script src="../js/myJS/akun.js"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="../vendor/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="../js/demo/chart-area-demo.js"></script>
+        <script src="../js/demo/chart-pie-demo.js"></script>
+    </body>
+</html>

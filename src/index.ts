@@ -9,6 +9,7 @@ import fastifyFormbody from "@fastify/formbody";
 import authRouter from "./routes/auth";
 import viewRouter from "./routes/view";
 import PendaftaranBerobatRouter from "./routes/pendaftaran-berobat";
+import fastifyMultipart from "@fastify/multipart";
 
 const envToLogger = {
     development: {
@@ -31,9 +32,19 @@ initORM();
 
 configurePassport(fastify);
 
+fastify.register(fastifyMultipart, {
+    limits: {
+        fileSize: 5 * 1024 * 1024, // Limit file size to 5MB
+    },
+});
 fastify.register(fastifyFormbody);
 fastify.register(fastifyStatic, {
     root: path.join(__dirname, "public"),
+});
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, "uploads"),
+    prefix: "/uploads/",
+    decorateReply: false,
 });
 
 fastify.get("/view/*", async (request, reply) => {

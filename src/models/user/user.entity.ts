@@ -6,11 +6,11 @@ import { hash, verify } from "argon2";
 export class User {
     @PrimaryKey({ autoincrement: true })
         id!: number;
-    
-    @Property({ nullable: false, hidden: true })
+
+    @Property({ nullable: false })
         username!: string;
 
-    @Property({ nullable: false, hidden: true })
+    @Property({ nullable: false })
         email!: string;
 
     @Property({ nullable: false, hidden: true })
@@ -19,7 +19,7 @@ export class User {
     @Property({ default: "pasien" })
         role!: string;
 
-    @Property({ onCreate: () => new Date() })
+    @Property({ onCreate: () => new Date(), hidden: true })
         created!: Date;
 
     constructor(username: string, email: string, password: string) {

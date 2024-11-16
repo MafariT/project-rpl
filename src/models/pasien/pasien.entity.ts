@@ -22,8 +22,11 @@ export class Pasien {
     @Property({ nullable: false })
         tanggalLahir!: string;
 
-    @Property({ nullable: false })
-        jenisKelamin!: string;
+    @Property()
+        fotoProfil!: string | null;
+
+    // @Property({ nullable: false })
+    //     jenisKelamin!: string;
 
     @ManyToOne(() => User, { nullable: false })
         fk!: number;
@@ -33,7 +36,8 @@ export class Pasien {
         alamat: string,
         noTel: number,
         tanggalLahir: string,
-        jenisKelamin: string,
+        fotoProfil: string | null,
+        // jenisKelamin: string,
         fk: number,
     ) {
         this.nik = nik;
@@ -41,7 +45,8 @@ export class Pasien {
         this.alamat = alamat;
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
-        this.jenisKelamin = jenisKelamin;
+        this.fotoProfil = fotoProfil;
+        // this.jenisKelamin = jenisKelamin;
         this.fk = fk;
     }
 }

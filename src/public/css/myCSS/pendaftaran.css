@@ -1,0 +1,79 @@
+.navbar-collapse .navbar-nav .linknya {
+    color: white;
+    font-size: 1rem;
+    margin-right: 40px;
+    text-decoration: none;
+    position: relative;
+    font-weight: bold;
+}
+
+.navbar-collapse .navbar-nav .link-hp {
+    margin-top: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.navbar-collapse .navbar-nav .linknya::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10%;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navbar-collapse .navbar-nav .linknya:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.d-flex .btnTambah {
+    background-color: #41E199;
+    color: black;
+    font-weight: 600;
+}
+
+.d-flex .btnTambah:hover {
+    background-color: #135537;
+    color: white;
+}
+
+.d-flex .btnLihat {
+    background-color: #97C0F7;
+    font-weight: 600;
+    color: #5A5C68;
+}
+
+.d-flex .btnLihat:hover {
+    background-color: #1c4173;
+    color: white;
+}
+
+.d-flex .btnEdit {
+    background-color: #6EE8B1;
+    margin-left: 10px;
+    font-weight: 600;
+    color: #5A5C68;
+}
+
+.d-flex .btnEdit:hover {
+    background-color: #277351;
+    color: white;
+}
+
+.d-flex .btnHapus {
+    background-color: #FF8A8A;
+    font-weight: 600;
+    color: #5A5C68;
+}
+
+.d-flex .btnHapus:hover {
+    background-color: #792323;
+    color: white;
+}
