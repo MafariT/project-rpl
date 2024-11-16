@@ -24,6 +24,26 @@ export async function getUser(request: FastifyRequest<{ Querystring: QueryParams
     }
 }
 
+export async function getUserById(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const userId: any = request.user?.id;
+
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
+
+    try {
+        const user = await db.user.findOne(userId)
+        if (!user) {
+            return reply.status(404).send({ message: "User record not found"})
+        }
+        return reply.send(user);
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
 export async function createUser(request: FastifyRequest<{ Body: User }>, reply: FastifyReply) {
     const db = await initORM();
     const { username, email, password } = request.body;

@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { isAdmin } from "../utils/auth";
+import { isAdmin, isAuthenticated } from "../utils/auth";
 
 export default async function viewRouter(fastify: FastifyInstance) {
     fastify.get("/", (request: FastifyRequest, reply: FastifyReply) => {

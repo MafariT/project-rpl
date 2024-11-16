@@ -62,4 +62,4 @@ fastify.register(pasienRouter, { prefix: "/api/pasien" });
 fastify.register(PendaftaranBerobatRouter, { prefix: "/api/pendaftaran-berobat" });
 fastify.register(userRouter, { prefix: "/api/user" });
 
-fastify.listen({ port: PORT });
+fastify.listen({ port: PORT, host: "0.0.0.0" });
