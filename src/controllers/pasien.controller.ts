@@ -53,11 +53,21 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
                     fs.mkdirSync(uploadDir, { recursive: true });
                 }
 
-                fileName = `${Date.now()}-${part.filename}`;
-                filePath = path.join(uploadDir, fileName);
+                // If filename is empty , get the filename from the database
+                if (part.filename.trim() === "") {
+                    const patientData = await db.pasien.findOne({ fk });
+                    if (patientData && patientData.fotoProfil) {
+                        fileName = patientData.fotoProfil;
+                    } else {
+                        fileName = "default.png";
+                    }
+                } else {
+                    fileName = `${Date.now()}-${part.filename}`;
+                    filePath = path.join(uploadDir, fileName);
 
-                // Save file to disk
-                await pipeline(part.file, fs.createWriteStream(filePath));
+                    // Save the file to disk
+                    await pipeline(part.file, fs.createWriteStream(filePath));
+                }
             } else {
                 // Collect other fields
                 payload[part.fieldname] = part.value;
