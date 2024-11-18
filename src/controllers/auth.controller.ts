@@ -23,6 +23,11 @@ export async function login(request: FastifyRequest, reply: FastifyReply) {
     return reply.send({ message: "Login successful" });
 }
 
+export async function logout(request: FastifyRequest, reply: FastifyReply) {
+    request.logout();
+    return reply.redirect("/");
+}
+
 export async function register(request: FastifyRequest<{ Body: User }>, reply: FastifyReply) {
     const db = await initORM();
     const { username, email, password } = request.body;

@@ -7,7 +7,7 @@ import userRouter from "./routes/user";
 import { configurePassport } from "./middlewares/passport";
 import fastifyFormbody from "@fastify/formbody";
 import authRouter from "./routes/auth";
-import viewRouter from "./routes/view";
+import { privateViewRouter, publicViewRouter } from "./routes/view";
 import PendaftaranBerobatRouter from "./routes/pendaftaran-berobat";
 import fastifyMultipart from "@fastify/multipart";
 
@@ -56,10 +56,11 @@ fastify.get("/health", async (request, reply) => {
 });
 
 // Routes
-fastify.register(viewRouter);
 fastify.register(authRouter, { prefix: "/api/auth" });
 fastify.register(pasienRouter, { prefix: "/api/pasien" });
 fastify.register(PendaftaranBerobatRouter, { prefix: "/api/pendaftaran-berobat" });
 fastify.register(userRouter, { prefix: "/api/user" });
+fastify.register(publicViewRouter, { prefix: "/" });
+fastify.register(privateViewRouter, { prefix: "/" });
 
 fastify.listen({ port: PORT, host: "0.0.0.0" });

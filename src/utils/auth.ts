@@ -9,12 +9,12 @@ declare module "fastify" {
 
 export async function isAuthenticated(request: FastifyRequest, reply: FastifyReply) {
     if (!request.isAuthenticated()) {
-        return reply.status(401).send({ message: "Unauthorized" });
+        return reply.redirect("/");
     }
 }
 
 export async function isAdmin(request: FastifyRequest, reply: FastifyReply) {
     if (request.user?.role !== "admin") {
-        return reply.status(403).send({ message: "Forbidden" });
+        return reply.redirect("/");
     }
 }

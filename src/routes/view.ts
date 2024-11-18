@@ -1,18 +1,23 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { isAdmin, isAuthenticated } from "../utils/auth";
 
-export default async function viewRouter(fastify: FastifyInstance) {
+export async function publicViewRouter(fastify: FastifyInstance) {
     fastify.get("/", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/index.html");
-    });
-    fastify.get("/home", (request: FastifyRequest, reply: FastifyReply) => {
-        reply.sendFile("view/home.html");
     });
     fastify.get("/login", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/login.html");
     });
     fastify.get("/register", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/register.html");
+    });
+}
+
+export async function privateViewRouter(fastify: FastifyInstance) {
+    fastify.addHook("preHandler", isAuthenticated);
+
+    fastify.get("/home", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/home.html");
     });
     fastify.get("/akun", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/akun.html");

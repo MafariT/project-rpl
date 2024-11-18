@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const profilePic = document.getElementById("profile-pic");
     const inputPic = document.getElementById("foto");
-    const removePicButton = document.querySelector(".hapusFoto");
+    const removePicButton = document.getElementById("hapus-foto");
+    const logoutButton = document.getElementById("logout");
     const form = document.querySelector("form");
     const username = document.getElementById("username");
     const email = document.getElementById("email");
@@ -15,13 +16,73 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Remove Profile Picture
-    removePicButton.addEventListener("click", (event) => {
+    removePicButton.addEventListener("click", async (event) => {
         event.preventDefault();
-        profilePic.src = "default.jpg";
-        inputPic.value = "";
+
+        Swal.fire({
+            title: "Konfirmasi",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonColor: "#e74a3b",
+            cancelButtonText: "Tidak",
+            confirmButtonColor: "#68A3F3",
+            confirmButtonText: "Ya",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    profilePic.src = "default.jpg";
+                    inputPic.value = "";
+                    const response = await fetch("/api/pasien/delete-pic", {
+                        method: "GET",
+                    });
+
+                    if (response.ok) {
+                        Swal.fire({
+                            title: "Success",
+                            text: "Foto Anda telah dihapus!",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Gagal menghapus foto",
+                            text: "Terjadi kesalahan saat menghapus foto!",
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error during delete:", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Terjadi kesalahan saat menghapus foto!",
+                    });
+                }
+            }
+        });
     });
 
-    // Fetch and Populate Data
+    // Logout
+    logoutButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch("/api/auth/logout", {
+                method: "GET",
+            });
+            window.location.href = response.url;
+        } catch (error) {
+            console.error("Error during logout:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Logout Failed",
+                text: "Terjadi kesalahan saat logout!",
+            });
+        }
+    });
+
+    // Fetch data
     const fetchData = async () => {
         try {
             const [pasienResponse, userResponse] = await Promise.all([fetch("/api/pasien/user"), fetch("/api/user")]);
@@ -45,6 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (error) {
             console.error("Error fetching data:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Failed to fetch data",
+                text: "Terjadi kesalahan saat mengambil data!",
+            });
         }
     };
 
@@ -55,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         const formData = new FormData(form);
 
-        // Exclude username and email from the form data
         formData.delete("username");
         formData.delete("email");
 
@@ -66,15 +131,29 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-                alert("Profile updated successfully!");
+                Swal.fire({
+                    icon: "success",
+                    title: "Profile berhasil di update!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
             } else {
                 const errorData = await response.json();
                 console.error("Error submitting form:", errorData.message || response.statusText);
-                alert("Failed to update profile.");
+                Swal.fire({
+                    icon: "error",
+                    title: "Failed to update profile",
+                    text: "Gagal memperbarui profil!",
+                });
             }
         } catch (error) {
             console.error("Error submitting form:", error);
-            alert("An error occurred. Please try again.");
+            Swal.fire({
+                icon: "error",
+                title: "An error occurred",
+                text: "Terjadi kesalahan saat memperbarui profil!",
+            });
         }
     });
 

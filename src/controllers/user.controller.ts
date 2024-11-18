@@ -33,9 +33,9 @@ export async function getUserById(request: FastifyRequest, reply: FastifyReply) 
     }
 
     try {
-        const user = await db.user.findOne(userId)
+        const user = await db.user.findOne(userId);
         if (!user) {
-            return reply.status(404).send({ message: "User record not found"})
+            return reply.status(404).send({ message: "User record not found" });
         }
         return reply.send(user);
     } catch (error) {
@@ -49,7 +49,7 @@ export async function createUser(request: FastifyRequest<{ Body: User }>, reply:
     const { username, email, password } = request.body;
 
     try {
-        userSchema.parse({ username, email, password }); 
+        userSchema.parse({ username, email, password });
         await db.user.save(username, email, password);
         return reply.status(201).send({ message: `User ${username} successfully created` });
     } catch (error) {

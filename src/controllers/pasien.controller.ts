@@ -114,3 +114,45 @@ export async function getPasienByUser(request: FastifyRequest, reply: FastifyRep
         return reply.status(500).send("Internal Server Error");
     }
 }
+
+export async function deletePic(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const userId: any = request.user?.id;
+
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
+
+    try {
+        const pasien = await db.pasien.findOne({ fk: userId });
+        if (!pasien) {
+            return reply.status(404).send({ message: "Pasien record not found" });
+        }
+
+        const oldFileName = pasien.fotoProfil;
+        if (oldFileName && oldFileName !== "default.jpg") {
+            const uploadDir = path.join(__dirname, "../uploads");
+            const oldFilePath = path.join(uploadDir, oldFileName);
+
+            if (fs.existsSync(oldFilePath)) {
+                fs.unlinkSync(oldFilePath);
+            }
+        }
+
+        pasien.fotoProfil = "default.jpg";
+        await db.pasien.saveOrUpdate(
+            pasien.nik,
+            pasien.nama,
+            pasien.alamat,
+            pasien.noTel,
+            pasien.tanggalLahir,
+            pasien.fotoProfil,
+            pasien.fk,
+        );
+
+        return reply.status(200).send({ message: "Picture successfully deleted" });
+    } catch (error) {
+        console.error("Error removing profile picture:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
