@@ -12,7 +12,10 @@ export class Pasien {
 
     @Property({ nullable: false })
         nama!: string;
-
+    
+    @Property({ nullable: false })
+        jenisKelamin!: number;
+        
     @Property({ nullable: false })
         alamat!: string;
 
@@ -25,28 +28,25 @@ export class Pasien {
     @Property()
         fotoProfil!: string | null;
 
-    // @Property({ nullable: false })
-    //     jenisKelamin!: string;
-
     @ManyToOne(() => User, { nullable: false })
         fk!: number;
     constructor(
         nik: string,
         nama: string,
+        jenisKelamin: number,
         alamat: string,
         noTel: number,
         tanggalLahir: string,
         fotoProfil: string | null,
-        // jenisKelamin: string,
         fk: number,
     ) {
         this.nik = nik;
         this.nama = nama;
+        this.jenisKelamin = jenisKelamin;
         this.alamat = alamat;
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
         this.fotoProfil = fotoProfil;
-        // this.jenisKelamin = jenisKelamin;
         this.fk = fk;
     }
 }

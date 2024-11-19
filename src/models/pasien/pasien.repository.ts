@@ -15,6 +15,7 @@ export class PasienRepository extends EntityRepository<Pasien> {
     async saveOrUpdate(
         nik: string,
         nama: string,
+        jenisKelamin: number,
         alamat: string,
         noTel: number,
         tanggalLahir: string,
@@ -26,6 +27,7 @@ export class PasienRepository extends EntityRepository<Pasien> {
         if (existingPasien) {
             existingPasien.nik = nik;
             existingPasien.nama = nama;
+            existingPasien.jenisKelamin = jenisKelamin;
             existingPasien.alamat = alamat;
             existingPasien.noTel = noTel;
             existingPasien.tanggalLahir = tanggalLahir;
@@ -33,7 +35,7 @@ export class PasienRepository extends EntityRepository<Pasien> {
 
             this.em.persist(existingPasien);
         } else {
-            const newPasien = new Pasien(nik, nama, alamat, noTel, tanggalLahir, fotoProfil, fk);
+            const newPasien = new Pasien(nik, nama,jenisKelamin, alamat, noTel, tanggalLahir, fotoProfil, fk);
             this.create(newPasien);
         }
 
