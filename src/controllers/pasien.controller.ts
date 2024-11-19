@@ -12,7 +12,7 @@ const pasienSchema = z.object({
     nik: z.string().min(1).max(255),
     nama: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
-    noTel: z.coerce.number().min(1).max(255), // Parsed to number
+    noTel: z.coerce.number().min(1), // Parsed to number
     // tanggalLahir: z.string().refine((value) => /^\d{2}-\d{2}-\d{4}$/.test(value), {
     //     message: "Must be in DD-MM-YYYY format",
     // }),
@@ -74,9 +74,9 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
             }
         }
 
-        const { nik, nama,jenisKelamin, alamat, noTel, tanggalLahir } = payload;
-        pasienSchema.parse({ nik, nama,jenisKelamin, alamat, noTel, tanggalLahir });
-        await db.pasien.saveOrUpdate(nik, nama,jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
+        const { nik, nama, jenisKelamin, alamat, noTel, tanggalLahir } = payload;
+        pasienSchema.parse({ nik, nama, jenisKelamin, alamat, noTel, tanggalLahir });
+        await db.pasien.saveOrUpdate(nik, nama, jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
 
         return reply.status(201).send({
             message: `Pasien ${nama} successfully created`,
