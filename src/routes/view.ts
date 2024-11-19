@@ -22,6 +22,9 @@ export async function privateViewRouter(fastify: FastifyInstance) {
     fastify.get("/akun", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/akun.html");
     });
+    fastify.get("/pendaftaran", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/pendaftaran.html");
+    });
     // fastify.get("/pasien-regis", (request: FastifyRequest, reply: FastifyReply) => {
     //     reply.sendFile("pasien-regis.html");
     // });
