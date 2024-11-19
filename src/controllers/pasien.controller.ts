@@ -13,7 +13,6 @@ const pasienSchema = z.object({
     nama: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
     noTel: z.coerce.number().min(1).max(255), // Parsed to number
-    jenisKelamin: z.coerce.number().min(1).max(3), // Parsed to number
     // tanggalLahir: z.string().refine((value) => /^\d{2}-\d{2}-\d{4}$/.test(value), {
     //     message: "Must be in DD-MM-YYYY format",
     // }),

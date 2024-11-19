@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
     const username = document.getElementById("username");
     const email = document.getElementById("email");
+    const jenisKelamin0 = document.getElementById("jenisKelamin0");
+    const jenisKelamin1 = document.getElementById("jenisKelamin1");
 
     // Update Profile Picture Preview
     inputPic.addEventListener("change", () => {
@@ -92,6 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 for (const [key, value] of Object.entries(pasienData)) {
                     if (key === "fotoProfil" && value) {
                         profilePic.src = `/uploads/${value}`;
+                    if (pasienData.jenisKelamin == 0) {
+                        jenisKelamin0.checked = "true" // Laki Laki
+                    }
+                    if (pasienData.jenisKelamin == 1) {
+                        jenisKelamin1.checked = "true" // Perempuan
+                    }
                     } else {
                         const input = document.querySelector(`[name="${key}"]`);
                         if (input) input.value = value;
@@ -140,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             } else {
                 const errorData = await response.json();
-                console.error("Error submitting form:", errorData.message || response.statusText);
+                console.error("Error submitting form:", errorData || response.statusText);
                 Swal.fire({
                     icon: "error",
                     title: "Failed to update profile",
