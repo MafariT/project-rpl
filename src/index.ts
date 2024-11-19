@@ -32,6 +32,10 @@ initORM();
 
 configurePassport(fastify);
 
+fastify.setNotFoundHandler(async (request, reply) => {
+    return reply.sendFile("/view/404.html")
+});
+
 fastify.register(fastifyMultipart, {
     limits: {
         fileSize: 5 * 1024 * 1024, // Limit file size to 5MB
