@@ -20,7 +20,7 @@ export class PendaftaranBerobat {
         alamat!: string;
 
     @Property({ nullable: false })
-        noTel!: number;
+        noTel!: string;
 
     @Property({ nullable: false })
         tanggalLahir!: string;
@@ -55,7 +55,7 @@ export class PendaftaranBerobat {
         nama: string,
         jenisKelamin: string,
         alamat: string,
-        noTel: number,
+        noTel: string,
         tanggalLahir: string,
         tanggalPengajuan: string,
         poli: string,

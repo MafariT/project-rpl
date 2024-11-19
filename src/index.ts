@@ -33,7 +33,7 @@ initORM();
 configurePassport(fastify);
 
 fastify.setNotFoundHandler(async (request, reply) => {
-    return reply.sendFile("/view/404.html")
+    return reply.sendFile("/view/404.html");
 });
 
 fastify.register(fastifyMultipart, {

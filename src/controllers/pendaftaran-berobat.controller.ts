@@ -9,7 +9,7 @@ const pendaftaranBerobatSchema = z.object({
     nik: z.string().min(1).max(255),
     nama: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
-    noTel: z.coerce.number().min(1),
+    noTel: z.string().min(1).max(255),
     poli: z.string().min(1).max(255),
     keluhan: z.string().min(1).max(255),
     namaDokter: z.string().min(1).max(255),
@@ -113,7 +113,79 @@ export async function createPendaftaranBerobat(
             totalPembayaran,
         } = payload;
 
-        await db.pendaftaranBerobat.saveOrUpdate(
+        await db.pendaftaranBerobat.save(
+            nik,
+            nama,
+            jenisKelamin,
+            alamat,
+            noTel,
+            tanggalLahir,
+            tanggalPengajuan,
+            poli,
+            keluhan,
+            namaDokter,
+            jam,
+            jenisPembayaran,
+            totalPembayaran,
+            fk,
+        );
+        return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });
+    } catch (error) {
+        if (error instanceof ZodError) {
+            console.error(error);
+            const errorMessages = error.errors.map((err) => {
+                return `${err.path.join(".")} - ${err.message}`;
+            });
+
+            return reply.status(400).send({ message: "Validation failed", errors: errorMessages });
+        }
+        if (error instanceof EntityExistsError) {
+            return reply.status(409).send({ message: error.message });
+        }
+        console.error("Error creating pendaftaranBerobat:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
+export async function updatePendaftaranBerobatById(
+    request: FastifyRequest<{ Body: PendaftaranBerobat }>,
+    reply: FastifyReply,
+) {
+    const db = await initORM();
+    const userId = request.user?.id;
+    const fk: any = await db.pasien.findOne({ fk: userId });
+    const { id } = request.params as any;
+    console.log(`id DAFTAR: ${id}`);
+
+    try {
+        const payload: any = {};
+        const parts = request.parts();
+
+        for await (const part of parts) {
+            if (part.type === "field") {
+                payload[part.fieldname] = part.value;
+            }
+        }
+
+        pendaftaranBerobatSchema.parse(payload); // Validation
+        const {
+            nik,
+            nama,
+            jenisKelamin,
+            alamat,
+            noTel,
+            tanggalLahir,
+            tanggalPengajuan,
+            poli,
+            keluhan,
+            namaDokter,
+            jam,
+            jenisPembayaran,
+            totalPembayaran,
+        } = payload;
+
+        await db.pendaftaranBerobat.update(
+            id,
             nik,
             nama,
             jenisKelamin,

@@ -17,7 +17,7 @@ export class PasienRepository extends EntityRepository<Pasien> {
         nama: string,
         jenisKelamin: string,
         alamat: string,
-        noTel: number,
+        noTel: string,
         tanggalLahir: string,
         fotoProfil: string | null,
         fk: number,

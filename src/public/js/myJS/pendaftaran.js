@@ -290,14 +290,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         $(`#editModal-${idPendaftaran}`).modal("show");
 
                         // Handle form submission
+                        const id = button.getAttribute("data-id");
                         const editForm = document.getElementById(`editForm-${idPendaftaran}`);
+                        console.log(idPendaftaran);
                         editForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
                             const formData = new FormData(editForm);
 
                             try {
-                                const updateResponse = await fetch(`/api/pendaftaran-berobat/`, {
-                                    method: "POST",
+                                const updateResponse = await fetch(`/api/pendaftaran-berobat/${id}`, {
+                                    method: "PUT",
                                     body: formData,
                                 });
 

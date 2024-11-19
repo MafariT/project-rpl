@@ -11,11 +11,9 @@ import { pipeline } from "stream/promises";
 const pasienSchema = z.object({
     nik: z.string().min(1).max(255),
     nama: z.string().min(1).max(255),
+    jenisKelamin: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
-    noTel: z.coerce.number().min(1), // Parsed to number
-    // tanggalLahir: z.string().refine((value) => /^\d{2}-\d{2}-\d{4}$/.test(value), {
-    //     message: "Must be in DD-MM-YYYY format",
-    // }),
+    noTel: z.string().min(1).max(255),
 });
 
 export async function getPasien(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
@@ -74,9 +72,9 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
             }
         }
 
-        const { nik, nama,jenisKelamin, alamat, noTel, tanggalLahir } = payload;
-        pasienSchema.parse({ nik, nama,jenisKelamin, alamat, noTel, tanggalLahir });
-        await db.pasien.saveOrUpdate(nik, nama,jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
+        pasienSchema.parse(payload);
+        const { nik, nama, jenisKelamin, alamat, noTel, tanggalLahir } = payload;
+        await db.pasien.saveOrUpdate(nik, nama, jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
 
         return reply.status(201).send({
             message: `Pasien ${nama} successfully created`,

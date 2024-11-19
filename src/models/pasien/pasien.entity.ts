@@ -12,15 +12,15 @@ export class Pasien {
 
     @Property({ nullable: false })
         nama!: string;
-    
+
     @Property({ nullable: false })
         jenisKelamin!: string;
-        
+
     @Property({ nullable: false })
         alamat!: string;
 
     @Property({ nullable: false })
-        noTel!: number;
+        noTel!: string;
 
     @Property({ nullable: false })
         tanggalLahir!: string;
@@ -35,7 +35,7 @@ export class Pasien {
         nama: string,
         jenisKelamin: string,
         alamat: string,
-        noTel: number,
+        noTel: string,
         tanggalLahir: string,
         fotoProfil: string | null,
         fk: number,

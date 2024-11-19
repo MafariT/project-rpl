@@ -1,5 +1,6 @@
 import { EntityRepository } from "@mikro-orm/mysql";
 import { PendaftaranBerobat } from "./pendaftaran-berobat.entity";
+import { EntityExistsError } from "../../utils/erros";
 import z from "zod";
 
 export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBerobat> {
@@ -16,12 +17,13 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         this.em.removeAndFlush(pendaftaranBerobat);
     }
 
-    async saveOrUpdate(
+    async update(
+        idPendaftaran: number,
         nik: string,
         nama: string,
         jenisKelamin: string,
         alamat: string,
-        noTel: number,
+        noTel: string,
         tanggalLahir: string,
         tanggalPengajuan: string,
         poli: string,
@@ -32,45 +34,72 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         totalPembayaran: string,
         fk: number,
     ): Promise<void> {
-        const existingPePendaftaranBerobat = await this.findOne({ nik });
+        const existingPendaftaranBerobat = await this.findOne({ idPendaftaran });
 
-        if (existingPePendaftaranBerobat) {
-            existingPePendaftaranBerobat.nik = nik;
-            existingPePendaftaranBerobat.nama = nama;
-            existingPePendaftaranBerobat.jenisKelamin = jenisKelamin;
-            existingPePendaftaranBerobat.alamat = alamat;
-            existingPePendaftaranBerobat.noTel = noTel;
-            existingPePendaftaranBerobat.tanggalLahir = tanggalLahir;
-            existingPePendaftaranBerobat.tanggalPengajuan = tanggalPengajuan;
-            existingPePendaftaranBerobat.poli = poli;
-            existingPePendaftaranBerobat.keluhan = keluhan;
-            existingPePendaftaranBerobat.namaDokter = namaDokter;
-            existingPePendaftaranBerobat.jam = jam;
-            existingPePendaftaranBerobat.jenisPembayaran = jenisPembayaran;
-            existingPePendaftaranBerobat.totalPembayaran = totalPembayaran;
-            existingPePendaftaranBerobat.fk = fk;
+        if (existingPendaftaranBerobat) {
+            existingPendaftaranBerobat.nik = nik;
+            existingPendaftaranBerobat.nama = nama;
+            existingPendaftaranBerobat.jenisKelamin = jenisKelamin;
+            existingPendaftaranBerobat.alamat = alamat;
+            existingPendaftaranBerobat.noTel = noTel;
+            existingPendaftaranBerobat.tanggalLahir = tanggalLahir;
+            existingPendaftaranBerobat.tanggalPengajuan = tanggalPengajuan;
+            existingPendaftaranBerobat.poli = poli;
+            existingPendaftaranBerobat.keluhan = keluhan;
+            existingPendaftaranBerobat.namaDokter = namaDokter;
+            existingPendaftaranBerobat.jam = jam;
+            existingPendaftaranBerobat.jenisPembayaran = jenisPembayaran;
+            existingPendaftaranBerobat.totalPembayaran = totalPembayaran;
+            existingPendaftaranBerobat.fk = fk;
 
-            this.em.persist(existingPePendaftaranBerobat);
-        } else {
-            const newPePendaftaranBerobat = new PendaftaranBerobat(
-                nik,
-                nama,
-                jenisKelamin,
-                alamat,
-                noTel,
-                tanggalLahir,
-                tanggalPengajuan,
-                poli,
-                keluhan,
-                namaDokter,
-                jam,
-                jenisPembayaran,
-                totalPembayaran,
-                fk,
-            );
-            this.create(newPePendaftaranBerobat);
+            this.em.persist(existingPendaftaranBerobat);
         }
 
         await this.em.flush();
+    }
+
+    async save(
+        nik: string,
+        nama: string,
+        jenisKelamin: string,
+        alamat: string,
+        noTel: string,
+        tanggalLahir: string,
+        tanggalPengajuan: string,
+        poli: string,
+        keluhan: string,
+        namaDokter: string,
+        jam: string,
+        jenisPembayaran: string,
+        totalPembayaran: string,
+        fk: number,
+    ): Promise<void> {
+        // if (await this.exists(nik)) {
+        //     throw new EntityExistsError(nik);
+        // }
+
+        const newPendaftaranBerobat = new PendaftaranBerobat(
+            nik,
+            nama,
+            jenisKelamin,
+            alamat,
+            noTel,
+            tanggalLahir,
+            tanggalPengajuan,
+            poli,
+            keluhan,
+            namaDokter,
+            jam,
+            jenisPembayaran,
+            totalPembayaran,
+            fk,
+        );
+        this.create(newPendaftaranBerobat);
+        await this.em.flush();
+    }
+
+    private async exists(nik: string): Promise<boolean> {
+        const count = await this.qb().where({ nik }).getCount();
+        return count > 0;
     }
 }
