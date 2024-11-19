@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <td class="d-flex justify-content-center">
                             <div class="d-flex">
                                 <button class="btnLihat btn" data-id="${pendaftaran.idPendaftaran}" data-toggle="modal" data-target="#${modalId}">Lihat</button>
-                                <button class="btnEdit btn" data-id="${pendaftaran.idPendaftaran}">Edit</button>
+                                <button class="btnEdit btn" data-id="${pendaftaran.idPendaftaran}" id="${pendaftaran.idPendaftaran}">Edit</button>
                             </div>
                         </td>
                         <td>
@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Initialize DataTable 
                 initDataTable(); 
+                addEditButtonListeners();
             }
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -108,12 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const initDataTable = () => {
         const table = $('#myTable'); 
-        if ($.fn.dataTable.isDataTable(table)) {
-            table.DataTable().destroy();
-        }
-        table.DataTable();
+        table.DataTable(); // Reinitialize
     };
-
+    
     fetchData();
 
     // Handle Form Submission
@@ -136,7 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     timer: 1500,
                     timerProgressBar: true,
                 });
-                fetchData(); // Refresh data
+                $('#tambahPendaftaran').modal('hide')
+                fetchData(); 
             } else {
                 const errorData = await response.json();
                 console.error("Error submitting form:", errorData || response.statusText);
@@ -154,6 +153,119 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+
+    const addEditButtonListeners = () => {
+        const editButtons = document.querySelectorAll(".btnEdit");
+
+        editButtons.forEach((button) => {
+            button.addEventListener("click", async (event) => {
+                const idPendaftaran = event.target.dataset.id;
+
+                try {
+                    const response = await fetch(`/api/pendaftaran-berobat/${idPendaftaran}`);
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        // Dynamically create and populate the modal
+                        const modal = document.createElement("div");
+                        modal.className = "modal fade";
+                        modal.id = `editModal-${idPendaftaran}`;
+                        modal.setAttribute("tabindex", "-1");
+                        modal.setAttribute("aria-labelledby", `editModal-${idPendaftaran}-label`);
+                        modal.setAttribute("aria-hidden", "true");
+
+                        modal.innerHTML = `
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModal-${idPendaftaran}-label">Edit Pendaftaran</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editForm-${idPendaftaran}">
+                                            <div class="form-group">
+                                                <label for="editNama">Nama</label>
+                                                <input type="text" class="form-control" id="editNama" name="nama" value="${data.nama}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editNoTel">No Telp</label>
+                                                <input type="text" class="form-control" id="editNoTel" name="noTel" value="${data.noTel}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editTanggalPengajuan">Tanggal Pengajuan</label>
+                                                <input type="date" class="form-control" id="editTanggalPengajuan" name="tanggalPengajuan" value="${data.tanggalPengajuan}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="editPoli">Poli</label>
+                                                <select class="form-control" id="editPoli" name="poli" required>
+                                                    <option value="Umum" ${data.poli === "Umum" ? "selected" : ""}>Umum</option>
+                                                    <option value="Bidan" ${data.poli === "Bidan" ? "selected" : ""}>Bidan</option>
+                                                    <option value="Gigi" ${data.poli === "Gigi" ? "selected" : ""}>Gigi</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        document.body.appendChild(modal);
+                        $(`#editModal-${idPendaftaran}`).modal("show");
+
+                        // Handle form submission
+                        const editForm = document.getElementById(`editForm-${idPendaftaran}`);
+                        editForm.addEventListener("submit", async (e) => {
+                            e.preventDefault();
+                            const formData = new FormData(editForm);
+
+                            try {
+                                const updateResponse = await fetch(`/api/pendaftaran-berobat/${idPendaftaran}`, {
+                                    method: "PUT",
+                                    body: formData,
+                                });
+
+                                if (updateResponse.ok) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Pendaftaran berhasil diupdate!",
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                        timerProgressBar: true,
+                                    });
+                                    $(`#editModal-${idPendaftaran}`).modal("hide");
+                                    fetchData();
+                                } else {
+                                    const errorData = await updateResponse.json();
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Update gagal!",
+                                        text: errorData.message || "Terjadi kesalahan.",
+                                    });
+                                }
+                            } catch (error) {
+                                console.error("Error updating pendaftaran:", error);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "An error occurred",
+                                    text: "Terjadi kesalahan saat mengupdate pendaftaran!",
+                                });
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error fetching pendaftaran details:", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal mendapatkan detail!",
+                        text: "Terjadi kesalahan saat mengambil data pendaftaran.",
+                    });
+                }
+            });
+        });
+    };
 
     // Responsive Navbar Handling
     function toggleLinkClass() {

@@ -57,6 +57,29 @@ export async function getPendaftaranBerobatByUser(request: FastifyRequest, reply
     }
 }
 
+export async function getPendaftaranBerobatById(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    // const userId = request.user?.id
+    // const fk: any = await db.pasien.findOne({fk: userId})
+    const { id } = request.params as any;
+
+    // if (!userId) {
+    //     return reply.status(401).send({ message: "Unauthorized" });
+    // }
+
+    try {
+        const pasien = await db.pendaftaranBerobat.findOne(id);
+        if (!pasien) {
+            return reply.status(404).send({ message: "Pasien record not found" });
+        }
+
+        return reply.status(200).send(pasien);
+    } catch (error) {
+        console.error("Error fetching pasien:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
 export async function createPendaftaranBerobat(
     request: FastifyRequest<{ Body: PendaftaranBerobat }>,
     reply: FastifyReply,
