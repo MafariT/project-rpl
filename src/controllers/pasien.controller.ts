@@ -74,8 +74,8 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
             }
         }
 
-        pasienSchema.parse(payload);
         const { nik, nama,jenisKelamin, alamat, noTel, tanggalLahir } = payload;
+        pasienSchema.parse({ nik, nama,jenisKelamin, alamat, noTel, tanggalLahir });
         await db.pasien.saveOrUpdate(nik, nama,jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
 
         return reply.status(201).send({
