@@ -4,7 +4,6 @@ import { PendaftaranBerobat } from "../models/pendaftaran-berobat/pendaftaran-be
 import { initORM } from "../utils/db";
 import z, { ZodError } from "zod";
 import { EntityExistsError } from "../utils/erros";
-import { Pasien } from "../models/pasien/pasien.entity";
 
 const pendaftaranBerobatSchema = z.object({
     nik: z.string().min(1).max(255),
@@ -37,45 +36,44 @@ export async function getPendaftaranBerobat(
 
 export async function getPendaftaranBerobatByUser(request: FastifyRequest, reply: FastifyReply) {
     const db = await initORM();
-    const userId = request.user?.id
-    const fk: any = await db.pasien.findOne({fk: userId})
+    const userId = request.user?.id;
+    const fk: any = await db.pasien.findOne({ fk: userId });
 
     if (!userId) {
         return reply.status(401).send({ message: "Unauthorized" });
     }
 
     try {
-        const pasien = await db.pendaftaranBerobat.find({ fk: fk });
-        if (!pasien) {
-            return reply.status(404).send({ message: "Pasien record not found" });
+        const pendaftaranBerobat = await db.pendaftaranBerobat.find({ fk: fk });
+        if (!pendaftaranBerobat) {
+            return reply.status(404).send({ message: "pendaftaranBerobat record not found" });
         }
 
-        return reply.status(200).send(pasien);
+        return reply.status(200).send(pendaftaranBerobat);
     } catch (error) {
-        console.error("Error fetching pasien:", error);
+        console.error("Error fetching pendaftaranBerobat:", error);
         return reply.status(500).send("Internal Server Error");
     }
 }
 
 export async function getPendaftaranBerobatById(request: FastifyRequest, reply: FastifyReply) {
     const db = await initORM();
-    // const userId = request.user?.id
-    // const fk: any = await db.pasien.findOne({fk: userId})
+    const userId = request.user?.id;
     const { id } = request.params as any;
 
-    // if (!userId) {
-    //     return reply.status(401).send({ message: "Unauthorized" });
-    // }
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
 
     try {
-        const pasien = await db.pendaftaranBerobat.findOne(id);
-        if (!pasien) {
-            return reply.status(404).send({ message: "Pasien record not found" });
+        const pendaftaranBerobat = await db.pendaftaranBerobat.findOne(id);
+        if (!pendaftaranBerobat) {
+            return reply.status(404).send({ message: "pendaftaranBerobat record not found" });
         }
 
-        return reply.status(200).send(pasien);
+        return reply.status(200).send(pendaftaranBerobat);
     } catch (error) {
-        console.error("Error fetching pasien:", error);
+        console.error("Error fetching pendaftaranBerobat:", error);
         return reply.status(500).send("Internal Server Error");
     }
 }
@@ -85,13 +83,13 @@ export async function createPendaftaranBerobat(
     reply: FastifyReply,
 ) {
     const db = await initORM();
-    const userId = request.user?.id
-    const fk: any = await db.pasien.findOne({fk: userId})
-    
+    const userId = request.user?.id;
+    const fk: any = await db.pasien.findOne({ fk: userId });
+
     try {
         const payload: any = {};
         const parts = request.parts();
-        
+
         for await (const part of parts) {
             if (part.type === "field") {
                 payload[part.fieldname] = part.value;
@@ -110,28 +108,27 @@ export async function createPendaftaranBerobat(
             poli,
             keluhan,
             namaDokter,
-            jam, 
-            jenisPembayaran, 
-            totalPembayaran 
+            jam,
+            jenisPembayaran,
+            totalPembayaran,
         } = payload;
 
-
-        await db.pendaftaranBerobat.save(
-        nik,
-        nama,
-        jenisKelamin,
-        alamat,
-        noTel,
-        tanggalLahir,
-        tanggalPengajuan,
-        poli,
-        keluhan,
-        namaDokter,
-        jam, 
-        jenisPembayaran, 
-        totalPembayaran,
-        fk
-    );
+        await db.pendaftaranBerobat.saveOrUpdate(
+            nik,
+            nama,
+            jenisKelamin,
+            alamat,
+            noTel,
+            tanggalLahir,
+            tanggalPengajuan,
+            poli,
+            keluhan,
+            namaDokter,
+            jam,
+            jenisPembayaran,
+            totalPembayaran,
+            fk,
+        );
         return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
@@ -146,6 +143,29 @@ export async function createPendaftaranBerobat(
             return reply.status(409).send({ message: error.message });
         }
         console.error("Error creating pendaftaranBerobat:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
+export async function deletePendaftaranBerobatById(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const userId = request.user?.id;
+    const { id } = request.params as any;
+
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
+
+    try {
+        const pendaftaranBerobat = await db.pendaftaranBerobat.findOne(id);
+        if (!pendaftaranBerobat) {
+            return reply.status(404).send({ message: "pendaftaranBerobat record not found" });
+        }
+
+        await db.pendaftaranBerobat.remove(pendaftaranBerobat);
+        return reply.status(200).send({ message: "Pendaftaran Berobat deleted successfully" });
+    } catch (error) {
+        console.error("Error fetching pendaftaranBerobat:", error);
         return reply.status(500).send("Internal Server Error");
     }
 }
