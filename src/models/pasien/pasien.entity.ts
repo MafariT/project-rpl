@@ -14,7 +14,7 @@ export class Pasien {
         nama!: string;
     
     @Property({ nullable: false })
-        jenisKelamin!: boolean;
+        jenisKelamin!: string;
         
     @Property({ nullable: false })
         alamat!: string;
@@ -33,7 +33,7 @@ export class Pasien {
     constructor(
         nik: string,
         nama: string,
-        jenisKelamin: boolean,
+        jenisKelamin: string,
         alamat: string,
         noTel: number,
         tanggalLahir: string,

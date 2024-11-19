@@ -7,16 +7,16 @@ import { EntityExistsError } from "../utils/erros";
 import { Pasien } from "../models/pasien/pasien.entity";
 
 const pendaftaranBerobatSchema = z.object({
-    // fk: z.string().min(1).max(255), // ID PASIEN
+    nik: z.string().min(1).max(255),
     nama: z.string().min(1).max(255),
-    keluhan: z.string().min(1).max(255),
-    poliklinik: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
-    noTel: z.coerce.number().min(1), // Parsed to number
-    tanggalLahir: z.string().refine((value) => /^\d{2}-\d{2}-\d{4}$/.test(value), {
-        message: "Must be in DD-MM-YYYY format",
-    }),
-    jenisKelamin: z.string().min(1).max(255),
+    noTel: z.coerce.number().min(1),
+    poli: z.string().min(1).max(255),
+    keluhan: z.string().min(1).max(255),
+    namaDokter: z.string().min(1).max(255),
+    jam: z.string().min(1).max(255),
+    jenisPembayaran: z.string().min(1).max(255),
+    totalPembayaran: z.string().min(1).max(255),
 });
 
 export async function getPendaftaranBerobat(
@@ -35,16 +35,80 @@ export async function getPendaftaranBerobat(
     }
 }
 
+export async function getPendaftaranBerobatByUser(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const userId = request.user?.id
+    const fk: any = await db.pasien.findOne({fk: userId})
+
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
+
+    try {
+        const pasien = await db.pendaftaranBerobat.find({ fk: fk });
+        if (!pasien) {
+            return reply.status(404).send({ message: "Pasien record not found" });
+        }
+
+        return reply.status(200).send(pasien);
+    } catch (error) {
+        console.error("Error fetching pasien:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
 export async function createPendaftaranBerobat(
     request: FastifyRequest<{ Body: PendaftaranBerobat }>,
     reply: FastifyReply,
 ) {
     const db = await initORM();
-    const { nama, keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, fk } = request.body;
-
+    const userId = request.user?.id
+    const fk: any = await db.pasien.findOne({fk: userId})
+    
     try {
-        pendaftaranBerobatSchema.parse({ nama, keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, fk }); // Validation
-        await db.pendaftaranBerobat.save(nama, keluhan, poliklinik, alamat, noTel, tanggalLahir, jenisKelamin, fk);
+        const payload: any = {};
+        const parts = request.parts();
+        
+        for await (const part of parts) {
+            if (part.type === "field") {
+                payload[part.fieldname] = part.value;
+            }
+        }
+
+        pendaftaranBerobatSchema.parse(payload); // Validation
+        const {
+            nik,
+            nama,
+            jenisKelamin,
+            alamat,
+            noTel,
+            tanggalLahir,
+            tanggalPengajuan,
+            poli,
+            keluhan,
+            namaDokter,
+            jam, 
+            jenisPembayaran, 
+            totalPembayaran 
+        } = payload;
+
+
+        await db.pendaftaranBerobat.save(
+        nik,
+        nama,
+        jenisKelamin,
+        alamat,
+        noTel,
+        tanggalLahir,
+        tanggalPengajuan,
+        poli,
+        keluhan,
+        namaDokter,
+        jam, 
+        jenisPembayaran, 
+        totalPembayaran,
+        fk
+    );
         return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {

@@ -78,7 +78,7 @@
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0"
+          <table class="table table-bordered table-hover" id="myTable" width="100%" cellspacing="0"
             style="border-radius: 10px; overflow: hidden;">
             <div class="d-flex justify-content-end mb-3">
               <button class="btnTambah btn" data-toggle="modal" data-target="#tambahPendaftaran">Tambah</button>
@@ -95,11 +95,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Agus</td>
-                <td>087834901234</td>
-                <td>2024-10-31</td>
-                <td> Umum </td>
+              <tr id="list-no">
+                <td id="list-nama"></td>
+                <td id="list-noTel"></td>
+                <td id="list-tanggalPengajuan"></td>
+                <td id="list-poli"></td>
                 <td class="d-flex justify-content-center">
                   <div class="d-flex">
                     <button class="btnLihat btn">Lihat</button>
@@ -144,21 +144,15 @@
           <form>
             <!-- input -->
             <div class="scrollspy-example">
-              <!-- Nama Lengkap -->
-              <div class="form-group">
-                <label for="namaLengkap" style="color: black;">Nama Lengkap</label>
-                <input type="text" class="form-control" id="namaLengkap" aria-describedby="" name="namaLengkap"
-                  required>
-              </div>
               <!-- NIK -->
               <div class="form-group">
                 <label for="nik" style="color: black;">NIK</label>
                 <input type="text" class="form-control" id="nik" aria-describedby="" name="nik" required>
               </div>
-              <!-- Tanggal Lahir -->
+              <!-- Nama Lengkap -->
               <div class="form-group">
-                <label for="tanggalLahir" style="color: black;">Tanggla Lahir</label>
-                <input type="date" class="form-control" id="tanggalLahir" aria-describedby="" name="tanggalLahir"
+                <label for="nama" style="color: black;">Nama Lengkap</label>
+                <input type="text" class="form-control" id="nama" aria-describedby="" name="nama"
                   required>
               </div>
               <!-- Jenis Kelamin -->
@@ -166,16 +160,16 @@
                 <label for="form-check-label" class="col-form-label" style="color: black;">Jenis Kelamin</label>
                 <div class="d-flex">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="exampleRadios1"
-                      value="Laki-Laki" required>
-                    <label class="form-check-label mr-3" for="exampleRadios1" style="color: black;">
+                    <input class="form-check-input" type="radio" name="jenisKelamin" id="jenisKelamin0"
+                    value="laki-laki" required>
+                    <label class="form-check-label mr-3" for="jenisKelamin0" style="color: black;">
                       Laki-Laki
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="exampleRadios2"
-                      value="Perempuan" required>
-                    <label class="form-check-label" for="exampleRadios2" style="color: black;">
+                    <input class="form-check-input" type="radio" name="jenisKelamin" id="jenisKelamin1"
+                    value="perempuan" required>
+                    <label class="form-check-label" for="jenisKelamin1" style="color: black;">
                       Perempuan
                     </label>
                   </div>
@@ -188,8 +182,14 @@
               </div>
               <!-- No telp -->
               <div class="form-group">
-                <label for="noTelp" style="color: black;">No Telp</label>
-                <input type="text" class="form-control" id="noTelp" aria-describedby="" name="noTelp" required>
+                <label for="noTel" style="color: black;">No Telp</label>
+                <input type="text" class="form-control" id="noTel" aria-describedby="" name="noTel" required>
+              </div>
+              <!-- Tanggal Lahir -->
+              <div class="form-group">
+                <label for="tanggalLahir" style="color: black;">Tanggla Lahir</label>
+                <input type="date" class="form-control" id="tanggalLahir" aria-describedby="" name="tanggalLahir"
+                  required>
               </div>
               <!-- Tanggal pengajuan -->
               <div class="form-group">
@@ -230,8 +230,8 @@
               </div>
               <!-- Jenis Pembayaran -->
               <div class="form-group">
-                <label for="janisPembayaran" style="color: black;">Jenis Pembayaran</label>
-                <select class="form-control" id="janisPembayaran" name="janisPembayaran" required>
+                <label for="jenisPembayaran" style="color: black;">Jenis Pembayaran</label>
+                <select class="form-control" id="jenisPembayaran" name="jenisPembayaran" required>
                   <option value=""></option>
                   <option value="dana">Dana</option>
                   <option value="cas">Cas</option>
@@ -248,7 +248,7 @@
             <!-- end input -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-weight: 600;">Tutup</button>
-              <button type="submit" class="btn btn-success" style="font-weight: 600;">Submit</button>
+              <button type="submit" class="btn btn-success" style="font-weight: 600;" id="submitData">Submit</button>
             </div>
           </form>
         </div>
@@ -357,6 +357,8 @@
   </footer>
   <!-- End Footer -->
 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- My JS -->
   <script src="../js/myJS/pendaftaran.js"></script>
   <!-- Font Awesome -->

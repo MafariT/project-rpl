@@ -15,7 +15,7 @@ export class PasienRepository extends EntityRepository<Pasien> {
     async saveOrUpdate(
         nik: string,
         nama: string,
-        jenisKelamin: boolean,
+        jenisKelamin: string,
         alamat: string,
         noTel: number,
         tanggalLahir: string,

@@ -8,17 +8,14 @@ export class PendaftaranBerobat {
         idPendaftaran!: number;
 
     @Property({ nullable: false })
+        nik!: string;
+
+    @Property({ nullable: false })
         nama!: string;
-
-    @Property({ onCreate: () => new Date() })
-        tanggal!: Date;
-
+    
     @Property({ nullable: false })
-        keluhan!: string;
-
-    @Property({ nullable: false })
-        poliklinik!: string;
-
+        jenisKelamin!: string;
+        
     @Property({ nullable: false })
         alamat!: string;
 
@@ -29,30 +26,60 @@ export class PendaftaranBerobat {
         tanggalLahir!: string;
 
     @Property({ nullable: false })
-        jenisKelamin!: string;
+        tanggalPengajuan!: string;
+
+    @Property({ nullable: false })
+        poli!: string;
+
+    @Property({ nullable: false })
+        keluhan!: string;
+
+    @Property({ nullable: false })
+        namaDokter!: string;
+
+    @Property({ nullable: false })
+        jam!: string;
+
+    @Property({ nullable: false })
+        jenisPembayaran!: string;
+
+    @Property({ nullable: false })
+        totalPembayaran!: string;
 
     @ManyToOne(() => Pasien, { nullable: false }) // TODO to ID FK
-        fk!: string;
+        fk!: number;
 
     constructor(
         // idPendaftaran: number,
+        nik: string,
         nama: string,
-        keluhan: string,
-        poliklinik: string,
+        jenisKelamin: string,
         alamat: string,
         noTel: number,
         tanggalLahir: string,
-        jenisKelamin: string,
-        fk: string,
+        tanggalPengajuan: string,
+        poli: string,
+        keluhan: string,
+        namaDokter: string,
+        jam: string,
+        jenisPembayaran: string,
+        totalPembayaran: string,
+        fk: number,
     ) {
         // this.idPendaftaran = idPendaftaran;
+        this.nik = nik;
         this.nama = nama;
-        this.fk = fk;
-        this.keluhan = keluhan;
-        this.poliklinik = poliklinik;
+        this.jenisKelamin = jenisKelamin;
         this.alamat = alamat;
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
-        this.jenisKelamin = jenisKelamin;
+        this.tanggalPengajuan = tanggalPengajuan
+        this.poli = poli,
+        this.keluhan = keluhan,
+        this.namaDokter = namaDokter,
+        this.jam = jam,
+        this.jenisPembayaran = jenisPembayaran,
+        this.totalPembayaran = totalPembayaran,
+        this.fk = fk;
     }
 }

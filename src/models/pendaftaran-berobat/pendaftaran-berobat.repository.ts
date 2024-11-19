@@ -14,27 +14,39 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
     }
 
     async save(
+        nik: string,
         nama: string,
-        keluhan: string,
-        poliklinik: string,
+        jenisKelamin: string,
         alamat: string,
         noTel: number,
         tanggalLahir: string,
-        jenisKelamin: string,
-        fk: string,
+        tanggalPengajuan: string,
+        poli: string,
+        keluhan: string,
+        namaDokter: string,
+        jam: string,
+        jenisPembayaran: string,
+        totalPembayaran: string,
+        fk: number,
     ): Promise<void> {
         // if (await this.exists(nik)) {
         //     throw new EntityExistsError(nik);
         // }
 
         const newPendaftaranBerobat = new PendaftaranBerobat(
+            nik,
             nama,
-            keluhan,
-            poliklinik,
+            jenisKelamin,
             alamat,
             noTel,
             tanggalLahir,
-            jenisKelamin,
+            tanggalPengajuan,
+            poli,
+            keluhan,
+            namaDokter,
+            jam,
+            jenisPembayaran,
+            totalPembayaran,
             fk,
         );
         this.create(newPendaftaranBerobat);

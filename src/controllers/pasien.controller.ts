@@ -12,7 +12,7 @@ const pasienSchema = z.object({
     nik: z.string().min(1).max(255),
     nama: z.string().min(1).max(255),
     alamat: z.string().min(1).max(255),
-    noTel: z.coerce.number().min(1).max(255), // Parsed to number
+    noTel: z.coerce.number().min(1), // Parsed to number
     // tanggalLahir: z.string().refine((value) => /^\d{2}-\d{2}-\d{4}$/.test(value), {
     //     message: "Must be in DD-MM-YYYY format",
     // }),
@@ -59,7 +59,7 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
                     if (patientData && patientData.fotoProfil) {
                         fileName = patientData.fotoProfil;
                     } else {
-                        fileName = "default.png";
+                        fileName = "kosong.jpg";
                     }
                 } else {
                     fileName = `${Date.now()}-${part.filename}`;
@@ -74,8 +74,8 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
             }
         }
 
+        pasienSchema.parse(payload);
         const { nik, nama,jenisKelamin, alamat, noTel, tanggalLahir } = payload;
-        pasienSchema.parse({ nik, nama,jenisKelamin, alamat, noTel, tanggalLahir });
         await db.pasien.saveOrUpdate(nik, nama,jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
 
         return reply.status(201).send({

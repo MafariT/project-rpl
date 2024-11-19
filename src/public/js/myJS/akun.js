@@ -94,18 +94,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 for (const [key, value] of Object.entries(pasienData)) {
                     if (key === "fotoProfil" && value) {
                         profilePic.src = `/uploads/${value}`;
-                    if (pasienData.jenisKelamin == 0) {
-                        jenisKelamin0.checked = "true" // Laki Laki
-                    }
-                    if (pasienData.jenisKelamin == 1) {
-                        jenisKelamin1.checked = "true" // Perempuan
-                    }
+                    } else if (key === "jenisKelamin") {
+                        if (value === "laki-laki") jenisKelamin0.checked = true; // Laki Laki
+                        if (value === "Perempuan") jenisKelamin1.checked = true; // Perempuan
                     } else {
                         const input = document.querySelector(`[name="${key}"]`);
                         if (input) input.value = value;
                     }
                 }
             }
+            
 
             if (userResponse.ok) {
                 const userData = await userResponse.json();
