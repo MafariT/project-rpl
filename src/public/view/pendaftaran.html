@@ -54,14 +54,14 @@
       <!-- Navbar links centered with mx-auto -->
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav mx-auto">
-          <a class="nav-tengah linknya" href="home.html" style="font-size: 20px;">Beranda</a>
-          <a class="nav-tengah linknya" href="pendaftaran.html" style="font-size: 20px;">Pendaftaran</a>
+          <a class="nav-tengah linknya" href="home" style="font-size: 20px;">Beranda</a>
+          <a class="nav-tengah linknya" href="pendaftaran" style="font-size: 20px;">Pendaftaran</a>
           <a class="nav-tengah linknya" href="#" style="font-size: 20px;">Informasi</a>
           <a class="nav-tengah linknya" href="#" style="font-size: 20px;">Ulasan</a>
         </div>
 
         <!-- Masuk button aligned to the right -->
-        <a class="tombol nav-link btn btn-primary font-weight-bold shadow" href="akun.html"
+        <a class="tombol nav-link btn btn-primary font-weight-bold shadow" href="akun"
           style="color: aliceblue; font-size: 1.2rem;">Akun</a>
       </div>
     </div>
@@ -142,51 +142,110 @@
         </div>
         <div class="modal-body">
           <form>
-            <!-- Nama Lengkap -->
-            <div class="form-group">
-              <label for="namaLengkap" style="color: black;">Nama Lengkap</label>
-              <input type="text" class="form-control" id="namaLengkap" aria-describedby="">
-            </div>
-            <!-- NIK -->
-            <div class="form-group">
-              <label for="nik" style="color: black;">NIK</label>
-              <input type="text" class="form-control" id="nik" aria-describedby="">
-            </div>
-            <!-- Tanggal Lahir -->
-            <div class="form-group">
-              <label for="date" style="color: black;">Tanggla Lahir</label>
-              <input type="date" class="form-control" id="date" aria-describedby="">
-            </div>
-            <!-- Jenis Kelamin -->
-            <div class="form-group">
-              <label for="form-check-label" class="col-form-label" style="color: black;">Jenis Kelamin</label>
-              <div class="d-flex">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="jenis_kelamin" id="exampleRadios1"
-                    value="Laki-Laki" required>
-                  <label class="form-check-label mr-3" for="exampleRadios1" style="color: black;">
-                    Laki-Laki
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="jenis_kelamin" id="exampleRadios2"
-                    value="Perempuan" required>
-                  <label class="form-check-label" for="exampleRadios2" style="color: black;">
-                    Perempuan
-                  </label>
+            <!-- input -->
+            <div class="scrollspy-example">
+              <!-- Nama Lengkap -->
+              <div class="form-group">
+                <label for="namaLengkap" style="color: black;">Nama Lengkap</label>
+                <input type="text" class="form-control" id="namaLengkap" aria-describedby="" name="namaLengkap"
+                  required>
+              </div>
+              <!-- NIK -->
+              <div class="form-group">
+                <label for="nik" style="color: black;">NIK</label>
+                <input type="text" class="form-control" id="nik" aria-describedby="" name="nik" required>
+              </div>
+              <!-- Tanggal Lahir -->
+              <div class="form-group">
+                <label for="tanggalLahir" style="color: black;">Tanggla Lahir</label>
+                <input type="date" class="form-control" id="tanggalLahir" aria-describedby="" name="tanggalLahir"
+                  required>
+              </div>
+              <!-- Jenis Kelamin -->
+              <div class="form-group">
+                <label for="form-check-label" class="col-form-label" style="color: black;">Jenis Kelamin</label>
+                <div class="d-flex">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="exampleRadios1"
+                      value="Laki-Laki" required>
+                    <label class="form-check-label mr-3" for="exampleRadios1" style="color: black;">
+                      Laki-Laki
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="exampleRadios2"
+                      value="Perempuan" required>
+                    <label class="form-check-label" for="exampleRadios2" style="color: black;">
+                      Perempuan
+                    </label>
+                  </div>
                 </div>
               </div>
+              <!-- Alamat -->
+              <div class="form-group">
+                <label for="alamat" style="color: black;">Alamat</label>
+                <input type="text" class="form-control" id="alamat" aria-describedby="" name="alamat" required>
+              </div>
+              <!-- No telp -->
+              <div class="form-group">
+                <label for="noTelp" style="color: black;">No Telp</label>
+                <input type="text" class="form-control" id="noTelp" aria-describedby="" name="noTelp" required>
+              </div>
+              <!-- Tanggal pengajuan -->
+              <div class="form-group">
+                <label for="tanggalPengajuan" style="color: black;">Tanggal Pengajuan</label>
+                <input type="date" class="form-control" id="tanggalPengajuan" aria-describedby=""
+                  name="tanggalPengajuan" required>
+              </div>
+              <!-- poli -->
+              <div class="form-group">
+                <label for="poli" style="color: black;">Poli</label>
+                <select class="form-control" id="poli" name="poli" required>
+                  <option value=""></option>
+                  <option value="Umum">Umum</option>
+                  <option value="Bidan">Bidan</option>
+                  <option value="Gigi">Gigi</option>
+                </select>
+              </div>
+              <!-- keluhan -->
+              <div class="form-group">
+                <label for="keluhan" style="color: black;">Keluhan</label>
+                <textarea class="form-control" id="keluhan" rows="4" placeholder="Jelaskan keluhan Anda lebih lengkap"
+                  name="keluhan" required></textarea>
+              </div>
+              <!-- namaDokter -->
+              <div class="form-group">
+                <label for="namaDokter" style="color: black;">Nama Dokter</label>
+                <select class="form-control" id="namaDokter" name="namaDokter" required>
+                  <option value=""></option>
+                  <option value="agus">dr. Agus Asep</option>
+                  <option value="Bidan">Bidan</option>
+                  <option value="Gigi">Gigi</option>
+                </select>
+              </div>
+              <!-- jam -->
+              <div class="form-group">
+                <label for="jam" style="color: black;">Jam</label>
+                <input type="time" class="form-control" id="jam" aria-describedby="" name="jam" required>
+              </div>
+              <!-- Jenis Pembayaran -->
+              <div class="form-group">
+                <label for="janisPembayaran" style="color: black;">Jenis Pembayaran</label>
+                <select class="form-control" id="janisPembayaran" name="janisPembayaran" required>
+                  <option value=""></option>
+                  <option value="dana">Dana</option>
+                  <option value="cas">Cas</option>
+                  <option value="gopay">Gopay</option>
+                </select>
+              </div>
+              <!-- total Pemabayran -->
+              <div class="form-group">
+                <label for="totalPembayaran" style="color: black;">Total Pemabayaran</label>
+                <input type="text" class="form-control" id="totalPembayaran" aria-describedby="" name="totalPembayaran"
+                  required value="Rp. 5.000,00">
+              </div>
             </div>
-            <!-- Alamat -->
-            <div class="form-group">
-              <label for="alamat" style="color: black;">Alamat</label>
-              <input type="text" class="form-control" id="alamat" aria-describedby="">
-            </div>
-            <!-- No telp -->
-            <div class="form-group">
-              <label for="noTelp" style="color: black;">No Telp</label>
-              <input type="text" class="form-control" id="noTelp" aria-describedby="">
-            </div>
+            <!-- end input -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-weight: 600;">Tutup</button>
               <button type="submit" class="btn btn-success" style="font-weight: 600;">Submit</button>
@@ -197,6 +256,7 @@
     </div>
   </div>
   <!-- end Modal -->
+   
   <!-- Footer -->
   <footer class="footer pt-10 pb-5 mt-auto footer-light" style="background-color: #68A3F3;">
     <div class="container-lg">
@@ -298,7 +358,7 @@
   <!-- End Footer -->
 
   <!-- My JS -->
-  <script src="../js/myJS/akun.js"></script>
+  <script src="../js/myJS/pendaftaran.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->
