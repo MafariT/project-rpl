@@ -130,7 +130,7 @@ export async function deletePic(request: FastifyRequest, reply: FastifyReply) {
         }
 
         const oldFileName = pasien.fotoProfil;
-        if (oldFileName && oldFileName !== "default.jpg") {
+        if (oldFileName && oldFileName !== "kosong.jpg") {
             const uploadDir = path.join(__dirname, "../uploads");
             const oldFilePath = path.join(uploadDir, oldFileName);
 
@@ -139,7 +139,7 @@ export async function deletePic(request: FastifyRequest, reply: FastifyReply) {
             }
         }
 
-        pasien.fotoProfil = "default.jpg";
+        pasien.fotoProfil = "kosong.jpg";
         await db.pasien.saveOrUpdate(
             pasien.nik,
             pasien.nama,
