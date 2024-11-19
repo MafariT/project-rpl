@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    profilePic.src = "default.jpg";
+                    profilePic.src = "../img/asset/kosong.jpg";
                     inputPic.value = "";
                     const response = await fetch("/api/pasien/delete-pic", {
                         method: "GET",
