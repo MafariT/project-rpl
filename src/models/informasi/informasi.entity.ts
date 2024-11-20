@@ -12,7 +12,7 @@ export class Informasi {
     @Property({ nullable: false })
         judul!: string;
 
-    @Property({ nullable: false })
+    @Property({ type: "text", nullable: false })
         isi!: string;
 
     @Property({ onCreate: () => new Date(), hidden: true })

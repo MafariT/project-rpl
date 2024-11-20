@@ -21,7 +21,7 @@ async function seedusers(count: number) {
     console.log(`${count} users seeded.`);
 }
 
-const user_COUNT = 100000; // Number of users to seed
+const user_COUNT = process.argv[2] ? parseInt(process.argv[2], 10) : 10;
 seedusers(user_COUNT)
     .catch((error) => {
         console.error("Error seeding users:", error);
