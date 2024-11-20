@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "foto": "https://example.com/images/foto1.jpg",
+      "judul": "Teknologi Masa Depan",
+      "isi": "Teknologi terus berkembang pesat dan membawa perubahan besar di berbagai bidang kehidupan."
+    },
+    {
+      "id": 2,
+      "foto": "https://example.com/images/foto2.jpg",
+      "judul": "Startup Digital di Indonesia",
+      "isi": "Startup berbasis teknologi menjadi salah satu penggerak utama ekonomi digital di Indonesia."
+    },
+    {
+      "id": 3,
+      "foto": "https://example.com/images/foto3.jpg",
+      "judul": "Pentingnya Energi Terbarukan",
+      "isi": "Penggunaan energi terbarukan dapat membantu mengurangi dampak negatif terhadap lingkungan."
+    },
+    {
+      "id": 4,
+      "foto": "https://example.com/images/foto4.jpg",
+      "judul": "Transformasi Digital di Pendidikan",
+      "isi": "Pendidikan berbasis teknologi memungkinkan pembelajaran menjadi lebih efektif dan fleksibel."
+    },
+    {
+      "id": 5,
+      "foto": "https://example.com/images/foto5.jpg",
+      "judul": "Peran AI dalam Kehidupan Sehari-hari",
+      "isi": "Kecerdasan buatan (AI) memberikan kontribusi besar dalam meningkatkan efisiensi berbagai aktivitas."
+    }
+  ]
+  

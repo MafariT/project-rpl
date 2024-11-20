@@ -15,7 +15,7 @@ export async function publicViewRouter(fastify: FastifyInstance) {
 
 export async function privateViewRouter(fastify: FastifyInstance) {
     fastify.addHook("preHandler", isAuthenticated);
-
+    
     fastify.get("/home", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/home.html");
     });
@@ -25,6 +25,9 @@ export async function privateViewRouter(fastify: FastifyInstance) {
     fastify.get("/pendaftaran", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/pendaftaran.html");
     });
+    fastify.get("/informasi", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/informasi.html");
+    }); 
     // fastify.get("/pasien-regis", (request: FastifyRequest, reply: FastifyReply) => {
     //     reply.sendFile("pasien-regis.html");
     // });

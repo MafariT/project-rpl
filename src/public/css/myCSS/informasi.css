@@ -1,0 +1,114 @@
+.navbar-collapse .navbar-nav .linknya {
+    color: white;
+    font-size: 1rem;
+    margin-right: 40px;
+    text-decoration: none;
+    position: relative;
+    font-weight: bold;
+}
+
+.navbar-collapse .navbar-nav .link-hp {
+    margin-top: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.navbar-collapse .navbar-nav .linknya::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10%;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navbar-collapse .navbar-nav .linknya:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.container-lg .btnBerita {
+    background-color: #3986EF;
+    color: white;
+    font-weight: bold;
+}
+
+.container-lg .btnBerita:hover {
+    color: white;
+    background-color: #0e5ece;
+}
+
+.container-lg .btnChild {
+    background-color: #68A3F3;
+    color: white;
+    font-weight: bold;
+}
+
+.container-lg .btnChild:hover {
+    color: white;
+    background-color: #0e5ece;
+}
+
+.btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping on small screens */
+    justify-content: start;
+    /* Center buttons horizontally */
+    gap: 0.5rem;
+    /* Spacing between buttons */
+}
+
+.cards {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.custom-img {
+    width: 360px;
+    /* Sesuaikan dengan kebutuhan */
+    height: 190px;
+    /* Sesuaikan dengan kebutuhan */
+    object-fit: cover;
+    /* Gambar dipotong untuk mengisi area tanpa distorsi */
+    object-position: center;
+    /* Memastikan bagian tengah gambar terlihat */
+}
+
+.card-text {
+    display: -webkit-box;
+    /* Aktifkan mode kotak fleksibel */
+    -webkit-box-orient: vertical;
+    /* Orientasi vertikal */
+    overflow: hidden;
+    /* Sembunyikan teks yang meluap */
+    text-overflow: ellipsis;
+    /* Tambahkan ... pada akhir teks */
+    -webkit-line-clamp: 2;
+    /* Batasi jumlah baris (atur untuk mencocokkan jumlah kata visual) */
+    line-height: 1.5;
+    /* Sesuaikan tinggi baris untuk hasil yang tepat */
+    max-height: 3em;
+    /* Kontrol tinggi maksimal (2 baris dengan line-height 1.5em) */
+    color: black;
+
+}
+
+
+/* Style for smaller devices (e.g., iPhone SE) */
+@media (max-width: 576px) {
+    .btn {
+        font-size: 0.875rem;
+        /* Slightly smaller font size */
+        padding: 0.4rem 0.8rem;
+        /* Adjust padding */
+    }
+}

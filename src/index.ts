@@ -10,6 +10,7 @@ import authRouter from "./routes/auth";
 import { privateViewRouter, publicViewRouter } from "./routes/view";
 import PendaftaranBerobatRouter from "./routes/pendaftaran-berobat";
 import fastifyMultipart from "@fastify/multipart";
+import informasiRouter from "./routes/informasi";
 
 const envToLogger = {
     development: {
@@ -64,6 +65,7 @@ fastify.register(authRouter, { prefix: "/api/auth" });
 fastify.register(pasienRouter, { prefix: "/api/pasien" });
 fastify.register(PendaftaranBerobatRouter, { prefix: "/api/pendaftaran-berobat" });
 fastify.register(userRouter, { prefix: "/api/user" });
+fastify.register(informasiRouter, { prefix: "/api/informasi" });
 fastify.register(publicViewRouter, { prefix: "/" });
 fastify.register(privateViewRouter, { prefix: "/" });
 

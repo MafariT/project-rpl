@@ -31,6 +31,7 @@
 .navbar-collapse .navbar-nav .linknya:hover::after {
     transform-origin: left;
     transform: scaleX(1);
+    /* background-color: #8998ac; */
 }
 
 .col-md-6 .labelFoto {
