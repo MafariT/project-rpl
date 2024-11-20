@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const profilePic = document.getElementById("profile-pic");
     const inputPic = document.getElementById("foto");
     const removePicButton = document.getElementById("hapus-foto");
+    const updateButton = document.getElementById("update-btn");
     const logoutButton = document.getElementById("logout");
     const form = document.querySelector("form");
     const username = document.getElementById("username");
@@ -66,13 +67,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Logout
     logoutButton.addEventListener("click", async (event) => {
         event.preventDefault();
+
+        showLoading(true);
+
         try {
             const response = await fetch("/api/auth/logout", {
                 method: "GET",
             });
+
             window.location.href = response.url;
         } catch (error) {
             console.error("Error during logout:", error);
@@ -81,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "Logout Failed",
                 text: "Terjadi kesalahan saat logout!",
             });
+        } finally {
+            resetButtons();
         }
     });
 
@@ -103,7 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             }
-            
 
             if (userResponse.ok) {
                 const userData = await userResponse.json();
@@ -129,6 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         formData.delete("username");
         formData.delete("email");
+
+        showLoading();
 
         try {
             const response = await fetch("/api/pasien", {
@@ -160,8 +167,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "An error occurred",
                 text: "Terjadi kesalahan saat memperbarui profil!",
             });
+        } finally {
+            resetButtons();
         }
     });
+
+    const showLoading = (isLogout = false) => {
+        if (isLogout) {
+            logoutButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging out...`;
+            logoutButton.disabled = true;
+        } else {
+            updateButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`;
+            updateButton.disabled = true;
+        }
+    };
+
+    const resetButtons = () => {
+        updateButton.innerHTML = "Update Profil";
+        updateButton.disabled = false;
+
+        logoutButton.innerHTML = "Logout";
+        logoutButton.disabled = false;
+    };
 
     // Responsive Navbar Handling
     function toggleLinkClass() {

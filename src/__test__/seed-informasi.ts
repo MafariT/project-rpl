@@ -23,7 +23,6 @@ async function seedInformasi(count: number) {
 
 const informasi_COUNT = process.argv[2] ? parseInt(process.argv[2], 10) : 10;
 
-// Call the seed function
 seedInformasi(informasi_COUNT)
     .catch((error) => {
         console.error("Error seeding informasi:", error);

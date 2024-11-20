@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fetch data
     const fetchData = async () => {
+        const spinner = document.getElementById("spinner");
+        spinner.style.display = "block";
         try {
             const [pasienResponse, pendaftaranResponse] = await Promise.all([
                 fetch("/api/pasien/user"),
@@ -62,9 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="${modalId}-label">Detail Pendaftaran</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
                                     </div>
                                     <div class="modal-body">
                                         <p><strong>Nik:</strong> ${pendaftaran.nik}</p>
@@ -81,9 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                         <p><strong>Total Pembayaran:</strong> ${pendaftaran.totalPembayaran}</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="color: white; font-weight: 600">Tutup</button>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     `;
@@ -104,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "Failed to fetch data",
                 text: "Terjadi kesalahan saat mengambil data!",
             });
+        } finally {
+            spinner.style.display = "none";
         }
     };
 
@@ -279,7 +279,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 <input type="text" class="form-control" id="totalPembayaran" aria-describedby="" name="totalPembayaran"
                                                 required value="${data.totalPembayaran}">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success" style="font-weight: 600;">Submit</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -344,12 +346,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const addHapusButtonListeners = () => {
-        const editHapusButtons = document.querySelectorAll(".btnHapus"); // Get all delete buttons
+        const editHapusButtons = document.querySelectorAll(".btnHapus");
 
         editHapusButtons.forEach((button) => {
             button.addEventListener("click", async (event) => {
-                const button = event.target; // Get the clicked button
-                const id = button.getAttribute("data-id"); // Get the ID from the `data-id` attribute
+                const button = event.target;
+                const id = button.getAttribute("data-id");
                 console.log(id);
 
                 if (!id) {
@@ -357,7 +359,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                // Show a SweetAlert2 confirmation modal
                 const { isConfirmed } = await Swal.fire({
                     title: "Konfirmasi",
                     icon: "warning",
