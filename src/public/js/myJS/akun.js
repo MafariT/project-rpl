@@ -174,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const showLoading = (isLogout = false) => {
         if (isLogout) {
-            logoutButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Logging out...`;
+            logoutButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             logoutButton.disabled = true;
         } else {
-            updateButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`;
+            updateButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             updateButton.disabled = true;
         }
     };

@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fetch data
     const fetchData = async () => {
-        const spinner = document.getElementById("spinner");
-        spinner.style.display = "block";
         try {
             const [pasienResponse, pendaftaranResponse] = await Promise.all([
                 fetch("/api/pasien/user"),
@@ -102,8 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: "Failed to fetch data",
                 text: "Terjadi kesalahan saat mengambil data!",
             });
-        } finally {
-            spinner.style.display = "none";
         }
     };
 
@@ -118,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(form);
-        console.log(formData);
 
         try {
             const response = await fetch("/api/pendaftaran-berobat", {
@@ -294,7 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Handle form submission
                         const id = button.getAttribute("data-id");
                         const editForm = document.getElementById(`editForm-${idPendaftaran}`);
-                        console.log(idPendaftaran);
                         editForm.addEventListener("submit", async (e) => {
                             e.preventDefault();
                             const formData = new FormData(editForm);
@@ -352,7 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
             button.addEventListener("click", async (event) => {
                 const button = event.target;
                 const id = button.getAttribute("data-id");
-                console.log(id);
 
                 if (!id) {
                     console.error("ID is missing for the delete action.");

@@ -51,20 +51,29 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
                     fs.mkdirSync(uploadDir, { recursive: true });
                 }
 
-                // If filename is empty , get the filename from the database
+                let oldFileName: string | null = null;
+                const patientData = await db.pasien.findOne({ fk });
+
+                if (patientData && patientData.fotoProfil) {
+                    oldFileName = patientData.fotoProfil;
+                }
+
+                // Determine the new file name
                 if (part.filename.trim() === "") {
-                    const patientData = await db.pasien.findOne({ fk });
-                    if (patientData && patientData.fotoProfil) {
-                        fileName = patientData.fotoProfil;
-                    } else {
-                        fileName = "kosong.jpg";
-                    }
+                    fileName = oldFileName || "kosong.jpg";
                 } else {
-                    fileName = `${Date.now()}-${part.filename}`;
+                    fileName = `${fk}-${part.filename}`;
                     filePath = path.join(uploadDir, fileName);
 
-                    // Save the file to disk
                     await pipeline(part.file, fs.createWriteStream(filePath));
+                }
+
+                // Delete the old file if it's different from the new one
+                if (oldFileName && oldFileName !== fileName && oldFileName !== "kosong.jpg") {
+                    const oldFilePath = path.join(uploadDir, oldFileName);
+                    if (fs.existsSync(oldFilePath)) {
+                        fs.unlinkSync(oldFilePath);
+                    }
                 }
             } else {
                 // Collect other fields
