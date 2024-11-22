@@ -16,8 +16,21 @@ export async function getInformasi(request: FastifyRequest<{ Querystring: QueryP
     const { filter, value } = request.query;
 
     try {
-        if (filter && value) {
-        const informasi = await db.informasi.fetch(filter, value);
+        const informasis = await db.informasi.fetch(filter, value);
+        return reply.status(200).send(informasis);
+    } catch (error) {
+        console.error("Error fetching informasis:", error);
+        return reply.status(500);
+    }
+}
+
+export async function getInformasiPage(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
+    const db = await initORM();
+    const { idInformasi } = request.params as { idInformasi: string };
+    console.log(idInformasi);
+
+    try {
+        const informasi = await db.informasi.fetch("idInformasi", idInformasi);
 
         if (!informasi || informasi.length === 0) {
             return reply.status(404).send("Informasi not found");
@@ -59,16 +72,21 @@ export async function getInformasi(request: FastifyRequest<{ Querystring: QueryP
                 rel="stylesheet">
 
             </head>
-
-            <body>
-                <div>
-                    <img src="${item.foto}" alt="Informasi Image">
-                    <h1>${item.judul}</h1>
-                    <p>${item.isi}</p>
-                    <a href="/" class="back-link">← Back to Home</a>
+            <body id="" style="font-family: 'Poppins', serif; padding-top: 30px;">
+                <div class="container my-5 pt-5">
+                    <div class="d-flex justify-content-center">
+                        <div class="col-xl-10 col-lg-12">
+                            <div class="border p-4 rounded" style="max-width: 900px; margin: 0 auto;">
+                                <img src="${item.foto}" alt="Informasi Image" class="img-fluid mb-4">
+                                <h1>${item.judul}</h1>
+                                <h6>${item.created.toLocaleDateString()}</h6>
+                                <p>${item.isi}</p>
+                                <a href="/informasi" class="btn btn-primary">← Kembali</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </body>
-
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #68A3F3;">
                 <div class="container-lg p-3">
@@ -217,103 +235,11 @@ export async function getInformasi(request: FastifyRequest<{ Querystring: QueryP
 
             </html>
         `;
-
-        // Send the rendered HTML
         reply.header("Content-Type", "text/html; charset=utf-8");
         return reply.status(200).send(htmlContent);
-        } else {
-            const informasis = await db.informasi.fetch(filter, value);
-            return reply.status(200).send(informasis);
-        }
     } catch (error) {
         console.error("Error fetching informasis:", error);
         return reply.status(500);
-    }
-}
-
-export async function getInformasiById(
-    request: FastifyRequest<{ Querystring: QueryParams }>,
-    reply: FastifyReply
-) {
-    const db = await initORM();
-    const { filter, value } = request.query;
-
-    try {
-        // Fetch the specific information based on the filter and value
-        const informasi = await db.informasi.fetch(filter, value);
-
-        if (!informasi || informasi.length === 0) {
-            return reply.status(404).send("Informasi not found");
-        }
-
-        // Render HTML response dynamically
-        const item = informasi[0]; // Assuming `fetch` returns an array
-        const htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>${item.judul}</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 20px;
-                    background-color: #f9f9f9;
-                    color: #333;
-                }
-                .container {
-                    max-width: 800px;
-                    margin: 0 auto;
-                    background: white;
-                    padding: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                }
-                .image {
-                    width: 100%;
-                    height: auto;
-                    border-radius: 10px;
-                }
-                .title {
-                    font-size: 24px;
-                    font-weight: bold;
-                    margin: 20px 0;
-                }
-                .content {
-                    font-size: 16px;
-                    line-height: 1.6;
-                }
-                .back-link {
-                    display: inline-block;
-                    margin-top: 20px;
-                    text-decoration: none;
-                    color: #007bff;
-                    font-weight: bold;
-                }
-                .back-link:hover {
-                    text-decoration: underline;
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <img src="${item.foto}" alt="Informasi Image" class="image">
-                <h1 class="title">${item.judul}</h1>
-                <p class="content">${item.isi}</p>
-                <a href="/" class="back-link">← Back to Home</a>
-            </div>
-        </body>
-        </html>
-        `;
-
-        // Send the rendered HTML
-        reply.header("Content-Type", "text/html; charset=utf-8");
-        return reply.status(200).send(htmlContent);
-    } catch (error) {
-        console.error("Error fetching informasi:", error);
-        return reply.status(500).send("Internal Server Error");
     }
 }
 
@@ -323,7 +249,7 @@ export async function createInformasi(request: FastifyRequest<{ Body: Informasi 
 
     try {
         informasiSchema.parse({ foto, judul, isi });
-        await db.informasi.saveOrUpdate( foto, judul, isi);
+        await db.informasi.saveOrUpdate(foto, judul, isi);
         return reply.status(201).send({ message: `Informasi ${judul} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {

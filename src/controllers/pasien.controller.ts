@@ -50,29 +50,28 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
                 if (!fs.existsSync(uploadDir)) {
                     fs.mkdirSync(uploadDir, { recursive: true });
                 }
-        
+
                 let oldFileName: string | null = null;
                 const patientData = await db.pasien.findOne({ fk });
-        
+
                 if (patientData && patientData.fotoProfil) {
                     oldFileName = patientData.fotoProfil;
                 }
-        
+
                 const allowedImageTypes = ["image/jpeg", "image/jpg", "image/png"];
-                if (!allowedImageTypes.includes(part.mimetype)) {
-                    return reply.status(400).send({ message: "File harus berupa image"});
-                    continue;
+                if (!allowedImageTypes.includes(part.mimetype) && part.filename.trim() !== "") {
+                    return reply.status(400).send({ message: "File harus berupa image" });
                 }
-        
+
                 if (part.filename.trim() === "") {
                     fileName = oldFileName || "kosong.jpg";
                 } else {
                     fileName = `${fk}-${part.filename}`;
                     filePath = path.join(uploadDir, fileName);
-        
+
                     await pipeline(part.file, fs.createWriteStream(filePath));
                 }
-        
+
                 // Delete the old file if it's different from the new one
                 if (oldFileName && oldFileName !== fileName && oldFileName !== "kosong.jpg") {
                     const oldFilePath = path.join(uploadDir, oldFileName);
@@ -85,7 +84,7 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
                 payload[part.fieldname] = part.value;
             }
         }
-        
+
         pasienSchema.parse(payload);
         const { nik, nama, jenisKelamin, alamat, noTel, tanggalLahir } = payload;
         await db.pasien.saveOrUpdate(nik, nama, jenisKelamin, alamat, noTel, tanggalLahir, fileName, fk);
