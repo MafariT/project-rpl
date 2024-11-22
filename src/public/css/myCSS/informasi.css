@@ -72,6 +72,81 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card-link {
+    align-self: flex-end;
+}
+
+.wadah {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pembungkus-kartu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.kartu {
+    background-color: white;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.kartu:hover {
+    transform: translateY(-10px);
+}
+
+.gambar-kartu {
+    width: 150px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.isi-kartu {
+    margin-top: 20px;
+}
+
+.judul-kartu {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: black;
+}
+
+.teks-kartu {
+    font-weight: 400;
+    margin-top: 20px;
+    color: black;
+}
+
+
 .custom-img {
     width: 360px;
     /* Sesuaikan dengan kebutuhan */
