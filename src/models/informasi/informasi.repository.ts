@@ -3,7 +3,7 @@ import { Informasi } from "./informasi.entity";
 import z from "zod";
 
 export class InformasiRepository extends EntityRepository<Informasi> {
-    static validFilter = z.enum(["id"]);
+    static validFilter = z.enum(["idInformasi"]);
     async fetch(filter?: string, value?: string): Promise<Informasi[]> {
         if (filter && value && InformasiRepository.validFilter.safeParse(filter).success) {
             return this.find({ [filter]: value });
