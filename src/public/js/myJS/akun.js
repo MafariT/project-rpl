@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Swal.fire({
                     icon: "error",
                     title: "Failed to update profile",
-                    text: "Gagal memperbarui profil!",
+                    text: `${errorData.message}`,
                 });
             }
         } catch (error) {
