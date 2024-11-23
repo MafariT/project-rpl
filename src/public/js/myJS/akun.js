@@ -189,33 +189,4 @@ document.addEventListener("DOMContentLoaded", () => {
         logoutButton.innerHTML = "Logout";
         logoutButton.disabled = false;
     };
-
-    // Responsive Navbar Handling
-    function toggleLinkClass() {
-        const navLinks = document.querySelectorAll(".navbar-nav .nav-tengah");
-        const btn = document.querySelector(".tombol");
-        const cont1 = document.querySelector(".csc1");
-
-        if (window.innerWidth < 992) {
-            // Mobile view
-            navLinks.forEach((link) => {
-                link.classList.remove("linknya");
-                link.classList.add("link-hp");
-            });
-            btn.style.marginTop = "20px";
-            if (cont1) cont1.style.marginTop = "50px";
-        } else {
-            // Desktop view
-            navLinks.forEach((link) => {
-                link.classList.add("linknya");
-                link.classList.remove("link-hp");
-            });
-            btn.style.marginTop = "0px";
-            if (cont1) cont1.style.marginTop = "0px";
-        }
-    }
-
-    // Initialize Navbar Toggle
-    toggleLinkClass();
-    window.addEventListener("resize", toggleLinkClass);
 });

@@ -38,202 +38,216 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
         const item = informasi[0];
         const htmlContent = `
         <!DOCTYPE html>
-            <html lang="en">
+        <html lang="en">
 
-            <head>
+        <head>
 
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <meta name="description" content="">
-            <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-            <title>PuskeSmart</title>
-            <!-- My CSS -->
-            <link rel="stylesheet" href="../css/myCSS/informasi.css">
+        <title>PuskeSmart</title>
 
-            <!-- Custom fonts for this template -->
-            <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-            <link
-                href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-                rel="stylesheet">
+        <!-- My Main CSS -->
+        <link rel="stylesheet" href="../css/myCSS/main.css">
 
-            <!-- Custom styles for this template -->
-            <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+        <!-- My CSS -->
+        <link rel="stylesheet" href="../css/myCSS/detail.css">
 
-            <!-- Custom styles for this page -->
-            <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <!-- Custom fonts for this template -->
+        <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
-            <!-- My font -->
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link
-                href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600&family=Julius+Sans+One&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-                rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
-            </head>
-            <body id="" style="font-family: 'Poppins', serif; padding-top: 30px;">
-                <div class="container my-5 pt-5">
-                    <div class="d-flex justify-content-center">
-                        <div class="col-xl-10 col-lg-12">
-                            <div class="border p-4 rounded" style="max-width: 900px; margin: 0 auto;">
-                                <img src="${item.foto}" alt="Informasi Image" class="img-fluid mb-4">
-                                <h1>${item.judul}</h1>
-                                <h6>${item.created.toLocaleDateString()}</h6>
-                                <p>${item.isi}</p>
-                                <a href="/informasi" class="btn btn-primary">← Kembali</a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Custom styles for this page -->
+        <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+        <!-- My font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600&family=Julius+Sans+One&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
+
+        </head>
+
+        <body id="" style="font-family: 'Poppins', serif; padding-top: 100px">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #68A3F3;">
+            <div class="container-lg p-3">
+            <!-- Logo -->
+            <div>
+                <img src="../img/asset/logo.png" alt="Logo" class="" style="width: auto; height: 40px;">
+            </div>
+
+            <!-- Toggler for mobile view -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
+                style="border: 1px solid aliceblue;">
+                <span class="" style="color: aliceblue;"><i class="fa-solid fa-bars"></i></span>
+            </button>
+
+            <!-- Navbar links centered with mx-auto -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav mx-auto">
+                <a class="nav-tengah linknya" href="home" style="font-size: 20px;">Beranda</a>
+                <a class="nav-tengah linknya" href="pendaftaran" style="font-size: 20px;">Pendaftaran</a>
+                <a class="nav-tengah linknya" href="informasi" style="font-size: 20px;">Informasi</a>
+                <a class="nav-tengah linknya" href="#" style="font-size: 20px;">Ulasan</a>
                 </div>
-            </body>
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #68A3F3;">
-                <div class="container-lg p-3">
-                <!-- Logo -->
-                <div>
-                    <img src="../img/asset/logo.png" alt="Logo" class="" style="width: auto; height: 40px;">
+
+                <!-- Masuk button aligned to the right -->
+                <a class="tombol nav-link btn btn-primary font-weight-bold shadow" href="akun"
+                style="color: aliceblue; font-size: 1.2rem;">Akun</a>
+            </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <!-- Main  -->
+        <div class="container-lg">
+            <div class="d-flex justify-content-center mt-3">
+            <img
+                src="${item.foto}"
+                alt="" class="img-fluid responsive-img">
+            </div>
+            <div>
+            <h1 style="font-weight: bold; color: black;">${item.judul}.</h1>
+            <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">${item.created.toLocaleDateString()}</h5>
+            <p style="color: black;">${item.isi}
+            </p>
+
+            <a href="/informasi" class="btn btn-primary mb-5">← Kembali</a>
+            </div>
+        </div>
+        <!-- End Main -->
+
+        <!-- Footer -->
+        <footer class="footer pt-10 pb-5 mt-auto footer-light" style="background-color: #68A3F3;">
+            <div class="container-lg">
+            <div class="row gx-5 py-5">
+                <div class="col-lg-6">
+                <div class="footer-brand mb-2"><img src="../img/asset/logoVer.png" alt="" style="width: auto; height: 40px;">
                 </div>
-
-                <!-- Toggler for mobile view -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
-                    style="border: 1px solid aliceblue;">
-                    <span class="" style="color: aliceblue;"><i class="fa-solid fa-bars"></i></span>
-                </button>
-
-                <!-- Navbar links centered with mx-auto -->
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav mx-auto">
-                    <a class="nav-tengah linknya" href="/home" style="font-size: 20px;">Beranda</a>
-                    <a class="nav-tengah linknya" href="/pendaftaran" style="font-size: 20px;">Pendaftaran</a>
-                    <a class="nav-tengah linknya" href="/informasi" style="font-size: 20px;">Informasi</a>
-                    <a class="nav-tengah linknya" href="#" style="font-size: 20px;">Ulasan</a>
-                    </div>
-
-                    <!-- Masuk button aligned to the right -->
-                    <a class="tombol nav-link btn btn-primary font-weight-bold shadow" href="/akun"
-                    style="color: aliceblue; font-size: 1.2rem;">Akun</a>
+                <!-- Almat -->
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-location-dot" style="font-size: 15px; color: white;"></i>
+                    <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px;">
+                    Jl. Yunus Sanis No.9, Handil Jaya, <br>Kec. Jelutung, Kota Jambi, Jambi, 36125
+                    </p>
                 </div>
+                <!-- no telp -->
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-phone-volume" style="font-size: 15px; color: white;"></i>
+                    <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px;">
+                    (021) 123-4567
+                    </p>
                 </div>
-            </nav>
-            <!-- End Navbar -->
-
-            <!-- Footer -->
-            <footer class="footer pt-10 pb-5 mt-auto footer-light" style="background-color: #68A3F3;">
-                <div class="container-lg">
-                <div class="row gx-5 py-5">
-                    <div class="col-lg-6">
-                    <div class="footer-brand mb-2"><img src="../img/asset/logoVer.png" alt="" style="width: auto; height: 40px;">
-                    </div>
-                    <!-- Almat -->
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-location-dot" style="font-size: 15px; color: white;"></i>
-                        <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px;">
-                        Jl. Yunus Sanis No.9, Handil Jaya, <br>Kec. Jelutung, Kota Jambi, Jambi, 36125
-                        </p>
-                    </div>
-                    <!-- no telp -->
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-phone-volume" style="font-size: 15px; color: white;"></i>
-                        <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px;">
-                        (021) 123-4567
-                        </p>
-                    </div>
-                    <!-- Email -->
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-envelope" style="font-size: 15px; color: white;"></i>
-                        <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px;">
-                        info@puskesmaskebunhandil.co.id
-                        </p>
-                    </div>
-                    </div>
-                    <div class="col-lg-6">
-                    <div class="row gx-2">
-                        <div class="col-md-4 mb-5 mb-lg-0">
-                        <div class="text-uppercase-expanded text-lg mb-4" style="color: white; font-weight: bold;">
-                            Layanan</div>
-                        <ul class="list-unstyled text-light" style="font-weight: 600;">
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Poli Umum
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Poli Anak
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Poli Gigi
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Poli Bidan
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Laboratorium
-                            </li>
-
-                        </ul>
-                        </div>
-                        <div class="col-md-4 mb-5 mb-md-0">
-                        <div class="text-uppercase-expanded text-lg mb-4" style="color: white; font-weight: bold;">
-                            Dukungan</div>
-                        <ul class="list-unstyled text-light" style="font-weight: 600;">
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Pusat Bantuan
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>FAQ
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Kontak Kami
-                            </li>
-                        </ul>
-                        </div>
-                        <div class="col-md-4">
-                        <div class="text-uppercase-expanded text-lg mb-4" style="color: white; font-weight: bold;">
-                            Tentang Kami
-                        </div>
-                        <ul class="list-unstyled text-light" style="font-weight: 600;">
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Visi Misi
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Tim Kami
-                            </li>
-                            <li class="" style="margin-bottom: -10px;">
-                            <p>Bantuan & Artikel
-                            </li>
-                        </ul>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <hr class="my-5" style="background-color: white;">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-md-6 small" style="color: white;">Copyright © PuskeSmart, 2024 - Hak Cipta Dilindungi.
-                    </div>
-                    <div class="col-md-6 text-right small">
-                    <a href="#!" style="color: white; text-decoration: none;">Privacy Policy</a> · <a href="#!"
-                        style="color: white; text-decoration: none;">Terms &amp; Conditions</a>
-                    </div>
+                <!-- Email -->
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-envelope" style="font-size: 15px; color: white;"></i>
+                    <p class="ml-3 my-2" style="font-size: 12px; color: white; margin-left: 10px;">
+                    info@puskesmaskebunhandil.co.id
+                    </p>
                 </div>
                 </div>
-            </footer>
-            <!-- End Footer -->
+                <div class="col-lg-6">
+                <div class="row gx-2">
+                    <div class="col-md-4 mb-5 mb-lg-0">
+                    <div class="text-uppercase-expanded text-lg mb-4" style="color: white; font-weight: bold;">
+                        Layanan</div>
+                    <ul class="list-unstyled text-light" style="font-weight: 600;">
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Poli Umum
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Poli Anak
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Poli Gigi
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Poli Bidan
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Laboratorium
+                        </li>
 
-            <!-- Font Awesome -->
-            <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
-            <!-- Bootstrap core JavaScript-->
-            <script src="../vendor/jquery/jquery.min.js"></script>
-            <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                    </ul>
+                    </div>
+                    <div class="col-md-4 mb-5 mb-md-0">
+                    <div class="text-uppercase-expanded text-lg mb-4" style="color: white; font-weight: bold;">
+                        Dukungan</div>
+                    <ul class="list-unstyled text-light" style="font-weight: 600;">
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Pusat Bantuan
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>FAQ
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Kontak Kami
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col-md-4">
+                    <div class="text-uppercase-expanded text-lg mb-4" style="color: white; font-weight: bold;">
+                        Tentang Kami
+                    </div>
+                    <ul class="list-unstyled text-light" style="font-weight: 600;">
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Visi Misi
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Tim Kami
+                        </li>
+                        <li class="" style="margin-bottom: -10px;">
+                        <p>Bantuan & Artikel
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <hr class="my-5" style="background-color: white;">
+            <div class="row gx-5 align-items-center">
+                <div class="col-md-6 small" style="color: white;">Copyright © PuskeSmart, 2024 - Hak Cipta Dilindungi.
+                </div>
+                <div class="col-md-6 text-right small">
+                <a href="#!" style="color: white; text-decoration: none;">Privacy Policy</a> · <a href="#!"
+                    style="color: white; text-decoration: none;">Terms &amp; Conditions</a>
+                </div>
+            </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
 
-            <!-- Core plugin JavaScript-->
-            <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Main JS -->
+        <script src="../js/myJS/main.js"></script>
+        <!-- The JS -->
+        <script src="../js/myJS/detail.js"></script>
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="../js/sb-admin-2.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            </body>
+        <!-- Custom scripts for all pages-->
+        <script src="../js/sb-admin-2.min.js"></script>
 
-            </html>
+        </body>
+
+        </html>
         `;
         reply.header("Content-Type", "text/html; charset=utf-8");
         return reply.status(200).send(htmlContent);

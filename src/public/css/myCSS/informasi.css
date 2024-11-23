@@ -1,56 +1,21 @@
-.navbar-collapse .navbar-nav .linknya {
-    color: white;
-    font-size: 1rem;
-    margin-right: 40px;
-    text-decoration: none;
-    position: relative;
-    font-weight: bold;
-}
-
-.navbar-collapse .navbar-nav .link-hp {
-    margin-top: 20px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.navbar-collapse .navbar-nav .linknya::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10%;
-    width: 100%;
-    height: 3px;
-    background: #fff;
-    border-radius: 5px;
-    transform: scaleX(0);
-    transition: transform .5s;
-}
-
-.navbar-collapse .navbar-nav .linknya:hover::after {
-    transform-origin: left;
-    transform: scaleX(1);
-}
-
-.container-lg .btnBerita {
+.container-lg .btnActive {
     background-color: #3986EF;
     color: white;
     font-weight: bold;
 }
 
-.container-lg .btnBerita:hover {
+.container-lg .btnActive:hover {
     color: white;
     background-color: #0e5ece;
 }
 
-.container-lg .btnChild {
+.container-lg .btnNonActive {
     background-color: #68A3F3;
     color: white;
     font-weight: bold;
 }
 
-.container-lg .btnChild:hover {
+.container-lg .btnNonActive:hover {
     color: white;
     background-color: #0e5ece;
 }
@@ -69,13 +34,17 @@
     display: grid;
     gap: 1rem;
     padding: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px));
 }
 
 .card-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    width: 21rem;
+    border: 1px solid black;
 }
 
 .card-title {
@@ -177,13 +146,10 @@
 
 }
 
-
-/* Style for smaller devices (e.g., iPhone SE) */
-@media (max-width: 576px) {
-    .btn {
-        font-size: 0.875rem;
-        /* Slightly smaller font size */
-        padding: 0.4rem 0.8rem;
-        /* Adjust padding */
+@media (max-width: 768px) {
+    .card-container {
+        width: 300px;
+        margin: 0 auto; /* Untuk membuatnya terpusat */
     }
 }
+

@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const fetchData = async () => {
-        try {
-            const informasiResponse = await fetch("/api/informasi");
+  // untuk mengambil data informasi  
+  const fetchData = async () => {
+    try {
+      const informasiResponse = await fetch("/api/informasi");
 
-            if (informasiResponse.ok) {
-                const data = await informasiResponse.json();
-                const cardContainer = document.getElementById("Card");
+      if (informasiResponse.ok) {
+        const data = await informasiResponse.json();
+        const cardContainer = document.getElementById("Card");
 
-                data.forEach((item) => {
-                    const cardHTML = `
+        data.forEach((item) => {
+          const cardHTML = `
             <!-- Card 1 -->
-            <div class="mb-4 p-3 card-container" style="background-color: #F2F2F2; border-radius: 10px; width: 21rem; border: 1px solid black;">
+            <div class="kartuInforma mb-4 p-3 card-container">
               <img src="${item.foto}" class="card-img-top custom-img" alt="" width="300" height="190">
               <div class="card-content">
                 <!-- Judul dengan text truncation -->
@@ -18,67 +19,69 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h6>${item.created.substring(0, 10)}</h6>
                 <p class="card-text">${item.isi}</p>
                 <div class="d-flex justify-content-end">
-                  <a href="" class="btn btn-success card-link mt-3" style="font-weight: bold;" data-toggle="modal"
-                    data-target="#modal-${item.idInformasi}">Lihat Detail</a>
+                  <a href="/informasi/${item.idInformasi}" class="btn btn-success card-link mt-3" style="font-weight: bold;">Lihat Detail</a>
                 </div>
               </div>
             </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="modal-${item.idInformasi}" tabindex="-1" aria-labelledby="beritaLabeberita" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: black;">${item.judul}</h5>
-                  </div>
-                  <div class="modal-body" style="color: black;">
-                    <h6>${item.created.substring(0, 10)}</h6>
-                    ${item.isi}
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="font-weight: bold;">Tutup</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Card and Modal -->
             `;
-                    cardContainer.innerHTML += cardHTML;
-                });
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    fetchData();
-
-    // Responsive Navbar Handling
-    function toggleLinkClass() {
-        const navLinks = document.querySelectorAll(".navbar-nav .nav-tengah");
-        const btn = document.querySelector(".tombol");
-        const cont1 = document.querySelector(".csc1");
-
-        if (window.innerWidth < 992) {
-            // Mobile view
-            navLinks.forEach((link) => {
-                link.classList.remove("linknya");
-                link.classList.add("link-hp");
-            });
-            btn.style.marginTop = "20px";
-            if (cont1) cont1.style.marginTop = "50px";
-        } else {
-            // Desktop view
-            navLinks.forEach((link) => {
-                link.classList.add("linknya");
-                link.classList.remove("link-hp");
-            });
-            btn.style.marginTop = "0px";
-            if (cont1) cont1.style.marginTop = "0px";
-        }
+          cardContainer.innerHTML += cardHTML;
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    // Initialize Navbar Toggle
-    toggleLinkClass();
-    window.addEventListener("resize", toggleLinkClass);
+  fetchData();
+
+  // Untuk memainkan tombol
+  // Ambil tombol
+  const btnBerita = document.getElementById("btnBerita");
+  const btnLayanan = document.getElementById("btnLayanan");
+  const btnFasilitas = document.getElementById("btnFasilitas");
+  const btnDokter = document.getElementById("btnDokter");
+
+  // Fungsi untuk mengubah tombol yang aktif dan non-aktif
+  const toggleActiveButton = (activeButton) => {
+    // Ambil semua tombol
+    const buttons = [btnBerita, btnLayanan, btnFasilitas, btnDokter];
+
+    buttons.forEach(button => {
+      if (button === activeButton) {
+        button.classList.add("btnActive");
+        button.classList.remove("btnNonActive");
+      } else {
+        button.classList.remove("btnActive");
+        button.classList.add("btnNonActive");
+      }
+    });
+  };
+
+  // Event listener untuk tombol berita
+  btnBerita.addEventListener("click", () => {
+    toggleActiveButton(btnBerita);
+    // Menampilkan atau menyembunyikan konten
+    document.getElementById("Layanan").classList.add("d-none");
+    document.getElementById("Card").classList.remove("d-none");
+  });
+
+  // Event listener untuk tombol layanan
+  btnLayanan.addEventListener("click", () => {
+    toggleActiveButton(btnLayanan);
+    // Menampilkan atau menyembunyikan konten
+    document.getElementById("Card").classList.add("d-none");
+    document.getElementById("Layanan").classList.remove("d-none");
+  });
+
+  // Event listener untuk tombol fasilitas
+  btnFasilitas.addEventListener("click", () => {
+    toggleActiveButton(btnFasilitas);
+    // Logika untuk konten Fasilitas jika diperlukan
+  });
+
+  // Event listener untuk tombol dokter
+  btnDokter.addEventListener("click", () => {
+    toggleActiveButton(btnDokter);
+    // Logika untuk konten Dokter jika diperlukan
+  });
 });
