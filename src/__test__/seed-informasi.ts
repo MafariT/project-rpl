@@ -11,7 +11,7 @@ async function seedInformasi(count: number) {
     for (let i = 0; i < count; i++) {
         const foto = faker.image.url();
         const judul = faker.lorem.sentence();
-        const isi = faker.lorem.paragraph();
+        const isi = faker.lorem.paragraph({ min: 1, max: 1000 });
 
         const informasi = new Informasi(foto, judul, isi);
         informasiList.push(informasi);

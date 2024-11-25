@@ -16,10 +16,10 @@ export async function getInformasi(request: FastifyRequest<{ Querystring: QueryP
     const { filter, value } = request.query;
 
     try {
-        const informasis = await db.informasi.fetch(filter, value);
-        return reply.status(200).send(informasis);
+        const informasi = await db.informasi.fetch(filter, value);
+        return reply.status(200).send(informasi);
     } catch (error) {
-        console.error("Error fetching informasis:", error);
+        console.error("Error fetching informasi:", error);
         return reply.status(500);
     }
 }
@@ -116,14 +116,12 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
             <div class="d-flex justify-content-center mt-3">
             <img
                 src="${item.foto}"
-                alt="" class="img-fluid responsive-img"
-                height="700" width="450"
-                >
+                alt="" class="img-fluid responsive-img">
             </div>
             <div>
             <h1 style="font-weight: bold; color: black;">${item.judul}.</h1>
             <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">${item.created.toLocaleDateString()}</h5>
-            <p style="color: black;">${item.isi}
+            ${formatIsiContent(item.isi)}
             </p>
 
             <a href="/informasi" class="btn btn-primary mb-5">← Kembali</a>
@@ -257,6 +255,23 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
         console.error("Error fetching informasis:", error);
         return reply.status(500);
     }
+}
+
+function formatIsiContent(content: string) {
+    const words = content.split(" ");
+    const paragraphs: any = [];
+    let paragraph: any = [];
+
+    words.forEach((word, index) => {
+        paragraph.push(word);
+        // If the paragraph has 100 words, push it as a new paragraph
+        if (paragraph.length >= 100 || index === words.length - 1) {
+            paragraphs.push(paragraph.join(" "));
+            paragraph = [];
+        }
+    });
+
+    return paragraphs.map((p: any) => `<p style="color: black;">${p}</p>`).join("\n");
 }
 
 export async function createInformasi(request: FastifyRequest<{ Body: Informasi }>, reply: FastifyReply) {
