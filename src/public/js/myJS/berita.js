@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Menampilkan atau menyembunyikan konten
     document.getElementById("Layanan").classList.add("d-none");
     document.getElementById("Card").classList.remove("d-none");
+    document.getElementById("Fasilitas").classList.add("d-none");
+    document.getElementById("Dokter").classList.add("d-none");
   });
 
   // Event listener untuk tombol layanan
@@ -71,17 +73,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // Menampilkan atau menyembunyikan konten
     document.getElementById("Card").classList.add("d-none");
     document.getElementById("Layanan").classList.remove("d-none");
+    document.getElementById("Fasilitas").classList.add("d-none");
+    document.getElementById("Dokter").classList.add("d-none");
   });
 
   // Event listener untuk tombol fasilitas
   btnFasilitas.addEventListener("click", () => {
     toggleActiveButton(btnFasilitas);
     // Logika untuk konten Fasilitas jika diperlukan
+    document.getElementById("Card").classList.add("d-none");
+    document.getElementById("Layanan").classList.add("d-none");
+    document.getElementById("Fasilitas").classList.remove("d-none");
+    document.getElementById("Dokter").classList.add("d-none");
   });
 
   // Event listener untuk tombol dokter
   btnDokter.addEventListener("click", () => {
     toggleActiveButton(btnDokter);
     // Logika untuk konten Dokter jika diperlukan
+    document.getElementById("Card").classList.add("d-none");
+    document.getElementById("Layanan").classList.add("d-none");
+    document.getElementById("Fasilitas").classList.add("d-none");
+    document.getElementById("Dokter").classList.remove("d-none");
+
+    // Pindah Halaman
+    // Membuat Variabel
+    const hlmDokterUmum = document.getElementById("dokterUmum");
+    // Menjalankan Function direct Halaman
+    hlmDokterUmum.addEventListener("click", function() {
+      console.log("ini Dokter Umum;")
+    });
   });
 });

@@ -116,7 +116,9 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
             <div class="d-flex justify-content-center mt-3">
             <img
                 src="${item.foto}"
-                alt="" class="img-fluid responsive-img">
+                alt="" class="img-fluid responsive-img"
+                height="700" width="450"
+                >
             </div>
             <div>
             <h1 style="font-weight: bold; color: black;">${item.judul}.</h1>

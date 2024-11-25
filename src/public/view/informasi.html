@@ -82,10 +82,11 @@
     </div>
 
     <hr style="background-color: black;">
-    <!-- Card -->
+    <!-- Card informasi-->
     <div id="Card" class="cards mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px;
     justify-content: center;">
     </div>
+    <!-- End Card -->
 
     <!-- Layanan -->
     <div id="Layanan" class="d-none wadah mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px;
@@ -128,6 +129,128 @@
         </div>
       </div>
     </div>
+    <!-- end Layanan -->
+
+    <!-- Start Fasilitas -->
+    <div id="Fasilitas" class="d-none wadah mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px;
+    justify-content: center;">
+      <div class="pembungkus-kartu">
+        <div class="kartu">
+          <img src="../img/asset/card1.png" alt="poli umum" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Ambulan</h1>
+            <p class="teks-kartu">Isinya ya Ambulan</p>
+          </div>
+        </div>
+        <div class="kartu">
+          <img src="../img/asset/card3.png" alt="poli gigi" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Laboratorium</h1>
+            <p class="teks-kartu">Tempat uji coba</p>
+          </div>
+        </div>
+        <div class="kartu">
+          <img src="../img/asset/card2.png" alt="poli anak" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Poli Bidan</h1>
+            <p class="teks-kartu">Layanan untuk ibu hamil dan persiapan persalinan</p>
+          </div>
+        </div>
+        <div class="kartu">
+          <img src="../img/asset/card2.png" alt="poli anak" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Poli Anak</h1>
+            <p class="teks-kartu">Layanan untuk anak usia dini</p>
+          </div>
+        </div>
+        <div class="kartu">
+          <img src="../img/asset/card2.png" alt="poli anak" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Laboratorium</h1>
+            <p class="teks-kartu">Layanan untuk Laboratorium</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Fasilitas -->
+
+    <!-- Start Dokter -->
+    <div id="Dokter" class="d-none wadah mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px;
+    justify-content: center;">
+      <div class="pembungkus-kartu">
+        <!-- Dokter Umum -->
+        <div class="kartu" style="cursor: pointer;" id="dokterUmum">
+          <img src="../img/asset/card1.png" alt="poli umum" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Dokter Umum</h1>
+          </div>
+        </div>
+        <!-- Dokter Gigi -->
+        <div class="kartu" style="cursor: pointer;">
+          <img src="../img/asset/card1.png" alt="poli umum" class="gambar-kartu" />
+          <div class="isi-kartu" style="cursor: pointer;">
+            <h1 class="judul-kartu">Dokter Gigi</h1>
+          </div>
+        </div>
+        <!-- Dokter Anak -->
+        <div class="kartu" style="cursor: pointer;">
+          <img src="../img/asset/card1.png" alt="poli umum" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Dokter Anak</h1>
+          </div>
+        </div>
+        <!-- Bidan -->
+        <div class="kartu" style="cursor: pointer;">
+          <img src="../img/asset/card1.png" alt="poli umum" class="gambar-kartu" />
+          <div class="isi-kartu">
+            <h1 class="judul-kartu">Bidan</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Dokter -->
+
+    <!-- Strat Tabel -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3" style="background-color: #97C0F7; border-bottom: 1px solid black;">
+        <h6 class="m-0 font-weight-bold" style="color: black; font-size: 1.5rem;">Jadwal Harian Dokter dan Bidan</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="border-radius: 10px; overflow: hidden;">
+            <thead>
+              <tr  class="text-dark" style="background-color: #C6DCFA;">
+                <th>Nama Dokter</th>
+                <th>Poli</th>
+                <th>Jam Mulai</th>
+                <th>Jam Selesai</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+              </tr>
+              <tr>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>63</td>
+              </tr>
+              <tr>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>66</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- End Table -->
   </div>
   <!-- End Main -->
 
@@ -246,6 +369,13 @@
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
 

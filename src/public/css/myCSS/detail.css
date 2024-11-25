@@ -1,4 +1,12 @@
 .responsive-img {
     border-radius: 10px;
     margin-bottom: 20px;
+    max-width: 80%; /* Membatasi lebar maksimum gambar */
+    height: auto;   /* Menjaga rasio aspek */
+}
+
+@media (max-width: 768px) {
+    .responsive-img {
+        max-width: 100%; /* Pada layar kecil, biarkan gambar memenuhi kontainer */
+    }
 }
