@@ -98,6 +98,7 @@
     margin-top: 10px;
 }
 
+
 .isi-kartu {
     margin-top: 20px;
 }
@@ -146,10 +147,30 @@
 
 }
 
+.tombol-pilih {
+    width: 150px;
+    font-size: 16px;
+    background-color: #5EC58F;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    /* Memberikan jarak antara select dan tombol */
+    cursor: pointer;
+}
+
+/* Efek hover untuk tombol */
+.tombol-pilih:hover {
+    background-color: #446855;
+    color: white;
+    font-weight: bold;
+}
+
 @media (max-width: 768px) {
     .card-container {
         width: 300px;
-        margin: 0 auto; /* Untuk membuatnya terpusat */
+        margin: 0 auto;
+        /* Untuk membuatnya terpusat */
     }
 }
-
