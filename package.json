@@ -9,6 +9,7 @@
         "dev": "nodemon ./src/index.ts",
         "seed-user": "ts-node ./src/__test__/seed-user.ts",
         "seed-informasi": "ts-node ./src/__test__/seed-informasi.ts",
+        "seed-dokter": "ts-node ./src/__test__/seed-dokter.ts",
         "create-db": "ts-node ./src/__test__/create-schema.ts"
     },
     "keywords": [],
@@ -30,6 +31,7 @@
         "dotenv": "^16.4.5",
         "fastify": "^5.0.0",
         "file-type": "^19.6.0",
+        "nodemailer": "^6.9.16",
         "passport": "^0.7.0",
         "passport-local": "^1.0.0",
         "pino": "^9.5.0",
@@ -40,6 +42,7 @@
         "@types/autocannon": "^7.12.5",
         "@types/file-type": "^10.6.0",
         "@types/node": "^22.7.9",
+        "@types/nodemailer": "^6.4.17",
         "@types/passport": "^1.0.16",
         "@types/passport-local": "^1.0.38",
         "@typescript-eslint/parser": "^5.62.0",

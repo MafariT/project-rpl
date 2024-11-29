@@ -32,6 +32,10 @@ export class UserRepository extends EntityRepository<User> {
         await this.em.removeAndFlush(user);
     }
 
+    async flush(): Promise<void> {
+        this.em.flush();
+    }
+
     private async exists(username: string): Promise<boolean> {
         const count = await this.qb().where({ username }).getCount();
         return count > 0;

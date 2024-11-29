@@ -172,35 +172,32 @@
     <div id="Dokter" class="d-none wadah mb-5 justify-content-between">
       <div>
         <div class="mb-3">
-          <h1 class="" style="font-weight: bold; color: black;">Pilih Jadwal Dokter</h1>
+          <h1 class="font-weight-bold" style="color: black;">Pilih Jadwal Dokter</h1>
         </div>
-        <form action="" style="display: flex; flex-direction: column;">
+        <form id="dokterForm" style="display: flex; flex-direction: column;">
           <div class="input-group mb-3" style="display: flex; align-items: center;">
-            <select class="custom-select" id="inputGroupSelect02">
-              <option selected>Plih Poli</option>
-              <option value="PoliUmum">Poli Umum</option>
-              <option value="PoliAnak">Poli Anak</option>
-              <option value="PoliBidan">Poli Bidan</option>
-              <option value="PoliGigi">Poli Gigi</option>
-              <option value="Laboratorium">Laboratorium</option>
+            <select class="custom-select" id="listPoli">
+              <option selected>Pilih Poli</option>
+              <option value="Poli Umum">Poli Umum</option>
+              <option value="Poli Anak">Poli Anak</option>
+              <option value="Poli Gigi">Poli Gigi</option>
+              <option value="Poli Jantung">Poli Jantung</option>
             </select>
           </div>
-
-           <!-- Tombol Pilih -->
-           <button class="tombol-pilih p-1" type="submit">Pilih</button>
+          <button type="button" id="pilihButton" class="tombol-pilih p-1">Pilih</button>
         </form>
       </div>
     </div>
     <!-- End Dokter -->
 
-    <!-- Strat Tabel -->
-    <div class="card shadow mb-4">
+    <!-- Start Tabel -->
+    <div id="dokterTable" class="card shadow mb-4 d-none">
       <div class="card-header py-3" style="background-color: #97C0F7; border-bottom: 1px solid black;">
         <h6 class="m-0 font-weight-bold" style="color: black; font-size: 1.5rem;">Jadwal Harian Dokter dan Bidan</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
+          <table class="table table-bordered" id="myTable" width="100%" cellspacing="0"
             style="border-radius: 10px; overflow: hidden;">
             <thead>
               <tr class="text-dark" style="background-color: #C6DCFA;">
@@ -211,30 +208,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-              </tr>
-              <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-              </tr>
-              <tr>
-                <td>Ashton Cox</td>
-                <td>Junior Technical Author</td>
-                <td>San Francisco</td>
-                <td>66</td>
-              </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <!-- End Table -->
+    <!-- End Tabel -->
+
   </div>
   <!-- End Main -->
 
@@ -338,10 +318,14 @@
   </footer>
   <!-- End Footer -->
 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- My Main JS -->
   <script src="../js/myJS/main.js"></script>
   <!-- Berita JS -->
   <script src="../js/myJS/berita.js"></script>
+  <!-- Dokter JS -->
+  <script src="../js/myJS/dokter.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->

@@ -19,6 +19,12 @@ export class User {
     @Property({ default: "pasien" })
         role!: string;
 
+    @Property({ nullable: true })
+        resetToken?: string | null;
+
+    @Property({ nullable: true })
+        resetTokenExpires?: Date | null;
+
     @Property({ onCreate: () => new Date(), hidden: true })
         created!: Date;
 

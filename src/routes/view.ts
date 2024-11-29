@@ -1,6 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { isAdmin, isAuthenticated } from "../utils/auth";
 import { getInformasiPage } from "../controllers/informasi.controller";
+import { resetPasswordPage } from "../controllers/auth.controller";
 
 export async function publicViewRouter(fastify: FastifyInstance) {
     fastify.get("/", (request: FastifyRequest, reply: FastifyReply) => {
@@ -12,6 +13,10 @@ export async function publicViewRouter(fastify: FastifyInstance) {
     fastify.get("/register", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/register.html");
     });
+    fastify.get("/forgot-password", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("forgot-password.html");
+    });
+    fastify.get("/reset-password/:token", resetPasswordPage);
 }
 
 export async function privateViewRouter(fastify: FastifyInstance) {

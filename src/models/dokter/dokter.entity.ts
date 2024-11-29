@@ -3,8 +3,8 @@ import { DokterRepository } from "./dokter.repository";
 
 @Entity({ repository: () => DokterRepository })
 export class Dokter {
-    @PrimaryKey()
-        idDokter!: string;
+    @PrimaryKey({ autoincrement: true })
+        idDokter!: number;
 
     @Property({ nullable: false })
         nama!: string;
@@ -12,33 +12,16 @@ export class Dokter {
     @Property({ nullable: false })
         poliKlinik!: string;
 
-    // @Property({ nullable: false })
-    //     alamat!: string;
+    @Property({ nullable: false })
+        jamMulai!: string;
 
-    // @Property({ nullable: false })
-    //     noTel!: number;
+    @Property({ nullable: false })
+        jamSelesai!: string;
 
-    // @Property({ nullable: false })
-    //     tanggalLahir!: string;
-
-    // @Property({ nullable: false })
-    //     jenisKelamin!: string;
-
-    constructor(
-        idDokter: string,
-        nama: string,
-        poliKlinik: string,
-        // alamat: string,
-        // noTel: number,
-        // tanggalLahir: string,
-        // jenisKelamin: string,
-    ) {
-        this.idDokter = idDokter;
+    constructor(nama: string, poliKlinik: string, jamMulai: string, jamSelesai: string) {
         this.nama = nama;
         this.poliKlinik = poliKlinik;
-        // this.alamat = alamat;
-        // this.noTel = noTel;
-        // this.tanggalLahir = tanggalLahir;
-        // this.jenisKelamin = jenisKelamin;
+        this.jamMulai = jamMulai;
+        this.jamSelesai = jamSelesai;
     }
 }

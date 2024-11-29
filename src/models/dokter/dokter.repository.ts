@@ -13,26 +13,18 @@ export class DokterRepository extends EntityRepository<Dokter> {
         }
     }
 
-    async save(
-        idDokter: string,
-        nama: string,
-        poliKlinik: string,
-        // alamat: string,
-        // noTel: number,
-        // tanggalLahir: string,
-        // jenisKelamin: string,
-    ): Promise<void> {
-        if (await this.exists(idDokter)) {
-            throw new EntityExistsError(idDokter);
-        }
+    async save(nama: string, poliKlinik: string, jamMulai: string, jamSelesai: string): Promise<void> {
+        // if (await this.exists(idDokter)) {
+        //     throw new EntityExistsError(idDokter);
+        // }
 
-        const newDokter = new Dokter(idDokter, nama, poliKlinik);
+        const newDokter = new Dokter(nama, poliKlinik, jamMulai, jamSelesai);
         this.create(newDokter);
         await this.em.flush();
     }
 
-    private async exists(idDokter: string): Promise<boolean> {
-        const count = await this.qb().where({ idDokter }).getCount();
-        return count > 0;
-    }
+    // private async exists(idDokter: string): Promise<boolean> {
+    //     const count = await this.qb().where({ idDokter }).getCount();
+    //     return count > 0;
+    // }
 }
