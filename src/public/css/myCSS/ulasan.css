@@ -1,0 +1,17 @@
+.bintang {
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.bintang .star {
+    font-size: 1.5rem;
+    color: #ddd;
+    margin-right: 5px;
+    transition: color 0.3s;
+}
+
+.bintang .star2 {
+    color: gold;
+}
+

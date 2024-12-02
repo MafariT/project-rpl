@@ -10,12 +10,10 @@
   <meta name="author" content="">
 
   <title>PuskeSmart</title>
-
   <!-- My Main CSS -->
   <link rel="stylesheet" href="../css/myCSS/main.css">
-
-  <!-- My CSS -->
-  <link rel="stylesheet" href="../css/myCSS/detail.css">
+  <!-- My Ulasan CSS -->
+  <link rel="stylesheet" href="../css/myCSS/ulasan.css">
 
   <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -72,31 +70,52 @@
   </nav>
   <!-- End Navbar -->
 
-  <!-- Main  -->
-  <div class="container-lg">
-    <div class="d-flex justify-content-center mt-3">
-      <img
-        src="https://images.pexels.com/photos/28860862/pexels-photo-28860862/free-photo-of-vibrant-nightlife-on-fremont-street-las-vegas.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        alt="" class="img-fluid responsive-img" height="200" width="150">
+  <!-- Start Main Section -->
+  <div class="container-lg mt-3 mb-3 p-3 shadow-sm" style="background-color: #F2F2F2; border-radius: 10px;"
+    id="tempatUlasan">
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-success" style="color: black; font-weight: 600;" data-toggle="modal"
+        data-target="#ulasanModal">Buat Ulasan</button>
     </div>
-    <div>
-      <h1 style="font-weight: bold; color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-        mollitia.</h1>
-      <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">2024-12-11</h5>
-      <p style="color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo commodi ut
-        dolorem fuga architecto possimus ipsam perspiciatis illo quos quo quidem, optio aliquid maiores eius ipsa ullam
-        incidunt reiciendis.
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum nulla possimus officiis, sint nobis repudiandae
-        harum alias odio repellendus expedita eos tenetur! Laboriosam inventore accusamus est expedita veniam doloribus
-        dolores?
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ad velit dolor eligendi earum accusamus,
-        impedit id iure, esse nesciunt ipsum sunt recusandae iusto blanditiis! Delectus officiis aspernatur libero nemo.
-      </p>
+    <hr style="background-color: black;">
+  </div>
+  <!-- End Main Section -->
 
-      <a href="/informasi" class="btn btn-primary mb-5">← Kembali</a>
+  <!-- Modal isi -->
+  <div class="modal fade" id="ulasanModal" tabindex="-1" role="dialog" aria-labelledby="ulasanModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ulasanModalLabel" style="font-weight: bold; color: black;">Buat Ulasan</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="form-ulasan">
+            <div class="form-group">
+              <label style="font-weight: bold; color: black;">Bintang</label>
+              <div class="bintang" id="star-rating">
+                <span class="star" data-value="1" id="B1"><i class="fas fa-star"></i></span>
+                <span class="star" data-value="2" id="B2"><i class="fas fa-star"></i></span>
+                <span class="star" data-value="3" id="B3"><i class="fas fa-star"></i></span>
+                <span class="star" data-value="4" id="B4"><i class="fas fa-star"></i></span>
+                <span class="star" data-value="5" id="B5"><i class="fas fa-star"></i></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ulasan" style="font-weight: bold; color: black;">Ulasan</label>
+              <textarea class="form-control" id="ulasan" rows="4" placeholder="Tulis ulasan Anda..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-success btn-block" style="font-weight: bold; color: white;"
+              id="submit-button">Submit</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-  <!-- End Main -->
+
 
   <!-- Footer -->
   <footer class="footer pt-10 pb-5 mt-auto footer-light" style="background-color: #68A3F3;">
@@ -200,8 +219,8 @@
 
   <!-- Main JS -->
   <script src="../js/myJS/main.js"></script>
-  <!-- The JS -->
-  <script src="../js/myJS/detail.js"></script>
+  <!-- Ulasan JS -->
+  <script src="../js/myJS/ulasan.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->
