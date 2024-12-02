@@ -15,3 +15,13 @@
     color: gold;
 }
 
+.d-flex .btnBuatUlasan {
+    background-color: #41e199;
+    color: black;
+    font-weight: 600;
+}
+
+.d-flex .btnBuatUlasan:hover {
+    background-color: #135537;
+    color: white;
+}

@@ -71,13 +71,17 @@
   <!-- End Navbar -->
 
   <!-- Start Main Section -->
-  <div class="container-lg mt-3 mb-3 p-3 shadow-sm" style="background-color: #F2F2F2; border-radius: 10px;"
-    id="tempatUlasan">
+  <div class="container-lg mt-3 mb-3 p-3 shadow-sm" style="background-color: #F2F2F2; border-radius: 10px;">
     <div class="d-flex justify-content-end">
-      <button class="btn btn-success" style="color: black; font-weight: 600;" data-toggle="modal"
+      <button class="btnBuatUlasan btn" data-toggle="modal"
         data-target="#ulasanModal">Buat Ulasan</button>
     </div>
     <hr style="background-color: black;">
+    <div id="tempatUlasan"></div>
+    <!-- Spinner -->
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="spinner-border" id="spinner"></div>
+    </div>
   </div>
   <!-- End Main Section -->
 
@@ -217,6 +221,8 @@
   </footer>
   <!-- End Footer -->
 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Main JS -->
   <script src="../js/myJS/main.js"></script>
   <!-- Ulasan JS -->

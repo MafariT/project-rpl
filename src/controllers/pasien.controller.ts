@@ -29,6 +29,28 @@ export async function getPasien(request: FastifyRequest<{ Querystring: QueryPara
     }
 }
 
+export async function getPasienById(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const userId = request.user?.id;
+    const { id } = request.params as any;
+
+    if (!userId) {
+        return reply.status(401).send({ message: "Unauthorized" });
+    }
+
+    try {
+        const pasien = await db.pasien.findOne(id);
+        if (!pasien) {
+            return reply.status(404).send({ message: "pasien record not found" });
+        }
+
+        return reply.status(200).send(pasien);
+    } catch (error) {
+        console.error("Error fetching pasien:", error);
+        return reply.status(500).send("Internal Server Error");
+    }
+}
+
 export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, reply: FastifyReply) {
     const db = await initORM();
 
@@ -99,6 +121,9 @@ export async function createPasien(request: FastifyRequest<{ Body: Pasien }>, re
         }
         if (error instanceof EntityExistsError) {
             return reply.status(409).send({ message: error.message });
+        }
+        if (error && (error as any).code === "FST_REQ_FILE_TOO_LARGE") {
+            return reply.status(413).send({ message: "File is too large" });
         }
         console.error("Error creating pasien:", error);
         return reply.status(500).send("Internal Server Error");

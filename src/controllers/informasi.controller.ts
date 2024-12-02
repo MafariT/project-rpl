@@ -120,7 +120,7 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
             </div>
             <div>
             <h1 style="font-weight: bold; color: black;">${item.judul}.</h1>
-            <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">${item.created.toLocaleDateString()}</h5>
+            <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">${new Date(item.created).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</h5>
             ${formatIsiContent(item.isi)}
 
             <a href="/informasi" class="btn btn-primary mb-5">← Kembali</a>

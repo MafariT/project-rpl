@@ -2,16 +2,14 @@ function populateTable(dokterData, poliFilter = "") {
     const tableBody = document.querySelector("#myTable tbody");
     tableBody.innerHTML = "";
 
-    const filteredDokterData = poliFilter
-        ? dokterData.filter((dokter) => dokter.poliKlinik === poliFilter)
-        : dokterData;
+    const filteredDokterData = poliFilter ? dokterData.filter((dokter) => dokter.poli === poliFilter) : dokterData;
 
     filteredDokterData.forEach((dokter) => {
         const row = document.createElement("tr");
 
         row.innerHTML = `
           <td>${dokter.nama}</td>
-          <td>${dokter.poliKlinik}</td>
+          <td>${dokter.poli}</td>
           <td>${dokter.jamMulai}</td>
           <td>${dokter.jamSelesai}</td>
         `;
@@ -44,7 +42,7 @@ async function fetchDokterData(poliFilter) {
         Swal.fire({
             icon: "error",
             title: "Failed to fetch data",
-            text: "Terjadi kesalahan saat mengambil data!",
+            text: "Terjadi kesalahan saat mengambil data",
         });
     }
 }

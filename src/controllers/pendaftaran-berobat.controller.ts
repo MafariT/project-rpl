@@ -15,7 +15,7 @@ const pendaftaranBerobatSchema = z.object({
     namaDokter: z.string().min(1).max(255),
     jam: z.string().min(1).max(255),
     jenisPembayaran: z.string().min(1).max(255),
-    totalPembayaran: z.string().min(1).max(255),
+    // totalPembayaran: z.string().min(1).max(255),
 });
 
 export async function getPendaftaranBerobat(
@@ -110,7 +110,7 @@ export async function createPendaftaranBerobat(
             namaDokter,
             jam,
             jenisPembayaran,
-            totalPembayaran,
+            // totalPembayaran,
         } = payload;
 
         await db.pendaftaranBerobat.save(
@@ -126,7 +126,7 @@ export async function createPendaftaranBerobat(
             namaDokter,
             jam,
             jenisPembayaran,
-            totalPembayaran,
+            // totalPembayaran,
             fk,
         );
         return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });
@@ -155,7 +155,6 @@ export async function updatePendaftaranBerobatById(
     const userId = request.user?.id;
     const fk: any = await db.pasien.findOne({ fk: userId });
     const { id } = request.params as any;
-    console.log(`id DAFTAR: ${id}`);
 
     try {
         const payload: any = {};
@@ -181,7 +180,7 @@ export async function updatePendaftaranBerobatById(
             namaDokter,
             jam,
             jenisPembayaran,
-            totalPembayaran,
+            // totalPembayaran,
         } = payload;
 
         await db.pendaftaranBerobat.update(
@@ -198,7 +197,7 @@ export async function updatePendaftaranBerobatById(
             namaDokter,
             jam,
             jenisPembayaran,
-            totalPembayaran,
+            // totalPembayaran,
             fk,
         );
         return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });

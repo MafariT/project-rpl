@@ -14,8 +14,8 @@ export class UserRepository extends EntityRepository<User> {
     }
 
     async save(username: string, email: string, password: string): Promise<void> {
-        if (await this.exists(username)) {
-            throw new EntityExistsError(username);
+        if (await this.exists(username, email)) {
+            throw new EntityExistsError(username, email);
         }
 
         const newUser = new User(username, email, password);
@@ -36,8 +36,8 @@ export class UserRepository extends EntityRepository<User> {
         this.em.flush();
     }
 
-    private async exists(username: string): Promise<boolean> {
-        const count = await this.qb().where({ username }).getCount();
+    private async exists(username: string, email: string): Promise<boolean> {
+        const count = await this.qb().where({ username }).orWhere({ email }).getCount();
         return count > 0;
     }
 }

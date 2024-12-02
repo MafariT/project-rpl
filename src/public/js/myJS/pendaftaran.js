@@ -15,7 +15,7 @@ form.addEventListener("submit", async (event) => {
         if (response.ok) {
             Swal.fire({
                 icon: "success",
-                title: "Pendaftaran berhasil!",
+                title: "Pendaftaran berhasil",
                 showConfirmButton: false,
                 timer: 1500,
                 timerProgressBar: true,
@@ -27,7 +27,7 @@ form.addEventListener("submit", async (event) => {
             console.error("Error submitting form:", errorData || response.statusText);
             Swal.fire({
                 icon: "error",
-                title: "Pendaftaran gagal!",
+                title: "Pendaftaran gagal",
             });
         }
     } catch (error) {
@@ -35,7 +35,7 @@ form.addEventListener("submit", async (event) => {
         Swal.fire({
             icon: "error",
             title: "An error occurred",
-            text: "Terjadi kesalahan saat pendaftaran!",
+            text: "Terjadi kesalahan saat pendaftaran",
         });
     }
 });
@@ -122,11 +122,9 @@ const addEditButtonListeners = () => {
                                         </div>
                                         <!-- Poli -->
                                         <div class="form-group">
-                                            <label for="editPoli">Poli</label>
-                                            <select class="form-control" id="editPoli" name="poli" required>
-                                                <option value="Umum" ${data.poli === "Umum" ? "selected" : ""}>Umum</option>
-                                                <option value="Bidan" ${data.poli === "Bidan" ? "selected" : ""}>Bidan</option>
-                                                <option value="Gigi" ${data.poli === "Gigi" ? "selected" : ""}>Gigi</option>
+                                            <label for="editPoli-${idPendaftaran}">Poli</label>
+                                            <select class="form-control" id="editPoli-${idPendaftaran}" name="poli" required>
+
                                             </select>
                                         </div>
                                         <!-- keluhan -->
@@ -137,11 +135,9 @@ const addEditButtonListeners = () => {
                                         </div>
                                         <!-- namaDokter -->
                                         <div class="form-group">
-                                            <label for="namaDokter" style="color: black;">Nama Dokter</label>
-                                            <select class="form-control" id="namaDokter" name="namaDokter" required>
-                                                <option value="agus" ${data.poli === "dr. Agus Asep" ? "selected" : ""}>Dr. Agus Asep</option>
-                                                <option value="bidan" ${data.poli === "bidan" ? "selected" : ""}>Bidan</option>
-                                                <option value="gigi" ${data.poli === "gigi" ? "selected" : ""}>Gigi</option>
+                                            <label for="editNamaDokter-${idPendaftaran}" style="color: black;">Nama Dokter</label>
+                                            <select class="form-control" id="editNamaDokter-${idPendaftaran}" name="namaDokter" required>
+
                                             </select>
                                         </div>
                                         <!-- jam -->
@@ -162,7 +158,7 @@ const addEditButtonListeners = () => {
                                         <!-- total Pemabayran -->
                                         <div class="form-group">
                                             <label for="totalPembayaran" style="color: black;">Total Pemabayaran</label>
-                                            <input type="text" class="form-control" id="totalPembayaran" aria-describedby="" name="totalPembayaran"
+                                            <input type="text" class="form-control" id="totalPembayaran" aria-describedby="" name="totalPembayaran" disabled="true"
                                             required value="${data.totalPembayaran}">
                                         </div>
                                         <div class="modal-footer">
@@ -176,6 +172,11 @@ const addEditButtonListeners = () => {
 
                     document.body.appendChild(modal);
                     $(`#editModal-${idPendaftaran}`).modal("show");
+                    await populateSelects(
+                        `editPoli-${idPendaftaran}`,
+                        `editNamaDokter-${idPendaftaran}`,
+                        idPendaftaran,
+                    );
 
                     // Handle form submission
                     const id = button.getAttribute("data-id");
@@ -193,7 +194,7 @@ const addEditButtonListeners = () => {
                             if (updateResponse.ok) {
                                 Swal.fire({
                                     icon: "success",
-                                    title: "Pendaftaran berhasil diupdate!",
+                                    title: "Pendaftaran berhasil diupdate",
                                     showConfirmButton: false,
                                     timer: 1500,
                                     timerProgressBar: true,
@@ -204,7 +205,7 @@ const addEditButtonListeners = () => {
                                 const errorData = await updateResponse.json();
                                 Swal.fire({
                                     icon: "error",
-                                    title: "Update gagal!",
+                                    title: "Update gagal",
                                     text: errorData.message || "Terjadi kesalahan.",
                                 });
                             }
@@ -213,7 +214,7 @@ const addEditButtonListeners = () => {
                             Swal.fire({
                                 icon: "error",
                                 title: "An error occurred",
-                                text: "Terjadi kesalahan saat mengupdate pendaftaran!",
+                                text: "Terjadi kesalahan saat mengupdate pendaftaran",
                             });
                         }
                     });
@@ -222,8 +223,8 @@ const addEditButtonListeners = () => {
                 console.error("Error fetching pendaftaran details:", error);
                 Swal.fire({
                     icon: "error",
-                    title: "Gagal mendapatkan detail!",
-                    text: "Terjadi kesalahan saat mengambil data pendaftaran.",
+                    title: "Gagal mendapatkan detail",
+                    text: "Terjadi kesalahan saat mengambil data pendaftaran",
                 });
             }
         });
@@ -304,13 +305,26 @@ const fetchData = async () => {
             const pasienData = await pasienResponse.json();
             for (const [key, value] of Object.entries(pasienData)) {
                 if (key === "jenisKelamin") {
-                    if (value === "laki-laki") jenisKelamin0.checked = true; // Laki Laki
-                    if (value === "Perempuan") jenisKelamin1.checked = true; // Perempuan
+                    if (value === "laki-laki") jenisKelamin0.checked = true;
+                    if (value === "Perempuan") jenisKelamin1.checked = true;
                 } else {
                     const input = document.querySelector(`[name="${key}"]`);
                     if (input) input.value = value;
                 }
             }
+        } else if (pasienResponse.status === 404) {
+            Swal.fire({
+                icon: "warning",
+                title: "Harap isi data akun terlebih dahulu",
+                text: "Anda belum mengisi data akun, silakan lengkapi informasi akun Anda terlebih dahulu",
+            });
+        } else {
+            console.error("Error fetching pasien data:", pasienResponse.statusText);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Gagal mengambil data pasien",
+            });
         }
 
         // Handle Pendaftaran Data
@@ -386,10 +400,77 @@ const fetchData = async () => {
         Swal.fire({
             icon: "error",
             title: "Failed to fetch data",
-            text: "Terjadi kesalahan saat mengambil data!",
+            text: "Terjadi kesalahan saat mengambil data",
         });
     }
 };
+
+async function populateSelects(poliSelectId = "poli", namaDokterSelectId = "namaDokter", idPendaftaran = null) {
+    try {
+        const dokterResponse = await fetch("/api/dokter");
+        if (!dokterResponse.ok) throw new Error("Failed to fetch dokter data");
+
+        const dokterData = await dokterResponse.json();
+
+        let pendaftaranData = null;
+        if (idPendaftaran) {
+            const pendaftaranResponse = await fetch(`/api/pendaftaran-berobat/user/${idPendaftaran}`);
+            if (!pendaftaranResponse.ok) throw new Error("Failed to fetch pendaftaran data");
+
+            pendaftaranData = await pendaftaranResponse.json();
+        }
+
+        // Populate poli
+        const poliSelect = document.getElementById(poliSelectId);
+        poliSelect.innerHTML = "";
+        const uniquePoli = [...new Set(dokterData.map((dokter) => dokter.poli))];
+        uniquePoli.forEach((poli) => {
+            const option = document.createElement("option");
+            option.value = poli;
+            option.textContent = poli;
+            poliSelect.appendChild(option);
+        });
+
+        // Set the selected poli if it's for the edit case
+        if (pendaftaranData) {
+            poliSelect.value = pendaftaranData.poli;
+        }
+
+        // Populate and filter namaDokter
+        const namaDokterSelect = document.getElementById(namaDokterSelectId);
+        namaDokterSelect.innerHTML = "";
+
+        const filteredDokter = dokterData.filter((dokter) => dokter.poli === poliSelect.value);
+        filteredDokter.forEach((dokter) => {
+            const option = document.createElement("option");
+            option.value = dokter.nama;
+            option.textContent = dokter.nama;
+            namaDokterSelect.appendChild(option);
+        });
+
+        if (pendaftaranData) {
+            namaDokterSelect.value = pendaftaranData.namaDokter;
+        }
+
+        // Event listener to update namaDokter dynamically if poli changes
+        poliSelect.addEventListener("change", () => {
+            const selectedPoli = poliSelect.value;
+            const updatedFilteredDokter = dokterData.filter((dokter) => dokter.poli === selectedPoli);
+
+            namaDokterSelect.innerHTML = "";
+            updatedFilteredDokter.forEach((dokter) => {
+                const option = document.createElement("option");
+                option.value = dokter.nama;
+                option.textContent = dokter.nama;
+                namaDokterSelect.appendChild(option);
+            });
+
+            namaDokterSelect.value = "";
+        });
+    } catch (error) {
+        console.error("Error populating selects:", error);
+    }
+}
 
 const initDataTable = () => {
     const table = $("#myTable");
@@ -398,4 +479,5 @@ const initDataTable = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchData();
+    populateSelects();
 });

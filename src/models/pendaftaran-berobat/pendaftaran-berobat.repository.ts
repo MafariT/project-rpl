@@ -31,7 +31,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         namaDokter: string,
         jam: string,
         jenisPembayaran: string,
-        totalPembayaran: string,
+        // totalPembayaran: string,
         fk: number,
     ): Promise<void> {
         const existingPendaftaranBerobat = await this.findOne({ idPendaftaran });
@@ -49,7 +49,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
             existingPendaftaranBerobat.namaDokter = namaDokter;
             existingPendaftaranBerobat.jam = jam;
             existingPendaftaranBerobat.jenisPembayaran = jenisPembayaran;
-            existingPendaftaranBerobat.totalPembayaran = totalPembayaran;
+            // existingPendaftaranBerobat.totalPembayaran = totalPembayaran;
             existingPendaftaranBerobat.fk = fk;
 
             this.em.persist(existingPendaftaranBerobat);
@@ -71,7 +71,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         namaDokter: string,
         jam: string,
         jenisPembayaran: string,
-        totalPembayaran: string,
+        // totalPembayaran: string,
         fk: number,
     ): Promise<void> {
         // if (await this.exists(nik)) {
@@ -91,7 +91,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
             namaDokter,
             jam,
             jenisPembayaran,
-            totalPembayaran,
+            // totalPembayaran,
             fk,
         );
         this.create(newPendaftaranBerobat);

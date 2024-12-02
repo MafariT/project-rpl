@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (response.ok) {
                         Swal.fire({
                             title: "Success",
-                            text: "Foto Anda telah dihapus!",
+                            text: "Foto Anda telah dihapus",
                             icon: "success",
                             showConfirmButton: false,
                             timer: 1500,
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         Swal.fire({
                             icon: "error",
                             title: "Gagal menghapus foto",
-                            text: "Terjadi kesalahan saat menghapus foto!",
+                            text: "Terjadi kesalahan saat menghapus foto",
                         });
                     }
                 } catch (error) {
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: "Terjadi kesalahan saat menghapus foto!",
+                        text: "Terjadi kesalahan saat menghapus foto",
                     });
                 }
             }
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Swal.fire({
                 icon: "error",
                 title: "Logout Failed",
-                text: "Terjadi kesalahan saat logout!",
+                text: "Terjadi kesalahan saat logout",
             });
         } finally {
             resetButtons();
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Swal.fire({
                 icon: "error",
                 title: "Failed to fetch data",
-                text: "Terjadi kesalahan saat mengambil data!",
+                text: "Terjadi kesalahan saat mengambil data",
             });
         }
     };
@@ -146,9 +146,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 Swal.fire({
                     icon: "success",
-                    title: "Profile berhasil di update!",
+                    title: "Profile berhasil di update",
                     showConfirmButton: false,
                     timer: 1500,
+                    timerProgressBar: true,
+                });
+            } else if (response.status === 413) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Failed to update profile",
+                    text: "Maksimal ukuran foto 5MB",
+                    timer: 4000,
                     timerProgressBar: true,
                 });
             } else {
@@ -161,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         } catch (error) {
+            console.log;
             console.error("Error submitting form:", error);
             Swal.fire({
                 icon: "error",

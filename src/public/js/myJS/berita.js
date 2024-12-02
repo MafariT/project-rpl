@@ -4,6 +4,7 @@ const btnBerita = document.getElementById("btnBerita");
 const btnLayanan = document.getElementById("btnLayanan");
 const btnFasilitas = document.getElementById("btnFasilitas");
 const btnDokter = document.getElementById("btnDokter");
+const spinner = document.getElementById("spinner");
 
 // Fungsi untuk mengubah tombol yang aktif dan non-aktif
 const toggleActiveButton = (activeButton) => {
@@ -79,6 +80,7 @@ const fetchData = async () => {
         if (informasiResponse.ok) {
             const data = await informasiResponse.json();
             const cardContainer = document.getElementById("Card");
+            spinner.remove();
 
             data.forEach((item) => {
                 const cardHTML = `
@@ -88,7 +90,7 @@ const fetchData = async () => {
               <div class="card-content">
                 <!-- Judul dengan text truncation -->
                 <h5 class="mt-3 mb-3 card-title" style="color: black; font-weight: bold;">${item.judul}</h5>
-                <h6>${item.created.substring(0, 10)}</h6>
+                <h6>${new Date(item.created).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</h6>
                 <p class="card-text">${item.isi}</p>
                 <div class="d-flex justify-content-end">
                   <a href="/informasi/${item.idInformasi}" class="btn btn-success card-link mt-3" style="font-weight: bold;">Lihat Detail</a>

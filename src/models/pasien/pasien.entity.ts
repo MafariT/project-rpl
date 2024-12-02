@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryKey, Property } from "@mikro-orm/mysql";
+import { Entity, OneToOne, PrimaryKey, Property } from "@mikro-orm/mysql";
 import { PasienRepository } from "./pasien.repository";
 import { User } from "../user/user.entity";
 
@@ -28,7 +28,7 @@ export class Pasien {
     @Property()
         fotoProfil!: string | null;
 
-    @ManyToOne(() => User, { nullable: false })
+    @OneToOne(() => User, { nullable: false })
         fk!: number;
     constructor(
         nik: string,

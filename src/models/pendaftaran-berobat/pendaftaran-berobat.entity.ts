@@ -12,10 +12,10 @@ export class PendaftaranBerobat {
 
     @Property({ nullable: false })
         nama!: string;
-    
+
     @Property({ nullable: false })
         jenisKelamin!: string;
-        
+
     @Property({ nullable: false })
         alamat!: string;
 
@@ -43,10 +43,10 @@ export class PendaftaranBerobat {
     @Property({ nullable: false })
         jenisPembayaran!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, default: "Rp. 5.000,00" })
         totalPembayaran!: string;
 
-    @ManyToOne(() => Pasien, { nullable: false }) // TODO to ID FK
+    @ManyToOne(() => Pasien, { nullable: false })
         fk!: number;
 
     constructor(
@@ -63,7 +63,7 @@ export class PendaftaranBerobat {
         namaDokter: string,
         jam: string,
         jenisPembayaran: string,
-        totalPembayaran: string,
+        // totalPembayaran: string,
         fk: number,
     ) {
         // this.idPendaftaran = idPendaftaran;
@@ -73,13 +73,13 @@ export class PendaftaranBerobat {
         this.alamat = alamat;
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
-        this.tanggalPengajuan = tanggalPengajuan
-        this.poli = poli,
-        this.keluhan = keluhan,
-        this.namaDokter = namaDokter,
-        this.jam = jam,
-        this.jenisPembayaran = jenisPembayaran,
-        this.totalPembayaran = totalPembayaran,
-        this.fk = fk;
+        this.tanggalPengajuan = tanggalPengajuan;
+        (this.poli = poli),
+        (this.keluhan = keluhan),
+        (this.namaDokter = namaDokter),
+        (this.jam = jam),
+        (this.jenisPembayaran = jenisPembayaran),
+        // this.totalPembayaran = totalPembayaran,
+        (this.fk = fk);
     }
 }

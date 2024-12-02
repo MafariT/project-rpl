@@ -7,7 +7,7 @@ import { QueryParams } from "../types/query-params";
 
 const dokterSchema = z.object({
     nama: z.string().min(1).max(255),
-    poliklinik: z.string().min(1).max(255),
+    poli: z.string().min(1).max(255),
     jamMulai: z.string().min(1).max(255),
     jamSelesai: z.string().min(1).max(255),
 });
@@ -27,11 +27,11 @@ export async function getDokter(request: FastifyRequest<{ Querystring: QueryPara
 
 export async function createDokter(request: FastifyRequest<{ Body: Dokter }>, reply: FastifyReply) {
     const db = await initORM();
-    const { nama, poliKlinik, jamMulai, jamSelesai } = request.body;
+    const { nama, poli, jamMulai, jamSelesai } = request.body;
 
     try {
-        dokterSchema.parse({ nama, poliKlinik, jamMulai, jamSelesai });
-        await db.dokter.save(nama, poliKlinik, jamMulai, jamSelesai);
+        dokterSchema.parse({ nama, poli, jamMulai, jamSelesai });
+        await db.dokter.save(nama, poli, jamMulai, jamSelesai);
         return reply.status(201).send({ message: `Dokter ${nama} successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {
@@ -40,7 +40,7 @@ export async function createDokter(request: FastifyRequest<{ Body: Dokter }>, re
                 return `${err.path.join(".")} - ${err.message}`;
             });
 
-            return reply.status(400).send({ message: "idDokteration failed", errors: errorMessages });
+            return reply.status(400).send({ message: "Validation failed", errors: errorMessages });
         }
         if (error instanceof EntityExistsError) {
             return reply.status(409).send({ message: error.message });

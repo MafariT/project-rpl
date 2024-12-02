@@ -10,7 +10,7 @@ export class Dokter {
         nama!: string;
 
     @Property({ nullable: false })
-        poliKlinik!: string;
+        poli!: string;
 
     @Property({ nullable: false })
         jamMulai!: string;
@@ -18,9 +18,9 @@ export class Dokter {
     @Property({ nullable: false })
         jamSelesai!: string;
 
-    constructor(nama: string, poliKlinik: string, jamMulai: string, jamSelesai: string) {
+    constructor(nama: string, poli: string, jamMulai: string, jamSelesai: string) {
         this.nama = nama;
-        this.poliKlinik = poliKlinik;
+        this.poli = poli;
         this.jamMulai = jamMulai;
         this.jamSelesai = jamSelesai;
     }
