@@ -8,13 +8,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+  <link rel="icon" href="../img/asset/logo.png" type="image/x-icon">
   <title>PuskeSmart</title>
 
   <!-- My CSS -->
   <link rel="stylesheet" href="../css/myCSS/informasi.css">
   <!-- My Main CSS -->
   <link rel="stylesheet" href="../css/myCSS/main.css">
+
+  <!-- My AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -82,46 +85,47 @@
     </div>
 
     <hr style="background-color: black;">
-<!-- Card informasi-->
-<div id="Card" class="cards mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; position: relative;">
-    <!-- Spinner -->
-    <div class="spinner-border" id="spinner" style="position: absolute; top: 50%; left: 50%;"></div>
-</div>
-<!-- End Card -->
+    <!-- Card informasi-->
+    <div id="Card" class="cards mb-5 justify-content-between"
+      style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; position: relative;">
+      <!-- Spinner -->
+      <div class="spinner-border" id="spinner" style="position: absolute; top: 50%; left: 50%;"></div>
+    </div>
+    <!-- End Card -->
 
     <!-- Layanan -->
     <div id="Layanan" class="d-none wadah mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px;
     justify-content: center;">
       <div class="pembungkus-kartu">
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="" data-aos-duration="1000">
           <img src="../img/asset/dokter.png" alt="poli umum" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Umum</h1>
             <p class="teks-kartu">Konsultasi kesehatan umum dan pemeriksaan dasar</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="300" data-aos-duration="1000">
           <img src="../img/asset/gigi.png" alt="poli gigi" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Gigi</h1>
             <p class="teks-kartu">Perawatan kesehatan gigi dan mulut untuk semua usia</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="600" data-aos-duration="1000">
           <img src="../img/asset/bidan.png" alt="poli Bidan" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Bidan</h1>
             <p class="teks-kartu">Layanan untuk ibu hamil dan persiapan persalinan</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="900" data-aos-duration="1000">
           <img src="../img/asset/Bayi.png" alt="poli anak" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Anak</h1>
             <p class="teks-kartu">Layanan untuk anak usia dini</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="1200" data-aos-duration="1000">
           <img src="../img/asset/setoskop.png" alt="Laboratorium" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Laboratorium</h1>
@@ -136,14 +140,14 @@
     <div id="Fasilitas" class="d-none wadah mb-5 justify-content-between" style="display: flex; flex-wrap: wrap; gap: 5px;
     justify-content: center;">
       <div class="pembungkus-kartu">
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="" data-aos-duration="1000">
           <img src="../img/asset/kursi.png" alt="poli umum" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Ruang Tunggu Nyaman</h1>
             <p class="teks-kartu">Puskesmas Kebun Handil memiliki ruang tunggu yang nyaman dan bersih</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="300" data-aos-duration="1000">
           <img src="../img/asset/konseling.png" alt="poli gigi" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Ruang Konseling</h1>
@@ -151,14 +155,14 @@
               memerlukan.</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="600" data-aos-duration="1000">
           <img src="../img/asset/ambulan.png" alt="poli anak" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Ambulans</h1>
             <p class="teks-kartu">Tersedia untuk keadaan darurat atau rujukan ke rumah sakit</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="900" data-aos-duration="1000">
           <img src="../img/asset/cucitangan.png" alt="poli anak" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Fasilitas Sanitasi lengkap</h1>
@@ -319,6 +323,11 @@
   </footer>
   <!-- End Footer -->
 
+  <!-- My AOS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- My Main JS -->

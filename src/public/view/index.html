@@ -7,13 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
+  <link rel="icon" href="../img/asset/logo.png" type="image/x-icon">
   <title>PuskeSmart</title>
 
   <!-- My CSS -->
   <link rel="stylesheet" href="../css/myCSS/index.css" />
   <!-- My Main CSS -->
   <link rel="stylesheet" href="../css/myCSS/main.css">
+
+  <!-- My AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -68,7 +71,7 @@
   <!-- Section 1 -->
   <div class="csc1 container-lg mt-5">
     <div class="row align-items-center mb-5">
-      <div class="col-md-8">
+      <div class="col-md-8" data-aos="fade-right" data-aos-delay="50" data-aos-duration="1000">
         <h1 class="mainTitle font-weight-bold" style="font-size: 35px; color: black">
           Selamat Datang di <br />
           PuskeSmart
@@ -81,7 +84,8 @@
         </button>
       </div>
       <div class="col-md-4 d-none d-md-block img-fluid text-right mt-4 mt-md-0" style="width: 300px">
-        <img src="../img/asset/ilustrasi 1.png" alt="Ilustrasi" class="" style="max-width: 250px" id="ilust1" />
+        <img src="../img/asset/ilustrasi 1.png" alt="Ilustrasi" class="" style="max-width: 250px" id="ilust1"
+          data-aos="fade-left" data-aos-delay="500" data-aos-duration="1000" />
       </div>
     </div>
   </div>
@@ -93,10 +97,10 @@
       <div class="row align-items-center">
         <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
           <img src="../img/asset/ilustrasi 2.png" alt="Ilustrasi" class="ilust2 img-fluid d-none d-md-block"
-            style="max-width: 250px" />
+            style="max-width: 250px" data-aos="fade-right" data-aos-delay="50" data-aos-duration="1000" />
         </div>
         <div class="col-md-6">
-          <div class="ml-md-5">
+          <div class="ml-md-5" data-aos="fade-left" data-aos-delay="500" data-aos-duration="1000">
             <h1 class="font-weight-bold text-center text-md-left mb-2" style="color: black">
               Tentang Kami
             </h1>
@@ -128,21 +132,21 @@
     </div>
     <div class="wadah">
       <div class="pembungkus-kartu">
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="" data-aos-duration="1000">
           <img src="../img/asset/dokter.png" alt="poli umum" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Umum</h1>
             <p class="teks-kartu">Konsultasi kesehatan umum dan pemeriksaan dasar</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="300" data-aos-duration="1000">
           <img src="../img/asset/gigi.png" alt="poli gigi" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Gigi</h1>
             <p class="teks-kartu">Perawatan kesehatan gigi dan mulut untuk semua usia</p>
           </div>
         </div>
-        <div class="kartu">
+        <div class="kartu" data-aos="flip-right" data-aos-delay="600" data-aos-duration="1000">
           <img src="../img/asset/bidan.png" alt="poli anak" class="gambar-kartu" />
           <div class="isi-kartu">
             <h1 class="judul-kartu">Poli Bidan</h1>
@@ -434,6 +438,13 @@
   </div>
   <!-- End Modal -->
 
+  <!-- My AOS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+    });
+  </script>
   <!-- My Main JS -->
   <script src="../js/myJS/main.js"></script>
   <!-- My JS -->
