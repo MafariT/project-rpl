@@ -24,7 +24,8 @@ export async function getUlasan(request: FastifyRequest<{ Querystring: QueryPara
         // Fetch pasien details
         const ulasanDetails = await Promise.all(
             ulasan.map(async (ulasanItem) => {
-                const pasien = await db.pasien.findOne({ fk: ulasanItem.fk });
+                const pasien = await db.pasien.findOne({ idPasien: ulasanItem.fk });
+                console.log(pasien);
 
                 if (!pasien) {
                     throw new Error("Pasien not found");

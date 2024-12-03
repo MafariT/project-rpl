@@ -14,7 +14,7 @@ export async function publicViewRouter(fastify: FastifyInstance) {
         reply.sendFile("view/register.html");
     });
     fastify.get("/forgot-password", (request: FastifyRequest, reply: FastifyReply) => {
-        reply.sendFile("forgot-password.html");
+        reply.sendFile("view/forgot-password.html");
     });
     fastify.get("/reset-password/:token", resetPasswordPage);
 }

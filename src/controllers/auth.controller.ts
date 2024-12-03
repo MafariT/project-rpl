@@ -68,17 +68,20 @@ export async function forgotPassword(request: FastifyRequest<{ Body: { email: st
     await db.user.flush();
 
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: 'smtp-relay.sendinblue.com',
+        port: 587,
         auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
+            user: process.env.SENDINBLUE_EMAIL,
+            pass: process.env.SENDINBLUE_API_KEY,
         },
     });
+    
+    
 
     const resetLink = `${request.protocol}://${request.hostname}:${request.port}/reset-password/${token}`;
 
     await transporter.sendMail({
-        from: '"Support" <support@example.com>',
+        from: `"Support" <${process.env.SENDER_EMAIL}>`,
         to: user.email,
         subject: "Password Reset Request",
         html: `<p>You requested a password reset. Click <a href="${resetLink}">here</a> to reset your password. This link is valid for 1 hour.</p>`,
@@ -126,18 +129,5 @@ export async function resetPasswordPage(request: FastifyRequest<{ Params: { toke
         return reply.status(400).send("Invalid or expired reset token");
     }
 
-    return reply.type("text/html").send(`
-        <html>
-        <head>
-            <title>Reset Password</title>
-        </head>
-        <body>
-            <h1>Reset Your Password</h1>
-            <form action="/api/auth/reset-password/${token}" method="POST">
-                <input type="password" name="newPassword" placeholder="Enter new password" required />
-                <button type="submit">Reset Password</button>
-            </form>
-        </body>
-        </html>
-    `);
+    return reply.sendFile("view/reset-password.html");
 }
