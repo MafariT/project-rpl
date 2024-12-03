@@ -99,8 +99,8 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
                 <div class="navbar-nav mx-auto">
                 <a class="nav-tengah linknya" href="/home" style="font-size: 20px;">Beranda</a>
                 <a class="nav-tengah linknya" href="/pendaftaran" style="font-size: 20px;">Pendaftaran</a>
-                <a class="nav-tengah linknya" href="/informasi" style="font-size: 20px;">Informasi</a>
-                <a class="nav-tengah linknya" href="#" style="font-size: 20px;">Ulasan</a>
+                <a class="nav-tengah linknya active" href="/informasi" style="font-size: 20px;">Informasi</a>
+                <a class="nav-tengah linknya" href="/ulasan" style="font-size: 20px;">Ulasan</a>
                 </div>
 
                 <!-- Masuk button aligned to the right -->

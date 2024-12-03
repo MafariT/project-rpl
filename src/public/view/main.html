@@ -8,12 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../img/asset/logo.png" type="image/x-icon">
+
   <title>PuskeSmart</title>
-  <!-- My Main CSS -->
+  <!-- My CSS -->
   <link rel="stylesheet" href="../css/myCSS/main.css">
-  <!-- My Ulasan CSS -->
-  <link rel="stylesheet" href="../css/myCSS/ulasan.css">
 
   <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -55,11 +53,11 @@
 
       <!-- Navbar links centered with mx-auto -->
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav mx-auto">
-          <a class="nav-tengah linknya" href="home" style="font-size: 20px;">Beranda</a>
-          <a class="nav-tengah linknya" href="pendaftaran" style="font-size: 20px;">Pendaftaran</a>
+        <div class="navbar-nav mx-auto" style="position: relative;">
+          <a class="nav-tengah linknya active" href="home" style="font-size: 20px;">Beranda</a>
+          <a class="nav-tengah linknya active" href="pendaftaran" style="font-size: 20px;">Pendaftaran</a>
           <a class="nav-tengah linknya" href="informasi" style="font-size: 20px;">Informasi</a>
-          <a class="nav-tengah linknya active" href="ulasan" style="font-size: 20px;">Ulasan</a>
+          <a class="nav-tengah linknya" href="#" style="font-size: 20px;">Ulasan</a>
         </div>
 
         <!-- Masuk button aligned to the right -->
@@ -69,57 +67,6 @@
     </div>
   </nav>
   <!-- End Navbar -->
-
-  <!-- Start Main Section -->
-  <div class="container-lg mt-3 mb-3 p-3 shadow-sm" style="background-color: #F2F2F2; border-radius: 10px;">
-    <div class="d-flex justify-content-end">
-      <button class="btnBuatUlasan btn" data-toggle="modal"
-        data-target="#ulasanModal">Buat Ulasan</button>
-    </div>
-    <hr style="background-color: black;">
-    <div id="tempatUlasan"></div>
-    <!-- Spinner -->
-    <div class="d-flex justify-content-center align-items-center">
-        <div class="spinner-border" id="spinner"></div>
-    </div>
-  </div>
-  <!-- End Main Section -->
-
-  <!-- Modal isi -->
-  <div class="modal fade" id="ulasanModal" tabindex="-1" role="dialog" aria-labelledby="ulasanModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ulasanModalLabel" style="font-weight: bold; color: black;">Buat Ulasan</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="form-ulasan">
-            <div class="form-group">
-              <label style="font-weight: bold; color: black;">Bintang</label>
-              <div class="bintang" id="star-rating">
-                <span class="star" data-value="1" id="B1"><i class="fas fa-star"></i></span>
-                <span class="star" data-value="2" id="B2"><i class="fas fa-star"></i></span>
-                <span class="star" data-value="3" id="B3"><i class="fas fa-star"></i></span>
-                <span class="star" data-value="4" id="B4"><i class="fas fa-star"></i></span>
-                <span class="star" data-value="5" id="B5"><i class="fas fa-star"></i></span>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="ulasan" style="font-weight: bold; color: black;">Ulasan</label>
-              <textarea class="form-control" id="ulasan" rows="4" placeholder="Tulis ulasan Anda..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-success btn-block" style="font-weight: bold; color: white;"
-              id="submit-button">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
   <!-- Footer -->
   <footer class="footer pt-10 pb-5 mt-auto footer-light" style="background-color: #68A3F3;">
@@ -221,12 +168,8 @@
   </footer>
   <!-- End Footer -->
 
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Main JS -->
   <script src="../js/myJS/main.js"></script>
-  <!-- Ulasan JS -->
-  <script src="../js/myJS/ulasan.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->

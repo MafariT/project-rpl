@@ -32,3 +32,8 @@
     transform-origin: left;
     transform: scaleX(1);
 }
+
+.navbar-collapse .navbar-nav .linknya.active::after {
+    transform: scaleX(1);
+}
+
