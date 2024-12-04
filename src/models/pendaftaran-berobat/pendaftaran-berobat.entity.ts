@@ -7,22 +7,22 @@ export class PendaftaranBerobat {
     @PrimaryKey({ autoincrement: true })
         idPendaftaran!: number;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 16})
         nik!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 128 })
         nama!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 16 })
         jenisKelamin!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 128 })
         alamat!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 16 })
         noTel!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 12 })
         tanggalLahir!: string;
 
     @Property({ nullable: false })

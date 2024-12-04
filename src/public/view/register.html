@@ -57,7 +57,7 @@
                   <span class="input-group-text"><i class="fa-regular fa-user"></i></span>
                 </div>
                 <input type="text" class="form-control" id="username" placeholder="Masukkan Nama Pengguna Anda"
-                  name="username" required />
+                  name="username" minlength="4" maxlength="64" required />
               </div>
             </div>
 
@@ -68,8 +68,8 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa-regular fa-envelope"></i></span>
                 </div>
-                <input type="text" class="form-control" id="email" placeholder="contoh@gmail.com" name="email"
-                  required />
+                <input type="text" class="form-control" id="email" placeholder="contoh@gmail.com" name="email" 
+                maxlength="128" required />
               </div>
             </div>
 
@@ -82,7 +82,7 @@
                   <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
                 </div>
                 <input type="password" class="form-control" id="password" placeholder="********" name="password"
-                  required />
+                minlength="8" maxlength="256" required />
               </div>
             </div>
 

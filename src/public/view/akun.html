@@ -91,13 +91,15 @@
           <!-- NIK -->
           <div class="form-group">
             <label for="nik" style="font-weight: bold; color: black">NIK</label>
-            <input type="type" class="form-control" id="nik" style="border: 1px solid black" name="nik" required />
+            <input type="type" class="form-control" id="nik" style="border: 1px solid black" name="nik" 
+            minlength="16" maxlength="16" required />
             <small id="nik" class="form-text text-muted">Kami akan menjaga privasi NIK anda.</small>
           </div>
           <!-- nama Lengkap -->
           <div class="form-group">
             <label for="nama" style="font-weight: bold; color: black">Nama Lengkap</label>
-            <input type="text" class="form-control" id="nama" style="border: 1px solid black" name="nama" required />
+            <input type="text" class="form-control" id="nama" style="border: 1px solid black" name="nama" 
+            minlength="1" maxlength="128" required />
           </div>
           <!-- Jenis Kelamin -->
           <div class="form-group">
@@ -132,7 +134,8 @@
           <!-- Alamat -->
           <div class="form-group">
             <label for="alamat" style="font-weight: bold; color: black">Alamat</label>
-            <input type="text" class="form-control" id="alamat" style="border: 1px solid black" name="alamat" required/>
+            <input type="text" class="form-control" id="alamat" style="border: 1px solid black" name="alamat" 
+            minlength="1" maxlength="128" required/>
           </div>
         </div>
 
@@ -141,7 +144,7 @@
           <div class="form-group">
             <label for="noTel" style="font-weight: bold; color: black">No Telp</label>
             <input type="tel" class="form-control" id="noTel" style="border: 1px solid black; margin-bottom: 39px"
-              name="noTel" required/>
+              name="noTel" minlength="11" maxlength="16" required/>
           </div>
           <!-- Tanggal Lahir -->
           <div class="form-group">

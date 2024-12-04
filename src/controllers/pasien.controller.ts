@@ -9,11 +9,12 @@ import path from "path";
 import { pipeline } from "stream/promises";
 
 const pasienSchema = z.object({
-    nik: z.string().min(1).max(255),
-    nama: z.string().min(1).max(255),
-    jenisKelamin: z.string().min(1).max(255),
-    alamat: z.string().min(1).max(255),
-    noTel: z.string().min(1).max(255),
+    nik: z.string().min(16).max(16),
+    nama: z.string().min(1).max(128),
+    jenisKelamin: z.string().min(1).max(16),
+    alamat: z.string().min(1).max(128),
+    noTel: z.string().min(11).max(16),
+    tanggalLahir: z.string().min(1).max(12),
 });
 
 export async function getPasien(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {

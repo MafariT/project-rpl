@@ -8,9 +8,9 @@ import { EntityExistsError } from "../utils/erros";
 import { User } from "../models/user/user.entity";
 
 const userSchema = z.object({
-    username: z.string().min(1).max(255),
-    email: z.string().min(1).max(255),
-    password: z.string().min(1).max(255),
+    username: z.string().min(4).max(64),
+    email: z.string().min(1).max(128),
+    password: z.string().min(8).max(255),
 });
 
 export const validateUser = {
@@ -81,10 +81,93 @@ export async function forgotPassword(request: FastifyRequest<{ Body: { email: st
     const resetLink = `${request.protocol}://${request.hostname}:${request.port}/reset-password/${token}`;
 
     await transporter.sendMail({
-        from: `"Support" <${process.env.SENDER_EMAIL}>`,
+        from: `"PuskeSmart" <${process.env.SENDER_EMAIL}>`,
         to: user.email,
         subject: "Password Reset Request",
-        html: `<p>You requested a password reset. Click <a href="${resetLink}">here</a> to reset your password. This link is valid for 1 hour.</p>`,
+        html: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+                    <style>
+                        body {
+                            font-family: 'Poppins', sans-serif;
+                            background-image: url('https://yourwebsite.com/img/asset/bg.jpg');
+                            background-size: cover;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            color: #333;
+                            padding: 40px;
+                        }
+                        .container {
+                            background-color: #ffffff;
+                            padding: 30px;
+                            border-radius: 15px;
+                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                            max-width: 600px;
+                            margin: auto;
+                        }
+                        .logo {
+                            display: block;
+                            margin: 0 auto 20px;
+                            max-width: 200px;
+                        }
+                        h1 {
+                            color: #2c3e50;
+                            text-align: center;
+                            font-size: 2rem;
+                            margin-bottom: 20px;
+                        }
+                        p {
+                            color: #34495e;
+                            font-size: 1rem;
+                            line-height: 1.6;
+                        }
+                        a {
+                            color: #3498db;
+                            text-decoration: none;
+                            font-weight: bold;
+                        }
+                        .footer {
+                            margin-top: 30px;
+                            text-align: center;
+                            color: #7f8c8d;
+                            font-size: 0.9rem;
+                        }
+                    </style>
+                </head>
+
+                <body>
+
+                    <div class="container">
+                        <!-- Logo -->
+                        <img src="cid:logo" alt="Logo" class="logo">
+                        
+                        <!-- Email Content -->
+                        <h1>Permintaan Mengatur Ulang Kata Sandi</h1>
+                        <p>Hallo,</p>
+                        <p>Anda baru saja meminta untuk mengatur ulang kata sandi akun Anda. Untuk melanjutkan, klik tautan di bawah ini untuk membuat kata sandi baru:</p>
+                        <p><a href="${resetLink}">Klik di sini untuk menyetel ulang sandi Anda</a></p>
+                        <p>Tautan ini akan kedaluwarsa dalam 1 jam, Pastikan untuk menggunakannya segera.</p>
+
+                        <p style="font-weight: 600;">Jika bukan anda yang membuat permintaan ini, Anda dapat mengabaikan email ini.</p>
+
+                        <div class="footer">
+                            <p>Terima kasih,<br>PuskeSmart Team</p>
+                        </div>
+                    </div>
+
+                </body>
+
+                </html>
+                `, 
+                attachments: [
+                    {
+                        filename: 'logo.png',
+                        path: 'src/public/img/asset/logoHer.png',
+                        cid: 'logo'
+                    }
+                ]
     });
 
     return reply.send({ message: "Password reset email sent" });

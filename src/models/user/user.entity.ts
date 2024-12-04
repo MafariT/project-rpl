@@ -7,16 +7,16 @@ export class User {
     @PrimaryKey({ autoincrement: true })
         id!: number;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 64})
         username!: string;
 
-    @Property({ nullable: false })
+    @Property({ nullable: false, length: 128})
         email!: string;
 
-    @Property({ nullable: false, hidden: true })
+    @Property({ nullable: false, hidden: true, length: 255 })
         password!: string;
 
-    @Property({ default: "pasien" })
+    @Property({ default: "pasien", length: 8 })
         role!: string;
 
     @Property({ nullable: true })

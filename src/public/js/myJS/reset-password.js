@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const submitButton = document.getElementById('btnSubmit');
+  const form = document.querySelector("form");
   const newPasswordInput = document.getElementById('newPassword');
   
   const pathParts = window.location.pathname.split('/');
   const token = pathParts[pathParts.length - 1];
 
-  submitButton.addEventListener("click", async function (event) {
+  form.addEventListener("submit", async function (event) {
     event.preventDefault();
     const newPassword = newPasswordInput.value;
 
