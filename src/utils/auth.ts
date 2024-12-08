@@ -16,7 +16,7 @@ export async function isAuthenticated(request: FastifyRequest, reply: FastifyRep
 
 export async function isAdmin(request: FastifyRequest, reply: FastifyReply) {
     if (request.user?.role !== "admin") {
-        return reply.redirect("/");
+        return reply.callNotFound();
     }
 }
 

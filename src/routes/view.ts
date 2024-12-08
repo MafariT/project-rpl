@@ -38,13 +38,12 @@ export async function privateViewRouter(fastify: FastifyInstance) {
     fastify.get("/ulasan", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/ulasan.html");
     });
-    // fastify.get("/pasien-regis", (request: FastifyRequest, reply: FastifyReply) => {
-    //     reply.sendFile("pasien-regis.html");
-    // });
-    // fastify.get("/pendaftaran-berobat", (request: FastifyRequest, reply: FastifyReply) => {
-    //     reply.sendFile("pendaftaran-berobat.html");
-    // });
-    // fastify.get("/admin", { preHandler: isAdmin }, (request: FastifyRequest, reply: FastifyReply) => {
-    //     reply.sendFile("view/admin.html");
-    // });
+}
+
+export async function adminViewRouter(fastify: FastifyInstance) {
+    fastify.addHook("preHandler", isAdmin);
+
+    fastify.get("/dashboard", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/dashboard.html");
+    });
 }

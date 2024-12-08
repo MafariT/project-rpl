@@ -11,7 +11,7 @@ async function seedUsers(count: number) {
     for (let i = 0; i < count; i++) {
         const username = faker.internet.userName();
         const email = faker.internet.email();
-        const password = faker.internet.password();
+        const password = "12345678";
 
         const user = new User(username, email, password);
         users.push(user);
