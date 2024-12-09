@@ -13,6 +13,7 @@ import fastifyMultipart from "@fastify/multipart";
 import informasiRouter from "./routes/informasi";
 import dokterRouter from "./routes/dokter";
 import ulasanRouter from "./routes/ulasan";
+import adminRouter from "./routes/admin";
 
 const envToLogger = {
     development: {
@@ -70,6 +71,8 @@ fastify.register(userRouter, { prefix: "/api/user" });
 fastify.register(informasiRouter, { prefix: "/api/informasi" });
 fastify.register(dokterRouter, { prefix: "/api/dokter" });
 fastify.register(ulasanRouter, { prefix: "/api/ulasan" });
+fastify.register(adminRouter, { prefix: "/api/admin" });
+
 fastify.register(publicViewRouter, { prefix: "/" });
 fastify.register(privateViewRouter, { prefix: "/" });
 fastify.register(adminViewRouter, { prefix: "/" });

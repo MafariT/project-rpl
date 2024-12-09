@@ -137,8 +137,13 @@
 
           <!-- Page Heading -->
           <div class="d-block d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-4 mb-sm-0 text-gray-800">Rekapitulasi Pasien Mingguan</h1>
-            <div class="d-flex">
+            <h1 class="h3 mb-4 mb-sm-0 text-gray-800">Rekapitulasi Pasien</h1>
+            <div>
+                <button id="toggle-weekly" class="btn btn-primary">Mingguan</button>
+                <button id="toggle-monthly" class="btn btn-success">Bulanan</button>
+                <button id="toggle-total" class="btn btn-info">Total</button>
+            </div>
+            <!-- <div class="d-flex">
               <a class="d-inline-block btn btn-sm btn-success shadow-sm mr-2" style="font-weight: 600; color: white;">
                 <i class="fas fa-edit fa-sm text-white-50"></i> Ubah Data
               </a>
@@ -146,11 +151,11 @@
                 data-toggle="modal" data-target="#tambahData">
                 <i class="fas fa-plus fa-sm text-white-50" style="font-weight: 600; color: white;"></i> Tambah Data
               </a>
-            </div>
+            </div> -->
           </div>
 
           <!-- Modal untuk mengisi data -->
-          <div class="modal fade" id="tambahData" tabindex="-1" aria-labelledby="tambahDataLabel" aria-hidden="true">
+          <!-- <div class="modal fade" id="tambahData" tabindex="-1" aria-labelledby="tambahDataLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -185,7 +190,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Content Row -->
           <div class="row">
@@ -198,7 +203,7 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Pengunjung</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">500</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="total"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-user fa-2x text-primary"></i>
@@ -216,7 +221,7 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                         Terverifikasi</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">150</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="verified"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fa-solid fa-circle-check fa-2x text-success"></i>
@@ -234,7 +239,7 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                         Tidak Terverifikasi</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">150</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="not-verified"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
@@ -251,9 +256,9 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                        Ulanas Jelek</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
+                        Ulasan Jelek</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="bad-review"></div>
+                    </div> 
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-warning"></i>
                     </div>
@@ -270,7 +275,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Kunjungan Pasien Mingguan</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Kunjungan Pasien</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
