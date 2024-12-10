@@ -71,7 +71,7 @@ const pieChart = new Chart(pieCtx, {
 
 async function updateCharts(filter = "") {
     try {
-        const response = await fetch(`/api/admin/dashboard?filter=${filter}`);
+        const response = await fetch(`/api/admin/dashboard-admin?filter=${filter}`);
         const data = await response.json();
         console.log(data);
 

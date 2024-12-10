@@ -43,7 +43,13 @@ export async function privateViewRouter(fastify: FastifyInstance) {
 export async function adminViewRouter(fastify: FastifyInstance) {
     fastify.addHook("preHandler", isAdmin);
 
-    fastify.get("/dashboard", (request: FastifyRequest, reply: FastifyReply) => {
-        reply.sendFile("view/dashboard.html");
+    fastify.get("/dashboard-admin", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/dashboard-admin.html");
+    });
+    fastify.get("/info-admin", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/info-admin.html");
+    });
+    fastify.get("/pendaftaran-admin", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/pendaftaran-admin.html");
     });
 }

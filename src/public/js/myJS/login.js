@@ -18,7 +18,7 @@ async function login() {
             if (response.status === 200) {
                 window.location.href = "/home";
             } else if (response.status === 302) {
-                window.location.href = "/dashboard";
+                window.location.href = "/dashboard-admin";
             } else if (response.status === 401) {
                 Swal.fire({
                     icon: "error",
