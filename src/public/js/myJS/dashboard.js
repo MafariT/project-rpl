@@ -2,7 +2,7 @@ const ctx = document.getElementById("myBarChart").getContext("2d");
 const barChart = new Chart(ctx, {
     type: "bar",
     data: {
-        labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"],
+        labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
         datasets: [
             {
                 label: "Data Pengunjung",
@@ -80,7 +80,15 @@ async function updateCharts(filter = "") {
         document.getElementById("not-verified").textContent = data.notVerified || 0;
         document.getElementById("bad-review").textContent = data.badReview || 0;
 
-        barChart.data.datasets[0].data = [data.total];
+        barChart.data.datasets[0].data = [
+            data.daysOfWeek.senin,
+            data.daysOfWeek.selasa,
+            data.daysOfWeek.rabu,
+            data.daysOfWeek.kamis,
+            data.daysOfWeek.jumat,
+            data.daysOfWeek.sabtu,
+            data.daysOfWeek.minggu,
+        ];
         barChart.update();
 
         pieChart.data.datasets[0].data = [data.anakAnak, data.remaja, data.dewasa];
