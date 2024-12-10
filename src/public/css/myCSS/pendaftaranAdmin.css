@@ -1,0 +1,20 @@
+#dataTable tbody tr {
+    height: auto;
+    /* Pastikan tinggi baris fleksibel */
+}
+
+#dataTable td {
+    vertical-align: middle;
+    /* Ratakan vertikal */
+}
+
+td .btn-detail {
+    background-color: #97C0F7;
+    color: white;
+    font-weight: 600;
+}
+
+td .btn-detail:hover {
+    background-color: #0c4793;
+    color: white;
+}

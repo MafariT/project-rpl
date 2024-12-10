@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../img/asset/logo.png" type="image/x-icon">
+  <title>PuskeSmart</title>
+
+  <!-- My Main CSS -->
+  <link rel="stylesheet" href="../css/myCSS/mainAdmin.css" />
+  <!-- My CSS -->
+  <link rel="stylesheet" href="../css/myCSS/infoAdmin.css">
+
+  <!-- Custom fonts for this template-->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- My font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Inter:wght@400;500;600&family=Julius+Sans+One&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet" />
+
+</head>
+
+<body id="page-top" style="font-family: 'Poppins', sans-serif;">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #97C0F7;">
+
+      <!-- Sidebar - Brand -->
+      <div class="sidebar-brand d-flex align-items-center justify-content-center">
+        <img src="../img/asset/logoVer.png" alt="PuskeSmart" id="logo" class="">
+        <img src="../img/asset/logo.png" alt="PuskeSmart" id="logo2" width="40px" class="d-none">
+      </div>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0 shadow" style="border: 1px solid white; border-radius: 10px;">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="dashboard.html">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Nav Item - Pendaftaran -->
+      <li class="nav-item">
+        <a class="nav-link" href="pendaftaranDashboard.html" style="font-weight: 600;">
+          <i class="fa-solid fa-file-invoice"></i>
+          <span>Pendaftaran</span></a>
+      </li>
+
+      <!-- Nav Item - Informasi -->
+      <li class="nav-item active">
+        <a class="nav-link" href="infoadmin.html" style="font-weight: 600;">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Informasi</span></a>
+      </li>
+
+      <!-- Nav Item - Ulasan -->
+      <li class="nav-item">
+        <a class="nav-link" href="balasUlasan.html" style="font-weight: 600;">
+          <i class="fa-solid fa-comments"></i>
+          <span>Ulasan</span></a>
+      </li>
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline mt-3">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Title -->
+          <div class="d-flex align-items-center mt-2">
+            <h1 style="font-size: 1.5rem; font-weight: 600; color: black;">
+              Informasi
+            </h1>
+          </div>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Agus Subianto</span>
+                <img class="img-profile rounded-circle" src="../img/undraw_profile_2.svg">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+
+        <!-- informasi part -->
+        <div class="container-fluid mt-3" id="tempatInfromasi">
+          <div class="d-flex justify-content-end">
+            <button class="d-inline-block btn btn-sm btn-success shadow-sm" style="font-weight: 600; color: white;"
+              data-toggle="modal" data-target="#tambahinfo">
+              <i class="fas fa-plus fa-sm text-white-50" style="font-weight: 600; color: white;"></i> Tambah Infroamsi
+            </button>
+
+            <!-- Modal isi -->
+            <div class="modal fade" id="tambahinfo" tabindex="-1" aria-labelledby="tambahinfoLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="tambahinfoLabel" style="font-weight: 600;">Tambah Data Infromasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="" method="">
+                      <div class="form-group">
+                        <label for="gambar">File Gambar</label>
+                        <input type="file" class="" id="gambar" name="gambar">
+                      </div>
+                      <div class="form-group">
+                        <label for="judul">Judul</label>
+                        <input type="text" class="form-control" id="judul" name="judul">
+                      </div>
+                      <div class="form-group">
+                        <label for="isi">Isi</label>
+                        <input type="text" class="form-control" id="isi" name="isi">
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" style="font-weight: 600;">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="border: 1px solid; border-radius: 10px;">
+
+          <!-- Start Informasion 1-->
+          <div class="mb-4 p-3 card-container d-flex align-items-center flex-wrap tempatInformasi"
+            style="border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+            <!-- Image Section -->
+            <div class="card-image" style="flex: 0 0 15%; text-align: center; padding-right: 15px;">
+              <img
+                src="https://images.pexels.com/photos/28847488/pexels-photo-28847488/free-photo-of-cozy-autumn-coffee-and-vintage-camera-setup.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                class="card-img-top custom-img" alt="Card Image"
+                style="width: 100%; border-radius: 5px; object-fit: cover;">
+            </div>
+
+            <!-- Content Section -->
+            <div class="card-content" style="flex: 1; padding-right: 15px;">
+              <h5 class="mt-3 mb-3 card-title" style="color: black; font-weight: bold; font-size: 1.2em;">
+                Kerjasama Puskesmas Kebun Handil dengan Dinas Kesehatan Kota Jambi
+              </h5>
+              <h6 style="color: gray; margin-bottom: 8px;">09 Desember 2024</h6>
+              <p class="card-text" style="color: #555; font-size: 0.9em; margin: 0;">
+                Puskesmas Kebun Handil bekerja sama dengan Dinas Kesehatan Kota Jambi untuk program vaksinasi anak.
+                Program ini bertujuan untuk meningkatkan cakupan vaksinasi dan mencegah penyebaran penyakit menular di
+                masyarakat.
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions"
+              style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+              <button class="btn btn-primary" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-eye"></i></button>
+              <button class="btn btn-success" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-pen-to-square"></i></button>
+              <button class="btn btn-danger" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+
+          <!-- Start Informasion 2-->
+          <div class="mb-4 p-3 card-container d-flex align-items-center flex-wrap tempatInformasi"
+            style="border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+            <!-- Image Section -->
+            <div class="card-image" style="flex: 0 0 15%; text-align: center; padding-right: 15px;">
+              <img
+                src="https://images.pexels.com/photos/28847488/pexels-photo-28847488/free-photo-of-cozy-autumn-coffee-and-vintage-camera-setup.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                class="card-img-top custom-img" alt="Card Image"
+                style="width: 100%; border-radius: 5px; object-fit: cover;">
+            </div>
+
+            <!-- Content Section -->
+            <div class="card-content" style="flex: 1; padding-right: 15px;">
+              <h5 class="mt-3 mb-3 card-title" style="color: black; font-weight: bold; font-size: 1.2em;">
+                Kerjasama Puskesmas Kebun Handil dengan Dinas Kesehatan Kota Jambi
+              </h5>
+              <h6 style="color: gray; margin-bottom: 8px;">09 Desember 2024</h6>
+              <p class="card-text" style="color: #555; font-size: 0.9em; margin: 0;">
+                Puskesmas Kebun Handil bekerja sama dengan Dinas Kesehatan Kota Jambi untuk program vaksinasi anak.
+                Program ini bertujuan untuk meningkatkan cakupan vaksinasi dan mencegah penyebaran penyakit menular di
+                masyarakat.
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions"
+              style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+              <button class="btn btn-primary" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-eye"></i></button>
+              <button class="btn btn-success" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-pen-to-square"></i></button>
+              <button class="btn btn-danger" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+
+          <!-- Start Informasion 3-->
+          <div class="mb-4 p-3 card-container d-flex align-items-center flex-wrap tempatInformasi"
+            style="border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+            <!-- Image Section -->
+            <div class="card-image" style="flex: 0 0 15%; text-align: center; padding-right: 15px;">
+              <img
+                src="https://images.pexels.com/photos/28847488/pexels-photo-28847488/free-photo-of-cozy-autumn-coffee-and-vintage-camera-setup.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                class="card-img-top custom-img" alt="Card Image"
+                style="width: 100%; border-radius: 5px; object-fit: cover;">
+            </div>
+
+            <!-- Content Section -->
+            <div class="card-content" style="flex: 1; padding-right: 15px;">
+              <h5 class="mt-3 mb-3 card-title" style="color: black; font-weight: bold; font-size: 1.2em;">
+                Kerjasama Puskesmas Kebun Handil dengan Dinas Kesehatan Kota Jambi
+              </h5>
+              <h6 style="color: gray; margin-bottom: 8px;">09 Desember 2024</h6>
+              <p class="card-text" style="color: #555; font-size: 0.9em; margin: 0;">
+                Puskesmas Kebun Handil bekerja sama dengan Dinas Kesehatan Kota Jambi untuk program vaksinasi anak.
+                Program ini bertujuan untuk meningkatkan cakupan vaksinasi dan mencegah penyebaran penyakit menular di
+                masyarakat.
+              </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card-actions"
+              style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+              <button class="btn btn-primary" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-eye"></i></button>
+              <button class="btn btn-success" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-pen-to-square"></i></button>
+              <button class="btn btn-danger" style="padding: 8px; font-size: 0.9em;"><i
+                  class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-secondary">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span style="color: white;">Copyright &copy; PuskeSmart, 2024 - Hak Cipta Dilindungi.</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- My Main JS -->
+  <script src="../js/myJS/mainAdmin.js"></script>
+  <!-- My JS -->
+  <script src="../js/myJS/infoAdmin.js"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="../vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="../js/demo/chart-area-demo.js"></script>
+  <script src="../js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
