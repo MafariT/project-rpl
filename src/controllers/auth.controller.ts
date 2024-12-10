@@ -20,6 +20,10 @@ export const validateUser = {
 };
 
 export async function login(request: FastifyRequest, reply: FastifyReply) {
+    const role = request.user?.role;
+    if (role == "admin") {
+        return reply.status(302).send({ message: "Login successful" });
+    }
     return reply.send({ message: "Login successful" });
 }
 
@@ -68,15 +72,13 @@ export async function forgotPassword(request: FastifyRequest<{ Body: { email: st
     await db.user.flush();
 
     const transporter = nodemailer.createTransport({
-        host: 'smtp-relay.sendinblue.com',
+        host: "smtp-relay.sendinblue.com",
         port: 587,
         auth: {
             user: process.env.SENDINBLUE_EMAIL,
             pass: process.env.SENDINBLUE_API_KEY,
         },
     });
-    
-    
 
     const resetLink = `${request.protocol}://${request.hostname}:${request.port}/reset-password/${token}`;
 
@@ -160,14 +162,14 @@ export async function forgotPassword(request: FastifyRequest<{ Body: { email: st
                 </body>
 
                 </html>
-                `, 
-                attachments: [
-                    {
-                        filename: 'logo.png',
-                        path: 'src/public/img/asset/logoHer.png',
-                        cid: 'logo'
-                    }
-                ]
+                `,
+        attachments: [
+            {
+                filename: "logo.png",
+                path: "src/public/img/asset/logoHer.png",
+                cid: "logo",
+            },
+        ],
     });
 
     return reply.send({ message: "Password reset email sent" });

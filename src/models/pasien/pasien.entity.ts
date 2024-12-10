@@ -7,7 +7,7 @@ export class Pasien {
     @PrimaryKey({ autoincrement: true })
         idPasien!: number;
 
-    @Property({ nullable: false, length: 16})
+    @Property({ nullable: false, length: 16 })
         nik!: string;
 
     @Property({ nullable: false, length: 128 })
@@ -28,8 +28,12 @@ export class Pasien {
     @Property()
         fotoProfil!: string | null;
 
+    @Property({ onCreate: () => new Date(), hidden: false })
+        created!: Date;
+
     @OneToOne(() => User, { nullable: false })
         fk!: number;
+
     constructor(
         nik: string,
         nama: string,

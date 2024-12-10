@@ -7,7 +7,7 @@ export class PendaftaranBerobat {
     @PrimaryKey({ autoincrement: true })
         idPendaftaran!: number;
 
-    @Property({ nullable: false, length: 16})
+    @Property({ nullable: false, length: 16 })
         nik!: string;
 
     @Property({ nullable: false, length: 128 })
@@ -45,6 +45,12 @@ export class PendaftaranBerobat {
 
     @Property({ nullable: false, default: "Rp. 5.000,00" })
         totalPembayaran!: string;
+
+    @Property({ nullable: false, default: false })
+        verifikasi!: boolean;
+
+    @Property({ onCreate: () => new Date(), hidden: false })
+        created!: Date;
 
     @ManyToOne(() => Pasien, { nullable: false })
         fk!: number;

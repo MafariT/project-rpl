@@ -18,6 +18,7 @@ export class Ulasan {
 
     @ManyToOne(() => Pasien, { nullable: false })
         fk!: number;
+
     constructor(rating: number, isi: string, fk: number) {
         this.rating = rating;
         this.isi = isi;

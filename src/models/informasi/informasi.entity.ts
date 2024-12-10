@@ -4,19 +4,19 @@ import { InformasiRepository } from "./informasi.repository";
 @Entity({ repository: () => InformasiRepository })
 export class Informasi {
     @PrimaryKey({ autoincrement: true })
-    idInformasi!: number;
+        idInformasi!: number;
 
     @Property({ nullable: false })
-    foto!: string;
+        foto!: string;
 
     @Property({ nullable: false })
-    judul!: string;
+        judul!: string;
 
     @Property({ type: "text", nullable: false })
-    isi!: string;
+        isi!: string;
 
     @Property({ onCreate: () => new Date(), hidden: false })
-    created!: Date;
+        created!: Date;
 
     constructor(foto: string, judul: string, isi: string) {
         this.foto = foto;

@@ -15,9 +15,10 @@ async function login() {
                 },
                 body: JSON.stringify(jsonData),
             });
-
-            if (response.ok) {
+            if (response.status === 200) {
                 window.location.href = "/home";
+            } else if (response.status === 302) {
+                window.location.href = "/dashboard";
             } else if (response.status === 401) {
                 Swal.fire({
                     icon: "error",

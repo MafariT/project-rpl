@@ -7,12 +7,13 @@ import userRouter from "./routes/user";
 import { configurePassport } from "./middlewares/passport";
 import fastifyFormbody from "@fastify/formbody";
 import authRouter from "./routes/auth";
-import { privateViewRouter, publicViewRouter } from "./routes/view";
+import { adminViewRouter, privateViewRouter, publicViewRouter } from "./routes/view";
 import PendaftaranBerobatRouter from "./routes/pendaftaran-berobat";
 import fastifyMultipart from "@fastify/multipart";
 import informasiRouter from "./routes/informasi";
 import dokterRouter from "./routes/dokter";
 import ulasanRouter from "./routes/ulasan";
+import adminRouter from "./routes/admin";
 
 const envToLogger = {
     development: {
@@ -70,7 +71,12 @@ fastify.register(userRouter, { prefix: "/api/user" });
 fastify.register(informasiRouter, { prefix: "/api/informasi" });
 fastify.register(dokterRouter, { prefix: "/api/dokter" });
 fastify.register(ulasanRouter, { prefix: "/api/ulasan" });
+fastify.register(adminRouter, { prefix: "/api/admin" });
+
 fastify.register(publicViewRouter, { prefix: "/" });
 fastify.register(privateViewRouter, { prefix: "/" });
+fastify.register(adminViewRouter, { prefix: "/" });
 
 fastify.listen({ port: PORT, host: "0.0.0.0" });
+
+export { fastify }; // For testing...
