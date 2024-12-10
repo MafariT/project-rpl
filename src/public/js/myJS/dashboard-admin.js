@@ -73,7 +73,6 @@ async function updateCharts(filter = "") {
     try {
         const response = await fetch(`/api/admin/dashboard-admin?filter=${filter}`);
         const data = await response.json();
-        console.log(data);
 
         document.getElementById("total").textContent = data.total || 0;
         document.getElementById("verified").textContent = data.verified || 0;
@@ -98,11 +97,19 @@ async function updateCharts(filter = "") {
     }
 }
 
+async function getAdminInfo() {
+    const response = await fetch(`/api/pasien/user`);
+    const data = await response.json();
+
+    document.getElementById("admin-name").textContent = data.nama;
+}
+
 document.getElementById("toggle-weekly").addEventListener("click", () => updateCharts("weekly"));
 document.getElementById("toggle-monthly").addEventListener("click", () => updateCharts("monthly"));
 document.getElementById("toggle-total").addEventListener("click", () => updateCharts(""));
 
 updateCharts();
+getAdminInfo();
 
 function toggleLinknyaClass() {
     if (window.innerWidth < 992) {
