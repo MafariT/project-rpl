@@ -1,0 +1,28 @@
+.gambar .labelFoto {
+    background-color: #68A3F3;
+    font-weight: bold;
+    color: white;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gambar .labelFoto:hover {
+    background-color: #0e4ea6;
+    color: white;
+}
+
+.gambar .hapusFoto {
+    background-color: #FF5757;
+    font-weight: bold;
+    color: white;
+    height: 50px;
+    width: 150px;
+}
+
+.gambar .hapusFoto:hover {
+    background-color: #970a0a;
+    color: white;
+}

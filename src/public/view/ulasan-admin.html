@@ -14,20 +14,17 @@
   <!-- My Main CSS -->
   <link rel="stylesheet" href="../css/myCSS/main-admin.css" />
 
-  <!-- My CSS -->
-  <link rel="stylesheet" href="../css/myCSS/pendaftaran-admin.css">
+  <!-- My Main CSS -->
+  <link rel="stylesheet" href="../css/myCSS/ulasan-admin.css">
 
-  <!-- Custom fonts for this template -->
+  <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
 
-  <!-- Custom styles for this template -->
+  <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <!-- My font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,14 +53,14 @@
       <hr class="sidebar-divider my-0 shadow" style="border: 1px solid white; border-radius: 10px;">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="/dashboard-admin">
+      <li class="nav-item active">
+        <a class="nav-link" href="dashboard.html">
           <i class="fa-solid fa-house"></i>
           <span>Dashboard</span></a>
       </li>
 
       <!-- Nav Item - Pendaftaran -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/pendaftaran-admin" style="font-weight: 600;">
           <i class="fa-solid fa-file-invoice"></i>
           <span>Pendaftaran</span></a>
@@ -106,7 +103,7 @@
           <!-- Title -->
           <div class="d-flex align-items-center mt-2">
             <h1 style="font-size: 1.5rem; font-weight: 600; color: black;">
-              Pendaftaran
+              Ulasan
             </h1>
           </div>
 
@@ -135,115 +132,71 @@
           </ul>
         </nav>
 
+
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <div class="d-block d-sm-flex align-items-center justify-content-between">
-            <div class="d-flex">
-              <!-- Terverifikasi -->
-              <span class="badge badge-success d-flex mr-2"
-                style="font-weight: 600; height: auto; width: auto; font-size: 15px;">
-                <p class="mr-2" style="margin-top: 15px;">Terverifikasi</p>
-                <p style="margin-top: 15px;" id="dataVerif">0</p>
-              </span>
-              <!-- Tidak Terverifikasi -->
-              <span class="badge badge-danger d-flex mr-2"
-                style="font-weight: 600; height: auto; width: auto; font-size: 15px;">
-                <p class="mr-2" style="margin-top: 15px;">Tidak Terverifikasi</p>
-                <p style="margin-top: 15px;" id="dataNoVerif">0</p>
-              </span>
-            </div>
-            <div class="mt-3 mt-sm-0">
+          <div class="d-block d-sm-flex justify-content-between">
+            <h1 class="h3 mb-4 mb-sm-0 text-gray-800">Data Ulasan</h1>
+            <div class="">
               <button id="toggle-weekly" class="btn btn-primary">Mingguan</button>
               <button id="toggle-monthly" class="btn btn-success">Bulanan</button>
               <button id="toggle-total" class="btn btn-info">Total</button>
             </div>
           </div>
-          <hr style="border-radius: 10px; border: 1px solid black;">
+          <hr style="border-radius: 10px; border: 1px solid rgb(109, 104, 104);">
+          <!-- Total Ulasan -->
+          <div class="d-flex">
+            <!-- Jumlah Ulasan -->
+            <span class="badge badge-warning d-flex mr-2"
+              style="font-weight: 600; height: 40px; width: auto; font-size: 15px;">
+              <p class="mr-2" style="margin-top: 9px;">Jumlah Ulasan</p>
+              <p style="margin-top: 9px;" id="dataUlasan">0</p>
+            </span>
+          </div>
 
-          <h1 class="h3 mb-2 text-gray-800">Tabel Kunjungan Pasien</h1>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4 mt-3">
-            <div class="card-header py-3" style="background-color: #97C0F7;">
-              <h6 class="m-0 font-weight-bold" style="color: black;">Data Pasien</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Nama</th>
-                      <th>No Tagihan</th>
-                      <th>Tanggal Pengajuan</th>
-                      <th>Poli</th>
-                      <th>Details</th>
-                      <th>Verifikasi</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>081234565634</td>
-                      <td>20/12/2024</td>
-                      <td>UMUM</td>
-                      <td class="d-flex justify-content-center">
-                        <button class="btn btn-detail">Details</button>
-                      </td>
-                      <td class="text-center  align-items-center h-100">
-                        <button class="btn btn-success mx-1" style="color: white; font-weight: 600;"
-                          id="verif">Ya</button>
-                        <button class="btn btn-danger mx-1" style="color: white; font-weight: 600;"
-                          id="noVerif">Tidak</button>
-                      </td>
-                      <td>
-                        <span class="badge badge-success d-none">Verifikasi</span>
-                        <span class="badge badge-danger d-none">Tidak Terverifikasi</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>agus</td>
-                      <td>081234565634</td>
-                      <td>20/12/2024</td>
-                      <td>UMUM</td>
-                      <td class="d-flex justify-content-center">
-                        <button class="btn btn-detail">Details</button>
-                      </td>
-                      <td class="text-center  align-items-center h-100">
-                        <button class="btn btn-success mx-1" style="color: white; font-weight: 600;"
-                          id="verif">Ya</button>
-                        <button class="btn btn-danger mx-1" style="color: white; font-weight: 600;"
-                          id="noVerif">Tidak</button>
-                      </td>
-                      <td>
-                        <span class="badge badge-success d-none">Verifikasi</span>
-                        <span class="badge badge-danger d-none">Tidak Terverifikasi</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>081234565634</td>
-                      <td>20/12/2024</td>
-                      <td>UMUM</td>
-                      <td class="d-flex justify-content-center">
-                        <button class="btn btn-detail">Details</button>
-                      </td>
-                      <td class="text-center  align-items-center h-100">
-                        <button class="btn btn-success mx-1" style="color: white; font-weight: 600;"
-                          id="verif">Ya</button>
-                        <button class="btn btn-danger mx-1" style="color: white; font-weight: 600;"
-                          id="noVerif">Tidak</button>
-                      </td>
-                      <td>
-                        <span class="badge badge-success ">Verifikasi</span>
-                        <span class="badge badge-danger d-none">Tidak Terverifikasi</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+          <!-- Start ulasan -->
+          <div id="tempatUlasan">
+            <!-- Card Ulasan 1 -->
+            <div class="mb-3 p-3 mt-3" style="background-color: white; border-radius: 10px; border: 1px solid #ddd;">
+              <div class="d-flex align-items-center">
+                <img src="../img/asset/testimonial/1.jpg" class="img-thumbnail rounded-circle" alt="author image"
+                  style="width: 100px; height: 100px" />
+                <div class="author ml-3">
+                  <h3 class="mb-1" style="color: black; font-weight: 600; font-size: 20px">Agus Subianto
+                  </h3>
+                  <p class="text-muted m-0">24 November 2024</p>
+                </div>
               </div>
+              <p class="mt-3" style="color: black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil,
+                beatae
+                incidunt. Error, repellat veritatis! Nobis non, accusamus, commodi illo temporibus nemo, cupiditate
+                dolores omnis maxime incidunt quis sed labore necessitatibus?</p>
+              <div class="d-flex align-items-center justify-content-between mt-5">
+                <div class="rating" style="color: gold;">
+                  <span class="star" data-value="1" id="B1"><i class="fas fa-star"></i></span>
+                  <span class="star" data-value="2" id="B2"><i class="fas fa-star"></i></span>
+                  <span class="star" data-value="3" id="B3"><i class="fas fa-star"></i></span>
+                  <span class="star" data-value="4" id="B4"><i class="fas fa-star"></i></span>
+                  <span class="star" data-value="5" id="B5"><i class="fas fa-star"></i></span>
+                </div>
+                <div>
+                  <button class="btn btn-primary btn-balas" id="btnBalas">Balas</button>
+                </div>
+              </div>
+
+              <form action="" method="" class="form-group mt-3" id="isiBalasan" style="display: none;">
+                <label for="response">Balas</label>
+                <textarea class="form-control" id="response" rows="5" placeholder="Masukkan Balsan"></textarea>
+                <div class="mt-3 d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary">Kirim</button>
+                </div>
+              </form>
+
+              <!-- User muncul untuk membalas -->
+              
             </div>
           </div>
+
         </div>
         <!-- /.container-fluid -->
 
@@ -295,7 +248,7 @@
   <!-- My Main JS -->
   <script src="../js/myJS/main-admin.js"></script>
   <!-- My JS -->
-  <script src="../js/myJS/pendaftaran-admin.js"></script>
+  <script src="../js/myJS/ulasan-admin.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->
@@ -309,11 +262,11 @@
   <script src="../js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="../vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../js/demo/datatables-demo.js"></script>
+  <script src="../js/demo/chart-area-demo.js"></script>
+  <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 
