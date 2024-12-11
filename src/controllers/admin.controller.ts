@@ -73,7 +73,7 @@ export async function getDashboard(request: FastifyRequest<{ Querystring: QueryP
                 ageGroups.dewasa++;
             }
         });
-        const badReview = await db.ulasan.count({ rating: 1 });
+        const badReview = await db.ulasan.count();
 
         return reply.send({
             total: records.length,
