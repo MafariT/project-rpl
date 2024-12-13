@@ -338,21 +338,22 @@ const fetchData = async () => {
             pendaftaranData.forEach((pendaftaran) => {
                 const tr = document.createElement("tr");
                 const modalId = `modal-${pendaftaran.idPendaftaran}`;
+                const mulaiBayar = new Date(pendaftaran.created).toLocaleDateString("id-ID", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                });
 
                 tr.innerHTML = `
                         <td>${pendaftaran.nama}</td>
-                        <td>${pendaftaran.noTel}</td>
-                        <td>${pendaftaran.tanggalPengajuan}</td>
-                        <td>${pendaftaran.poli}</td>
-                        <td class="d-flex justify-content-center">
+                        <td>${pendaftaran.noTagihan}</td>
+                        <td>${pendaftaran.jenisPembayaran}</td>
+                        <td>${pendaftaran.totalPembayaran}</td>
+                        <td>${mulaiBayar}}</td>
+                        <td>
                             <div class="d-flex">
                                 <button class="btnLihat btn" data-id="${pendaftaran.idPendaftaran}" data-toggle="modal" data-target="#${modalId}">Lihat</button>
                                 <button class="btnEdit btn" data-id="${pendaftaran.idPendaftaran}" id="${pendaftaran.idPendaftaran}">Edit</button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex">
-                                <button class="btnHapus btn" data-id="${pendaftaran.idPendaftaran}">Hapus</button>
                             </div>
                         </td>
                     `;
@@ -378,6 +379,8 @@ const fetchData = async () => {
                                         <p><strong>Jam:</strong> ${pendaftaran.jam}</p>
                                         <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran}</p>
                                         <p><strong>Total Pembayaran:</strong> ${pendaftaran.totalPembayaran}</p>
+                                        <p><strong>No Tagihan:</strong> ${pendaftaran.noTagihan}</p>
+                                        <p><strong>Mulai Bayar:</strong> ${mulaiBayar}</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal" style="color: white; font-weight: 600">Tutup</button>
