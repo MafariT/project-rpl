@@ -12,22 +12,19 @@
   <title>PuskeSmart</title>
 
   <!-- My Main CSS -->
-  <link rel="stylesheet" href="../css/myCSS/main-admin.css" />
+  <link rel="stylesheet" href="../css/myCSS/main-admin.css">
 
   <!-- My CSS -->
-  <link rel="stylesheet" href="../css/myCSS/pendaftaran-admin.css">
+  <link rel="stylesheet" href="../css/myCSS/detail-informasi-admin.css">
 
-  <!-- Custom fonts for this template -->
+  <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet">
 
-  <!-- Custom styles for this template -->
+  <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <!-- My font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,14 +53,14 @@
       <hr class="sidebar-divider my-0 shadow" style="border: 1px solid white; border-radius: 10px;">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="/dashboard-admin">
+      <li class="nav-item active">
+        <a class="nav-link" href="dashboard.html">
           <i class="fa-solid fa-house"></i>
           <span>Dashboard</span></a>
       </li>
 
       <!-- Nav Item - Pendaftaran -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="/pendaftaran-admin" style="font-weight: 600;">
           <i class="fa-solid fa-file-invoice"></i>
           <span>Pendaftaran</span></a>
@@ -106,7 +103,7 @@
           <!-- Title -->
           <div class="d-flex align-items-center mt-2">
             <h1 style="font-size: 1.5rem; font-weight: 600; color: black;">
-              Pendaftaran
+              Informasi
             </h1>
           </div>
 
@@ -116,7 +113,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Agus Subianto</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="admin-name"></span>
                 <img class="img-profile rounded-circle" src="../img/undraw_profile_2.svg">
               </a>
               <!-- Dropdown - User Information -->
@@ -135,115 +132,42 @@
           </ul>
         </nav>
 
+
         <!-- Begin Page Content -->
-        <div class="container-fluid">
-          <div class="d-block d-sm-flex align-items-center justify-content-between">
-            <div class="d-flex">
-              <!-- Terverifikasi -->
-              <span class="badge badge-success d-flex mr-2"
-                style="font-weight: 600; height: auto; width: auto; font-size: 15px;">
-                <p class="mr-2" style="margin-top: 15px;">Hadir</p>
-                <p style="margin-top: 15px;" id="dataVerif">0</p>
-              </span>
-              <!-- Tidak Terverifikasi -->
-              <span class="badge badge-danger d-flex mr-2"
-                style="font-weight: 600; height: auto; width: auto; font-size: 15px;">
-                <p class="mr-2" style="margin-top: 15px;">Tidak Hadir</p>
-                <p style="margin-top: 15px;" id="dataNoVerif">0</p>
-              </span>
+        <div class="container-fluid d-flex justify-content-center">
+          <div style="width: 900px;">
+            <div class="d-flex justify-content-center mt-3">
+              <img
+                src="https://images.pexels.com/photos/28860862/pexels-photo-28860862/free-photo-of-vibrant-nightlife-on-fremont-street-las-vegas.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="" class="img-fluid responsive-img" height="200" width="auto">
             </div>
-            <div class="mt-3 mt-sm-0">
-              <button id="toggle-weekly" class="btn btn-primary">Mingguan</button>
-              <button id="toggle-monthly" class="btn btn-success">Bulanan</button>
-              <button id="toggle-total" class="btn btn-info">Total</button>
-            </div>
-          </div>
-          <hr style="border-radius: 10px; border: 1px solid black;">
+            <div>
+              <h1 style="font-weight: bold; color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis,
+                mollitia.</h1>
+              <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">2024-12-11</h5>
+              <p style="color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo commodi
+                ut
+                dolorem fuga architecto possimus ipsam perspiciatis illo quos quo quidem, optio aliquid maiores eius
+                ipsa
+                ullam
+                incidunt reiciendis.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum nulla possimus officiis, sint nobis
+                repudiandae
+                harum alias odio repellendus expedita eos tenetur! Laboriosam inventore accusamus est expedita veniam
+                doloribus
+                dolores?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ad velit dolor eligendi earum
+                accusamus,
+                impedit id iure, esse nesciunt ipsum sunt recusandae iusto blanditiis! Delectus officiis aspernatur
+                libero
+                nemo.
+              </p>
 
-          <h1 class="h3 mb-2 text-gray-800">Rekapitulasi Pasien Mingguan</h1>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4 mt-3">
-            <div class="card-header py-3" style="background-color: #97C0F7;">
-              <h6 class="m-0 font-weight-bold" style="color: black;">Data Pasien</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Nama</th>
-                      <th>No Tagihan</th>
-                      <th>Tanggal Pengajuan</th>
-                      <th>Poli</th>
-                      <th>Details</th>
-                      <th>Kehadiran</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>081234565634</td>
-                      <td>20/12/2024</td>
-                      <td>UMUM</td>
-                      <td class="d-flex justify-content-center">
-                        <button class="btn btn-detail">Details</button>
-                      </td>
-                      <td class="text-center  align-items-center h-100">
-                        <!-- tombol Pilih-->
-                        <Button class="btn btn-pilih" data-toggle="modal" data-target="#pilihKehadiran">Pilih</Button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="pilihKehadiran" tabindex="-1" aria-labelledby="pilihKehadiranLabel"
-                          aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="pilihKehadiranLabel"
-                                  style="color: black; font-weight: 600;">Kehadiran Pasien</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form action="">
-                                  <div class="form-group">
-                                    <label for="jenisKehadiran" style="color: black;" class="d-flex">Kehadiran</label>
-                                    <select class="form-control" id="jenisKehadiran" name="jenisKehadiran" required>
-                                      <option value="Tidak Hadir">Tidak Hadir</option>
-                                      <option value="Hadir">Hadir</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="pesan" style="color: black;" class="d-flex">Pesan</label>
-                                    <textarea class="form-control" id="pesan" rows="4"
-                                      placeholder="" name="pesan"
-                                      required></textarea>
-                                  </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="submit" class="btn btn-kirim">Kirim</button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <span class="badge d-none"
-                          style="height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1rem; background-color: #41E199; color: white;">Hadir</span>
-                        <span class="badge"
-                          style="height: 40px; display: flex; align-items: center; justify-content: center; font-size: 1rem; background-color: #FF5757; color: white;">Tidak
-                          Hadir</span>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
+              <a href="info-admin.html" class="btn btn-primary mb-5">← Kembali</a>
             </div>
           </div>
+
         </div>
         <!-- /.container-fluid -->
 
@@ -295,7 +219,7 @@
   <!-- My Main JS -->
   <script src="../js/myJS/main-admin.js"></script>
   <!-- My JS -->
-  <script src="../js/myJS/pendaftaran-admin.js"></script>
+  <script src="../js/myJS/detail-informasi-admin.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->
@@ -309,11 +233,11 @@
   <script src="../js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="../vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../js/demo/datatables-demo.js"></script>
+  <script src="../js/demo/chart-area-demo.js"></script>
+  <script src="../js/demo/chart-pie-demo.js"></script>
 
 </body>
 

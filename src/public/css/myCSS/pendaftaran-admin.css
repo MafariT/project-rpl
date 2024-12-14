@@ -18,3 +18,26 @@ td .btn-detail:hover {
     background-color: #0c4793;
     color: white;
 }
+
+td .btn-pilih {
+    background-color: #41E199;
+    color: white;
+    font-weight: 600;
+}
+
+td .btn-pilih:hover {
+    color: white;
+    background-color: #3e594d;
+    font-weight: 600;
+}
+
+div .btn-kirim {
+    background-color: #41E199;
+    color: white;
+    font-weight: 600;
+}
+
+div .btn-kirim:hover {
+    color: white;
+    background-color: #3e594d;
+}
