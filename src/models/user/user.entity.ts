@@ -7,10 +7,10 @@ export class User {
     @PrimaryKey({ autoincrement: true })
         id!: number;
 
-    @Property({ nullable: false, length: 64})
+    @Property({ nullable: false, length: 64 })
         username!: string;
 
-    @Property({ nullable: false, length: 128})
+    @Property({ nullable: false, length: 128 })
         email!: string;
 
     @Property({ nullable: false, hidden: true, length: 255 })
@@ -25,7 +25,7 @@ export class User {
     @Property({ nullable: true })
         resetTokenExpires?: Date | null;
 
-    @Property({ onCreate: () => new Date(), hidden: true })
+    @Property({ onCreate: () => new Date() })
         created!: Date;
 
     constructor(username: string, email: string, password: string) {

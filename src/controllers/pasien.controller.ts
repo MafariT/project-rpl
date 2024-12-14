@@ -2,7 +2,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { QueryParams } from "../types/query-params";
 import { Pasien } from "../models/pasien/pasien.entity";
 import { initORM } from "../utils/db";
-import z, { ZodError } from "zod";
+import { z, ZodError } from "zod";
 import { EntityExistsError } from "../utils/erros";
 import fs from "fs";
 import path from "path";

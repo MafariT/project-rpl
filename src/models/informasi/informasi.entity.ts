@@ -15,7 +15,7 @@ export class Informasi {
     @Property({ type: "text", nullable: false })
         isi!: string;
 
-    @Property({ onCreate: () => new Date(), hidden: false })
+    @Property({ onCreate: () => new Date() })
         created!: Date;
 
     constructor(foto: string, judul: string, isi: string) {

@@ -5,7 +5,7 @@ const barChart = new Chart(ctx, {
         labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
         datasets: [
             {
-                label: "Data Pengunjung",
+                label: "Data Pendaftar",
                 data: [],
                 backgroundColor: "rgba(0, 123, 255, 0.8)",
                 borderRadius: 10,
@@ -75,8 +75,8 @@ async function updateCharts(filter = "") {
         const data = await response.json();
 
         document.getElementById("total").textContent = data.total || 0;
-        document.getElementById("verified").textContent = data.verified || 0;
-        document.getElementById("not-verified").textContent = data.notVerified || 0;
+        document.getElementById("hadir").textContent = data.present || 0;
+        document.getElementById("tidak-hadir").textContent = data.notPresent || 0;
         document.getElementById("bad-review").textContent = data.badReview || 0;
 
         barChart.data.datasets[0].data = [
@@ -97,41 +97,24 @@ async function updateCharts(filter = "") {
     }
 }
 
-async function getAdminInfo() {
-    const response = await fetch(`/api/pasien/user`);
-    const data = await response.json();
-
-    document.getElementById("admin-name").textContent = data.nama;
+function updateHeading(filterType) {
+    const heading = document.getElementById("filter-heading");
+    heading.textContent = `Rekapitulasi Pasien - ${filterType}`;
 }
 
-document.getElementById("toggle-weekly").addEventListener("click", () => updateCharts("weekly"));
-document.getElementById("toggle-monthly").addEventListener("click", () => updateCharts("monthly"));
-document.getElementById("toggle-total").addEventListener("click", () => updateCharts(""));
+document.getElementById("toggle-weekly").addEventListener("click", () => {
+    updateCharts("weekly");
+    updateHeading("Mingguan");
+});
+document.getElementById("toggle-monthly").addEventListener("click", () => {
+    updateCharts("monthly");
+    updateHeading("Bulanan");
+});
+document.getElementById("toggle-total").addEventListener("click", () => {
+    updateCharts("");
+    updateHeading("Total");
+});
 
-updateCharts();
-getAdminInfo();
-
-function toggleLinknyaClass() {
-    if (window.innerWidth < 992) {
-        const logo = document.getElementById("logo");
-        const logo2 = document.getElementById("logo2");
-
-        logo.classList.add("d-none");
-        logo2.classList.remove("d-none");
-    } else {
-        const logo = document.getElementById("logo");
-        logo.style.width = "130px";
-    }
-}
-
-toggleLinknyaClass();
-window.addEventListener("resize", toggleLinknyaClass);
-
-const togleBtn = document.getElementById("sidebarToggle");
-togleBtn.addEventListener("click", function () {
-    const logo = document.getElementById("logo");
-    const logo2 = document.getElementById("logo2");
-
-    logo.classList.toggle("d-none");
-    logo2.classList.toggle("d-none");
+document.addEventListener("DOMContentLoaded", () => {
+    updateCharts();
 });

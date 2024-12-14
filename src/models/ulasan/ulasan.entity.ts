@@ -13,7 +13,7 @@ export class Ulasan {
     @Property({ nullable: false })
         isi!: string;
 
-    @Property({ onCreate: () => new Date(), hidden: false })
+    @Property({ onCreate: () => new Date() })
         created!: Date;
 
     @ManyToOne(() => Pasien, { nullable: false })

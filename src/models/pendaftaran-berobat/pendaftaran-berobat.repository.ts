@@ -31,6 +31,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         namaDokter: string,
         jam: string,
         jenisPembayaran: string,
+        noTagihan: string,
         // totalPembayaran: string,
         fk: number,
     ): Promise<void> {
@@ -49,6 +50,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
             existingPendaftaranBerobat.namaDokter = namaDokter;
             existingPendaftaranBerobat.jam = jam;
             existingPendaftaranBerobat.jenisPembayaran = jenisPembayaran;
+            existingPendaftaranBerobat.noTagihan = noTagihan;
             // existingPendaftaranBerobat.totalPembayaran = totalPembayaran;
             existingPendaftaranBerobat.fk = fk;
 
@@ -71,6 +73,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         namaDokter: string,
         jam: string,
         jenisPembayaran: string,
+        noTagihan: string,
         // totalPembayaran: string,
         fk: number,
     ): Promise<void> {
@@ -91,6 +94,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
             namaDokter,
             jam,
             jenisPembayaran,
+            noTagihan,
             // totalPembayaran,
             fk,
         );
@@ -98,8 +102,7 @@ export class PendaftaranBerobatRepository extends EntityRepository<PendaftaranBe
         await this.em.flush();
     }
 
-    private async exists(nik: string): Promise<boolean> {
-        const count = await this.qb().where({ nik }).getCount();
-        return count > 0;
+    async flush(): Promise<void> {
+        this.em.flush();
     }
 }

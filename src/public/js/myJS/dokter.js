@@ -1,23 +1,33 @@
+let dataTableInstance = null;
+
 function populateTable(dokterData, poliFilter = "") {
-    const tableBody = document.querySelector("#myTable tbody");
-    tableBody.innerHTML = "";
-
+    const tbody = document.querySelector("tbody");
     const filteredDokterData = poliFilter ? dokterData.filter((dokter) => dokter.poli === poliFilter) : dokterData;
+    const rows = [];
 
+    tbody.innerHTML = "";
     filteredDokterData.forEach((dokter) => {
-        const row = document.createElement("tr");
+        const tr = document.createElement("tr");
 
-        row.innerHTML = `
+        tr.innerHTML = `
           <td>${dokter.nama}</td>
           <td>${dokter.poli}</td>
           <td>${dokter.jamMulai}</td>
           <td>${dokter.jamSelesai}</td>
         `;
-
-        tableBody.appendChild(row);
+        rows.push(tr);
+        tbody.appendChild(tr);
     });
 
-    initDataTable();
+    // If DataTable is initialized, update the data
+    if (dataTableInstance) {
+        dataTableInstance.clear();
+        dataTableInstance.rows.add(rows);
+        dataTableInstance.draw();
+    } else {
+        const table = $("#myTable");
+        dataTableInstance = table.DataTable();
+    }
 }
 
 async function fetchDokterData(poliFilter) {

@@ -37,7 +37,7 @@ FastifyPassport.registerUserDeserializer(async (id: number) => {
 export function configurePassport(fastify: FastifyInstance) {
     fastify.register(require("@fastify/secure-session"), {
         secret: "aowpdjaw0-d120931u2eio12nwdaspoda[siud1[2d102-di1wdasd",
-        cookie: { path: "/", httpOnly: true, secure: false, maxAge: 60 * 60 * 24 }, // 1 Day
+        cookie: { path: "/", httpOnly: true, secure: false, maxAge: 60 * 60 * 1 }, // 1 Hour
     });
 
     fastify.register(FastifyPassport.initialize());

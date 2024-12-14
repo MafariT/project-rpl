@@ -56,11 +56,11 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.get("/view/*", async (request, reply) => {
-    reply.status(403).send({ message: "Forbidden" });
+    return reply.callNotFound();
 });
 
 fastify.get("/health", async (request, reply) => {
-    reply.send({ status: "OK" });
+    return reply.send({ status: "OK" });
 });
 
 // Routes

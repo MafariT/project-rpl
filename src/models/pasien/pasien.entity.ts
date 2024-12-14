@@ -28,7 +28,7 @@ export class Pasien {
     @Property()
         fotoProfil!: string | null;
 
-    @Property({ onCreate: () => new Date(), hidden: false })
+    @Property({ onCreate: () => new Date() })
         created!: Date;
 
     @OneToOne(() => User, { nullable: false })

@@ -2,7 +2,7 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { QueryParams } from "../types/query-params";
 import { PendaftaranBerobat } from "../models/pendaftaran-berobat/pendaftaran-berobat.entity";
 import { initORM } from "../utils/db";
-import z, { ZodError } from "zod";
+import { z, ZodError } from "zod";
 import { EntityExistsError } from "../utils/erros";
 
 const pendaftaranBerobatSchema = z.object({
@@ -29,6 +29,7 @@ export async function getPendaftaranBerobat(
 
     try {
         const pendaftaranBerobat = await db.pendaftaranBerobat.fetch(filter, value);
+        pendaftaranBerobat;
         return reply.status(200).send(pendaftaranBerobat);
     } catch (error) {
         console.error("Error fetching pendaftaranBerobat:", error);
@@ -87,6 +88,7 @@ export async function createPendaftaranBerobat(
     const db = await initORM();
     const userId = request.user?.id;
     const fk: any = await db.pasien.findOne({ fk: userId });
+    let noTagihan: string;
 
     try {
         const payload: any = {};
@@ -115,6 +117,14 @@ export async function createPendaftaranBerobat(
             // totalPembayaran,
         } = payload;
 
+        if (jenisPembayaran !== "Transfer") {
+            noTagihan = "-";
+        } else {
+            noTagihan = `${Date.now()}${Math.floor(Math.random() * 1000)
+                .toString()
+                .padStart(3, "0")}`;
+        }
+
         await db.pendaftaranBerobat.save(
             nik,
             nama,
@@ -128,6 +138,7 @@ export async function createPendaftaranBerobat(
             namaDokter,
             jam,
             jenisPembayaran,
+            noTagihan,
             // totalPembayaran,
             fk,
         );

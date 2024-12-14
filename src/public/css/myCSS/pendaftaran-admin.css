@@ -1,20 +1,30 @@
-#dataTable tbody tr {
-    height: auto;
-    /* Pastikan tinggi baris fleksibel */
-}
-
-#dataTable td {
-    vertical-align: middle;
-    /* Ratakan vertikal */
-}
-
-td .btn-detail {
-    background-color: #97C0F7;
-    color: white;
+.d-flex .btnYa {
+    color: #fff;
     font-weight: 600;
 }
 
-td .btn-detail:hover {
-    background-color: #0c4793;
+.d-flex .btnYa:hover {
+    background-color: #135537;
+    color: white;
+}
+
+.d-flex .btnTidak {
+    color: #fff;
+    font-weight: 600;
+}
+
+.d-flex .btnTidak:hover {
+    background-color: #792323;
+    color: white;
+}
+
+.d-flex .btnLihat {
+    background-color: #97c0f7;
+    font-weight: 600;
+    color: #fff;
+}
+
+.d-flex .btnLihat:hover {
+    background-color: #1c4173;
     color: white;
 }

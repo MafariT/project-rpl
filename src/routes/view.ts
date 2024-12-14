@@ -52,4 +52,7 @@ export async function adminViewRouter(fastify: FastifyInstance) {
     fastify.get("/pendaftaran-admin", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/pendaftaran-admin.html");
     });
+    fastify.get("/ulasan-admin", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/ulasan-admin.html");
+    });
 }

@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { initORM } from "../utils/db";
-import z, { ZodError } from "zod";
+import { z, ZodError } from "zod";
 import { User } from "../models/user/user.entity";
 import { EntityExistsError, EntityNotFound } from "../utils/erros";
 import { QueryParams } from "../types/query-params";

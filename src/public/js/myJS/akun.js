@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutButton.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        showLoading(true);
         Swal.fire({
             title: "Konfirmasi",
             icon: "warning",
@@ -85,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const response = await fetch("/api/auth/logout", {
                         method: "GET",
                     });
+                    showLoading(true);
                     window.location.href = response.url;
                     if (response.ok) {
                         Swal.fire({

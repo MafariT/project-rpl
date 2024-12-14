@@ -3,8 +3,9 @@ import { initORM } from "../utils/db";
 import { z } from "zod";
 import { subWeeks, subMonths, isAfter, differenceInYears, getDay } from "date-fns";
 import { QueryParams } from "../types/query-params";
+import nodemailer from "nodemailer";
 
-export async function getDashboard(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
+export async function getDashboardAdmin(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
     const db = await initORM();
     const validFilter = z.enum(["weekly", "monthly"]);
     const { filter } = request.query;
@@ -20,8 +21,8 @@ export async function getDashboard(request: FastifyRequest<{ Querystring: QueryP
             records = records.filter((record) => isAfter(new Date(record.created), cutoffDate));
         }
 
-        const verifiedCount = records.filter((record) => record.verifikasi === true).length;
-        const notVerifiedCount = records.filter((record) => record.verifikasi === false).length;
+        const presentCount = records.filter((record) => record.isPresent === true).length;
+        const notPresentCount = records.filter((record) => record.isPresent === false).length;
 
         const now = new Date();
         const ageGroups = { anakAnak: 0, remaja: 0, dewasa: 0 };
@@ -77,8 +78,8 @@ export async function getDashboard(request: FastifyRequest<{ Querystring: QueryP
 
         return reply.send({
             total: records.length,
-            verified: verifiedCount,
-            notVerified: notVerifiedCount,
+            present: presentCount,
+            notPresent: notPresentCount,
             anakAnak: ageGroups.anakAnak,
             remaja: ageGroups.remaja,
             dewasa: ageGroups.dewasa,
@@ -87,6 +88,162 @@ export async function getDashboard(request: FastifyRequest<{ Querystring: QueryP
         });
     } catch (error) {
         console.error("Error fetching dashboard data:", error);
+        return reply.status(500).send({ error: "Internal Server Error" });
+    }
+}
+
+export async function getPendaftaranAdmin(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
+    const db = await initORM();
+    const validFilter = z.enum(["weekly", "monthly"]);
+    const { filter } = request.query;
+
+    try {
+        const pendaftaranBerobat = await db.pendaftaranBerobat.findAll();
+        let records = pendaftaranBerobat;
+
+        if (filter && validFilter.safeParse(filter).success) {
+            const now = new Date();
+            const cutoffDate = filter === "weekly" ? subWeeks(now, 1) : subMonths(now, 1);
+
+            records = records.filter((record) => isAfter(new Date(record.created), cutoffDate));
+        }
+
+        const presentCount = records.filter((record) => record.isPresent === true).length;
+        const notPresentCount = records.filter((record) => record.isPresent === false).length;
+
+        return reply.send({
+            pendaftaranBerobat: records,
+            present: presentCount,
+            notPresent: notPresentCount,
+        });
+    } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+        return reply.status(500).send({ error: "Internal Server Error" });
+    }
+}
+
+export async function setVerified(
+    request: FastifyRequest<{ Querystring: QueryParams; Body: { message: string } }>,
+    reply: FastifyReply,
+) {
+    const db = await initORM();
+    const validFilter = z.enum(["yes", "no"]);
+    const { filter, id } = request.query;
+    const { message } = request.body;
+
+    const transporter = nodemailer.createTransport({
+        host: "smtp-relay.sendinblue.com",
+        port: 587,
+        auth: {
+            user: process.env.SENDINBLUE_EMAIL,
+            pass: process.env.SENDINBLUE_API_KEY,
+        },
+    });
+
+    try {
+        // Validate the filter
+        if (!filter || !validFilter.safeParse(filter).success) {
+            return reply.status(400).send({ error: "Invalid filter value. Use 'yes' or 'no'." });
+        }
+        const pendaftaranBerobat = await db.pendaftaranBerobat.findOne({ idPendaftaran: id as any });
+        if (!pendaftaranBerobat) {
+            return reply.status(404).send({ message: `${id} Not found` });
+        }
+        pendaftaranBerobat.isPresent = filter === "yes";
+        await db.pendaftaranBerobat.flush();
+
+        const pendaftaranBerobatRow = await db.pendaftaranBerobat.findOne({ idPendaftaran: id as any });
+        const pasienRow = await db.pasien.findOne({ idPasien: pendaftaranBerobatRow?.fk });
+        const user = await db.user.findOne({ id: pasienRow?.fk });
+
+        await transporter.sendMail({
+            from: `"PuskeSmart" <${process.env.SENDER_EMAIL}>`,
+            to: user?.email,
+            subject: "Kehadiran",
+            html: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+                    <style>
+                        body {
+                            font-family: 'Poppins', sans-serif;
+                            background-image: url('https://yourwebsite.com/img/asset/bg.jpg');
+                            background-size: cover;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            color: #333;
+                            padding: 40px;
+                        }
+                        .container {
+                            background-color: #ffffff;
+                            padding: 30px;
+                            border-radius: 15px;
+                            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                            max-width: 600px;
+                            margin: auto;
+                        }
+                        .logo {
+                            display: block;
+                            margin: 0 auto 20px;
+                            max-width: 200px;
+                        }
+                        h1 {
+                            color: #2c3e50;
+                            text-align: center;
+                            font-size: 2rem;
+                            margin-bottom: 20px;
+                        }
+                        p {
+                            color: #34495e;
+                            font-size: 1rem;
+                            line-height: 1.6;
+                        }
+                        a {
+                            color: #3498db;
+                            text-decoration: none;
+                            font-weight: bold;
+                        }
+                        .footer {
+                            margin-top: 30px;
+                            text-align: center;
+                            color: #7f8c8d;
+                            font-size: 0.9rem;
+                        }
+                    </style>
+                </head>
+
+                <body>
+
+                    <div class="container">
+                        <!-- Logo -->
+                        <img src="cid:logo" alt="Logo" class="logo">
+                        
+                        <!-- Email Content -->
+                        <p>${message}</p>
+                        <div class="footer">
+                            <p>Terima kasih,<br>PuskeSmart Team</p>
+                        </div>
+                    </div>
+
+                </body>
+
+                </html>
+                `,
+            attachments: [
+                {
+                    filename: "logo.png",
+                    path: "src/public/img/asset/logoHer.png",
+                    cid: "logo",
+                },
+            ],
+        });
+
+        return reply.send({ message: "Password reset email sent" });
+
+        return reply.send({ message: `${id} successfully updated` });
+    } catch (error) {
+        console.error("Error updating isPresent:", error);
         return reply.status(500).send({ error: "Internal Server Error" });
     }
 }

@@ -18,7 +18,7 @@ export class Dokter {
     @Property({ nullable: false })
         jamSelesai!: string;
 
-    @Property({ onCreate: () => new Date(), hidden: false })
+    @Property({ onCreate: () => new Date() })
         created!: Date;
 
     constructor(nama: string, poli: string, jamMulai: string, jamSelesai: string) {

@@ -396,7 +396,7 @@ const fetchData = async () => {
             // Initialize DataTable
             initDataTable();
             // addEditButtonListeners();
-            addHapusButtonListeners();
+            // addHapusButtonListeners();
         }
     } catch (error) {
         console.error("Error fetching data:", error);

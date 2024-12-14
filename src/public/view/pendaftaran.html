@@ -91,7 +91,7 @@
               <tr class="text-dark" style="background-color: #C6DCFA;">
                 <th>Nama Lengkap</th>
                 <th>No Tagihan</th>
-                <th>Jenis Pemabayaran</th>
+                <th>Jenis Pembayaran</th>
                 <th>Jumlah</th>
                 <th>Mulai Bayar</th>
                 <th>Details</th>
@@ -214,13 +214,24 @@
                 <input type="time" class="form-control" id="jam" aria-describedby="" name="jam" required>
               </div>
               <!-- Jenis Pembayaran -->
-              <div class="form-group">
-                <label for="jenisPembayaran" style="color: black;">Jenis Pembayaran</label>
-                <select class="form-control" id="jenisPembayaran" name="jenisPembayaran" required>
-                  <option value="dana">Dana</option>
-                  <option value="cash">Cash</option>
-                  <option value="gopay">Gopay</option>
-                </select>
+                <div class="form-group">
+                <label for="form-check-label" class="col-form-label" style="color: black;">Jenis Pembayaran</label>
+                <div class="d-flex">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jenisPembayaran" id="jenisPembayaran"
+                      value="Cash" required>
+                    <label class="form-check-label mr-3" for="jenisPembayaran" style="color: black;">
+                      Cash
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jenisPembayaran" id="jenisPembayaran1"
+                      value="Transfer" required>
+                    <label class="form-check-label" for="jenisPembayaran1" style="color: black;">
+                      Transfer
+                    </label>
+                  </div>
+                </div>
               </div>
               <!-- total Pemabayran -->
               <div class="form-group">

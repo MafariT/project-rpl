@@ -47,12 +47,12 @@ export class PendaftaranBerobat {
         totalPembayaran!: string;
 
     @Property({ nullable: false })
-        noTagihan: string = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
+        noTagihan: string;
 
     @Property({ nullable: false, default: false })
-        verifikasi!: boolean;
+        isPresent!: boolean;
 
-    @Property({ onCreate: () => new Date(), hidden: false })
+    @Property({ onCreate: () => new Date() })
         created!: Date;
 
     @ManyToOne(() => Pasien, { nullable: false })
@@ -72,6 +72,7 @@ export class PendaftaranBerobat {
         namaDokter: string,
         jam: string,
         jenisPembayaran: string,
+        noTagihan: string,
         // totalPembayaran: string,
         fk: number,
     ) {
@@ -88,6 +89,7 @@ export class PendaftaranBerobat {
         this.namaDokter = namaDokter;
         this.jam = jam;
         this.jenisPembayaran = jenisPembayaran;
+        this.noTagihan = noTagihan;
         // this.totalPembayaran = totalPembayaran,
         this.fk = fk;
     }

@@ -137,7 +137,7 @@
 
           <!-- Page Heading -->
           <div class="d-block d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-4 mb-sm-0 text-gray-800">Rekapitulasi Pasien</h1>
+            <h1 class="h3 mb-4 mb-sm-0 text-gray-800" id="filter-heading">Rekapitulasi Pasien</h1>
             <div>
                 <button id="toggle-weekly" class="btn btn-primary">Mingguan</button>
                 <button id="toggle-monthly" class="btn btn-success">Bulanan</button>
@@ -202,7 +202,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Pengunjung</div>
+                        Pendaftar</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800" id="total"></div>
                     </div>
                     <div class="col-auto">
@@ -220,8 +220,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                        Terverifikasi</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="verified"></div>
+                        Hadir</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="hadir"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fa-solid fa-circle-check fa-2x text-success"></i>
@@ -238,8 +238,8 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                        Tidak Terverifikasi</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="not-verified"></div>
+                        Tidak Hadir</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="tidak-hadir"></div>
                     </div>
                     <div class="col-auto">
                       <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
@@ -275,7 +275,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Kunjungan Pasien</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Rekapitulasi Pendaftaran Pasien</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -291,7 +291,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Rata-rata Umur Pengunjung</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Rata-rata Umur Pendaftar</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -364,6 +364,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Admin Main JS -->
+  <script src="../js/myJS/main-admin.js"></script>
   <!-- My JS -->
   <script src="../js/myJS/dashboard-admin.js"></script>
   <!-- Font Awesome -->
