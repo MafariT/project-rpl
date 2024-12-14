@@ -46,6 +46,9 @@ export class PendaftaranBerobat {
     @Property({ nullable: false, default: "Rp. 5.000,00" })
         totalPembayaran!: string;
 
+    @Property({ nullable: false })
+        noTagihan: string = `${Date.now()}${Math.floor(Math.random() * 1000)}`;
+
     @Property({ nullable: false, default: false })
         verifikasi!: boolean;
 
@@ -80,12 +83,12 @@ export class PendaftaranBerobat {
         this.noTel = noTel;
         this.tanggalLahir = tanggalLahir;
         this.tanggalPengajuan = tanggalPengajuan;
-        (this.poli = poli),
-        (this.keluhan = keluhan),
-        (this.namaDokter = namaDokter),
-        (this.jam = jam),
-        (this.jenisPembayaran = jenisPembayaran),
+        this.poli = poli;
+        this.keluhan = keluhan;
+        this.namaDokter = namaDokter;
+        this.jam = jam;
+        this.jenisPembayaran = jenisPembayaran;
         // this.totalPembayaran = totalPembayaran,
-        (this.fk = fk);
+        this.fk = fk;
     }
 }

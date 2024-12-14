@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showCancelButton: true,
             cancelButtonColor: "#e74a3b",
             cancelButtonText: "Tidak",
-            confirmButtonColor: "#68A3F3",
+            confirmButtonColor: "#7afb8d",
             confirmButtonText: "Ya",
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -71,23 +71,50 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         showLoading(true);
-
-        try {
-            const response = await fetch("/api/auth/logout", {
-                method: "GET",
-            });
-
-            window.location.href = response.url;
-        } catch (error) {
-            console.error("Error during logout:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Logout Failed",
-                text: "Terjadi kesalahan saat logout",
-            });
-        } finally {
-            resetButtons();
-        }
+        Swal.fire({
+            title: "Konfirmasi",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonColor: "#e74a3b",
+            cancelButtonText: "Tidak",
+            confirmButtonColor: "#7afb8d",
+            confirmButtonText: "Ya",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch("/api/auth/logout", {
+                        method: "GET",
+                    });
+                    window.location.href = response.url;
+                    if (response.ok) {
+                        Swal.fire({
+                            title: "Success",
+                            icon: "success",
+                            showConfirmButton: false,
+                            timer: 1500,
+                            timerProgressBar: true,
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Gagal Logout",
+                            text: "Terjadi kesalahan saat Logout",
+                        });
+                    }
+                } catch (error) {
+                    console.error("Error during delete:", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Terjadi kesalahan saat Logout",
+                    });
+                } finally {
+                    resetButtons();
+                }
+            } else {
+                resetButtons();
+            }
+        });
     });
 
     // Fetch data

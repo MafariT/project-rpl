@@ -149,96 +149,96 @@ export async function createPendaftaranBerobat(
     }
 }
 
-export async function updatePendaftaranBerobatById(
-    request: FastifyRequest<{ Body: PendaftaranBerobat }>,
-    reply: FastifyReply,
-) {
-    const db = await initORM();
-    const userId = request.user?.id;
-    const fk: any = await db.pasien.findOne({ fk: userId });
-    const { id } = request.params as any;
+// export async function updatePendaftaranBerobatById(
+//     request: FastifyRequest<{ Body: PendaftaranBerobat }>,
+//     reply: FastifyReply,
+// ) {
+//     const db = await initORM();
+//     const userId = request.user?.id;
+//     const fk: any = await db.pasien.findOne({ fk: userId });
+//     const { id } = request.params as any;
 
-    try {
-        const payload: any = {};
-        const parts = request.parts();
+//     try {
+//         const payload: any = {};
+//         const parts = request.parts();
 
-        for await (const part of parts) {
-            if (part.type === "field") {
-                payload[part.fieldname] = part.value;
-            }
-        }
+//         for await (const part of parts) {
+//             if (part.type === "field") {
+//                 payload[part.fieldname] = part.value;
+//             }
+//         }
 
-        pendaftaranBerobatSchema.parse(payload); // Validation
-        const {
-            nik,
-            nama,
-            jenisKelamin,
-            alamat,
-            noTel,
-            tanggalLahir,
-            tanggalPengajuan,
-            poli,
-            keluhan,
-            namaDokter,
-            jam,
-            jenisPembayaran,
-            // totalPembayaran,
-        } = payload;
+//         pendaftaranBerobatSchema.parse(payload); // Validation
+//         const {
+//             nik,
+//             nama,
+//             jenisKelamin,
+//             alamat,
+//             noTel,
+//             tanggalLahir,
+//             tanggalPengajuan,
+//             poli,
+//             keluhan,
+//             namaDokter,
+//             jam,
+//             jenisPembayaran,
+//             // totalPembayaran,
+//         } = payload;
 
-        await db.pendaftaranBerobat.update(
-            id,
-            nik,
-            nama,
-            jenisKelamin,
-            alamat,
-            noTel,
-            tanggalLahir,
-            tanggalPengajuan,
-            poli,
-            keluhan,
-            namaDokter,
-            jam,
-            jenisPembayaran,
-            // totalPembayaran,
-            fk,
-        );
-        return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });
-    } catch (error) {
-        if (error instanceof ZodError) {
-            console.error(error);
-            const errorMessages = error.errors.map((err) => {
-                return `${err.path.join(".")} - ${err.message}`;
-            });
+//         await db.pendaftaranBerobat.update(
+//             id,
+//             nik,
+//             nama,
+//             jenisKelamin,
+//             alamat,
+//             noTel,
+//             tanggalLahir,
+//             tanggalPengajuan,
+//             poli,
+//             keluhan,
+//             namaDokter,
+//             jam,
+//             jenisPembayaran,
+//             // totalPembayaran,
+//             fk,
+//         );
+//         return reply.status(201).send({ message: `pendaftaranBerobat ${nama} successfully created` });
+//     } catch (error) {
+//         if (error instanceof ZodError) {
+//             console.error(error);
+//             const errorMessages = error.errors.map((err) => {
+//                 return `${err.path.join(".")} - ${err.message}`;
+//             });
 
-            return reply.status(400).send({ message: "Validation failed", errors: errorMessages });
-        }
-        if (error instanceof EntityExistsError) {
-            return reply.status(409).send({ message: error.message });
-        }
-        console.error("Error creating pendaftaranBerobat:", error);
-        return reply.status(500).send("Internal Server Error");
-    }
-}
+//             return reply.status(400).send({ message: "Validation failed", errors: errorMessages });
+//         }
+//         if (error instanceof EntityExistsError) {
+//             return reply.status(409).send({ message: error.message });
+//         }
+//         console.error("Error creating pendaftaranBerobat:", error);
+//         return reply.status(500).send("Internal Server Error");
+//     }
+// }
 
-export async function deletePendaftaranBerobatById(request: FastifyRequest, reply: FastifyReply) {
-    const db = await initORM();
-    const userId = request.user?.id;
-    const { id } = request.params as any;
+// export async function deletePendaftaranBerobatById(request: FastifyRequest, reply: FastifyReply) {
+//     const db = await initORM();
+//     const userId = request.user?.id;
+//     const { id } = request.params as any;
 
-    if (!userId) {
-        return reply.status(401).send({ message: "Unauthorized" });
-    }
+//     if (!userId) {
+//         return reply.status(401).send({ message: "Unauthorized" });
+//     }
 
-    try {
-        const pendaftaranBerobat = await db.pendaftaranBerobat.findOne(id);
-        if (!pendaftaranBerobat) {
-            return reply.status(404).send({ message: "pendaftaranBerobat record not found" });
-        }
+//     try {
+//         const pendaftaranBerobat = await db.pendaftaranBerobat.findOne(id);
+//         if (!pendaftaranBerobat) {
+//             return reply.status(404).send({ message: "pendaftaranBerobat record not found" });
+//         }
 
-        await db.pendaftaranBerobat.remove(pendaftaranBerobat);
-        return reply.status(200).send({ message: "Pendaftaran Berobat deleted successfully" });
-    } catch (error) {
-        console.error("Error fetching pendaftaranBerobat:", error);
-        return reply.status(500).send("Internal Server Error");
-    }
-}
+//         await db.pendaftaranBerobat.remove(pendaftaranBerobat);
+//         return reply.status(200).send({ message: "Pendaftaran Berobat deleted successfully" });
+//     } catch (error) {
+//         console.error("Error fetching pendaftaranBerobat:", error);
+//         return reply.status(500).send("Internal Server Error");
+//     }
+// }
