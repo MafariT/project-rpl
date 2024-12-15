@@ -12,11 +12,7 @@ export class InformasiRepository extends EntityRepository<Informasi> {
         }
     }
 
-    async saveOrUpdate(
-        foto: string,
-        judul: string,
-        isi: string
-    ): Promise<void> {
+    async saveOrUpdate(foto: string, judul: string, isi: string): Promise<void> {
         const existingInformasi = await this.findOne({ judul });
 
         if (existingInformasi) {
@@ -31,5 +27,9 @@ export class InformasiRepository extends EntityRepository<Informasi> {
         }
 
         await this.em.flush();
+    }
+
+    async remove(informasi: Informasi) {
+        this.em.removeAndFlush(informasi);
     }
 }

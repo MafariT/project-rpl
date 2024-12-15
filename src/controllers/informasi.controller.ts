@@ -298,21 +298,25 @@ export async function createInformasi(request: FastifyRequest<{ Body: Informasi 
     }
 }
 
-// export async function deleteInformasi(request: FastifyRequest, reply: FastifyReply) {
-//     const db = await initORM();
-//     const { id } = request.params as { id: number };
+export async function deleteInformasiById(request: FastifyRequest, reply: FastifyReply) {
+    const db = await initORM();
+    const { id } = request.params as any;
 
-//     if (isNaN(id)) {
-//         return reply.status(400).send({ message: `Informasi ${id} must be a number` });
-//     }
+    if (isNaN(id)) {
+        return reply.status(400).send({ message: `Informasi ${id} must be a number` });
+    }
 
-//     try {
-//         await db.informasi.delete(id);
-//         return reply.status(201).send({ message: `Informasi ${id} successfully deleted` });
-//     } catch (error) {
-//         if (error instanceof EntityNotFound) {
-//             return reply.status(404).send({ message: error.message });
-//         }
-//         return reply.status(500);
-//     }
-// }
+    try {
+        const informasi = await db.informasi.findOne(id);
+        if (!informasi) {
+            return reply.status(404).send({ message: "informasi record not found" });
+        }
+        await db.informasi.remove(informasi);
+        return reply.status(201).send({ message: `Informasi ${id} successfully deleted` });
+    } catch (error) {
+        if (error instanceof EntityNotFound) {
+            return reply.status(404).send({ message: error.message });
+        }
+        return reply.status(500);
+    }
+}

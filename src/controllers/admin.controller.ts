@@ -239,8 +239,6 @@ export async function setVerified(
             ],
         });
 
-        return reply.send({ message: "Password reset email sent" });
-
         return reply.send({ message: `${id} successfully updated` });
     } catch (error) {
         console.error("Error updating isPresent:", error);
