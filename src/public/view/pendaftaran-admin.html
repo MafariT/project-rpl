@@ -153,9 +153,9 @@
               </span>
             </div>
             <div class="mt-3 mt-sm-0">
-              <button id="toggle-weekly" class="btn btn-primary">Mingguan</button>
-              <button id="toggle-monthly" class="btn btn-success">Bulanan</button>
-              <button id="toggle-total" class="btn btn-info">Total</button>
+              <button id="toggle-weekly" class="btn btn-mingguan">Mingguan</button>
+              <button id="toggle-monthly" class="btn btn-bulanan">Bulanan</button>
+              <button id="toggle-total" class="btn btn-total">Total</button>
             </div>
           </div>
           <hr style="border-radius: 10px; border: 1px solid black;">
@@ -163,7 +163,7 @@
           <h1 class="h3 mb-2 text-gray-800" id="filter-heading">Tabel Kunjungan Pasien</h1>
 
             <!-- Tabel -->
-            <div class="card shadow mb-4 mt-3">
+            <div class="card shadow mt-4" style="margin-bottom: 100px;">
               <div class="card-header py-3" style="background-color: #97C0F7; border-bottom: 1px solid black;">
                 <h6 class="m-0 font-weight-bold" style="color: black; font-size: 1.5rem;">Data Pendaftaran</h6>
               </div>
@@ -171,7 +171,6 @@
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover" id="myTable" width="100%" cellspacing="0"
                     style="border-radius: 10px; overflow: hidden;">
-                    <hr style="background-color: black;">
                     <thead>
                       <tr class="text-dark" style="background-color: #C6DCFA;">
                         <th>Nama Lengkap</th>
@@ -185,7 +184,7 @@
                     </thead>
                     <tbody>
                       <!-- Spinner -->
-                      <tr id="spinner">
+                      <tr id="spinner" >
                         <td colspan="8" class="text-center">
                           <div class="spinner-border" role="status">
                             <span class="sr-only">Loading...</span>

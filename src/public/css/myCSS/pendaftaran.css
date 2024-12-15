@@ -20,15 +20,15 @@
     color: white;
 }
 
-.d-flex .btnEdit {
-    background-color: #6EE8B1;
+.d-flex .btnLihat {
+    background-color: #97C0F7;
     margin-left: 10px;
     font-weight: 600;
-    color: #5A5C68;
+    color: #fdfdfd;
 }
 
-.d-flex .btnEdit:hover {
-    background-color: #277351;
+.d-flex .btnLihat:hover {
+    background-color: #2c4362;
     color: white;
 }
 

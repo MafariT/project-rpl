@@ -237,24 +237,26 @@ async function fetchData(filter = "") {
                 });
 
                 tr.innerHTML = `
-                    <td>${pendaftaran.nama}</td>
-                    <td>${pendaftaran.noTagihan}</td>
-                    <td>${tanggalPengajuan}</td>
-                    <td>${pendaftaran.poli}</td>
+                    <td style="color: black;">${pendaftaran.nama}</td>
+                    <td style="color: black;">${pendaftaran.noTagihan}</td>
+                    <td style="color: black;">${tanggalPengajuan}</td>
+                    <td style="color: black;">${pendaftaran.poli}</td>
                     <td>
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-center">
                             <button class="btnLihat btn" data-id="${pendaftaran.idPendaftaran}" data-toggle="modal" data-target="#${modalId}">Lihat</button>
                         </div>
                     </td>
                     <td>
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-center">
                             <button class="btnPilih btn btn-success d-flex mr-2" data-id="${pendaftaran.idPendaftaran}" data-toggle="modal">Pilih</button>
                         </div>
                     </td>
                     <td>
-                        <span class="badge ${pendaftaran.isPresent ? "badge-success" : "badge-danger"}">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <span class="badge ${pendaftaran.isPresent ? "badge-success" : "badge-danger"} mt-2" style="height: auto; font-size: 1rem;">
                             ${pendaftaran.isPresent ? "Hadir" : "Tidak Hadir"}
-                        </span>
+                            </span>
+                        </div>
                     </td>
                 `;
 

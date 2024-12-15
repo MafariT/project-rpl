@@ -349,9 +349,9 @@ const fetchData = async () => {
                         <td>${pendaftaran.noTagihan}</td>
                         <td>${pendaftaran.jenisPembayaran}</td>
                         <td>${pendaftaran.totalPembayaran}</td>
-                        <td>${mulaiBayar}</td>
+                        <td >${mulaiBayar}</td>
                         <td>
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-center">
                                 <button class="btnLihat btn" data-id="${pendaftaran.idPendaftaran}" data-toggle="modal" data-target="#${modalId}">Lihat</button>
                                 <!-- <button class="btnEdit btn" data-id="${pendaftaran.idPendaftaran}" id="${pendaftaran.idPendaftaran}">Edit</button> -->
                             </div>

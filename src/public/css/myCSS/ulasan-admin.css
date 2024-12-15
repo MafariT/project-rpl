@@ -37,3 +37,36 @@
     transform: scaleX(1);
 }
 
+div .btn-mingguan {
+    background-color: #5672D8;
+    color: white;
+    font-weight: 600;
+}
+
+div .btn-mingguan:hover {
+    background-color: #0f2883;
+    color: white;
+}
+
+div .btn-bulanan {
+    background-color: #5EC58F;
+    color: white;
+    font-weight: 600;
+}
+
+div .btn-bulanan:hover {
+    background-color: #207a4c;
+    color: white;
+}
+
+div .btn-total {
+    background-color: #68A3F3;
+    color: white;
+    font-weight: 600;
+}
+
+div .btn-total:hover {
+    background-color: #1d61c1;
+    color: white;
+}
+
