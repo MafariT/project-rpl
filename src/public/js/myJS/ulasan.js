@@ -20,22 +20,55 @@ document.addEventListener("DOMContentLoaded", async function () {
                 spinner.remove();
                 container.innerHTML = "";
 
-                ulasanData.forEach(({ rating, created, isi, pasien }) => {
+                ulasanData.forEach(({ rating, created, isi, pasien, balasan, balasanCreated }) => {
+                    // Create the main review card
+                    const reviewCard = document.createElement("div");
+                    reviewCard.classList.add("mb-3", "p-3");
+                    reviewCard.style.backgroundColor = "white";
+                    reviewCard.style.borderRadius = "10px";
+                    reviewCard.style.border = "1px solid #ddd";
+
+                    // Generate star ratings dynamically
                     const stars = Array(rating).fill('<i class="fas fa-star text-warning"></i>').join("");
-                    const ulasanHTML = `
-                        <div class="mb-3 p-3" style="background-color: white; border-radius: 10px; border: 1px solid #ddd;">
+
+                    // Set the main review card content
+                    reviewCard.innerHTML = `
+                        <div class="d-flex align-items-center">
+                            <img src="/uploads/${pasien?.fotoProfil || "default-profile.png"}" class="img-thumbnail rounded-circle" alt="author image" style="width: 75px; height: 75px" />
+                            <div class="author ml-3">
+                                <h3 class="mb-1" style="color: black; font-weight: 600; font-size: 20px">${pasien?.nama || "Anonymous"}</h3>
+                                <p class="text-muted m-0">${new Date(created).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</p>
+                            </div>
+                        </div>
+                        <p class="mt-3" style="color: black">${isi}</p>
+                        <div class="rating">${stars}</div>
+                    `;
+
+                    // Append the main review card to the container
+                    container.appendChild(reviewCard);
+
+                    // If a response exists, append the balasanDiv
+                    if (balasan) {
+                        const balasanDiv = document.createElement("div");
+                        balasanDiv.style.marginTop = "10px";
+                        balasanDiv.style.paddingLeft = "30px";
+                        balasanDiv.style.borderLeft = "3px solid #ddd";
+                        balasanDiv.style.paddingTop = "10px";
+
+                        balasanDiv.innerHTML = `
                             <div class="d-flex align-items-center">
-                                <img src="/uploads/${pasien?.fotoProfil || "default-profile.png"}" class="img-thumbnail rounded-circle" alt="author image" style="width: 100px; height: 100px" />
+                                <img src="../img/asset/logo.png" class="img-thumbnail rounded-circle" alt="author image" style="width: 75px; height: 75px" />
                                 <div class="author ml-3">
-                                    <h3 class="mb-1" style="color: black; font-weight: 600; font-size: 20px">${pasien?.nama || "Anonymous"}</h3>
-                                    <p class="text-muted m-0">${new Date(created).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</p>
+                                    <h3 class="mb-1" style="color: #007bff; font-weight: 600; font-size: 18px">Admin Puskesmart</h3>
+                                    <p class="text-muted m-0">${new Date(balasanCreated).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</p>
                                 </div>
                             </div>
-                            <p class="mt-3" style="color: black">${isi}</p>
-                            <div class="rating">${stars}</div>
-                        </div>
-                    `;
-                    container.innerHTML += ulasanHTML;
+                            <p class="mt-3" style="color: black;">${balasan}</p>
+                        `;
+
+                        // Append the balasanDiv to the review card
+                        reviewCard.appendChild(balasanDiv);
+                    }
                 });
             }
         } catch (error) {

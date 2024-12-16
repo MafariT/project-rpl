@@ -5,11 +5,12 @@ import { Dokter } from "../models/dokter/dokter.entity";
 import { PendaftaranBerobat } from "../models/pendaftaran-berobat/pendaftaran-berobat.entity";
 import { Informasi } from "../models/informasi/informasi.entity";
 import { Ulasan } from "../models/ulasan/ulasan.entity";
+import { Admin } from "../models/admin/admin.entity";
 
 dotenv.config();
 
 export default {
-    entities: [Pasien, User, Dokter, PendaftaranBerobat, Informasi, Ulasan],
+    entities: [Pasien, Admin, User, Dokter, PendaftaranBerobat, Informasi, Ulasan],
     dbName: process.env.DB_NAME,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

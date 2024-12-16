@@ -12,8 +12,8 @@ export class InformasiRepository extends EntityRepository<Informasi> {
         }
     }
 
-    async saveOrUpdate(foto: string, judul: string, isi: string): Promise<void> {
-        const existingInformasi = await this.findOne({ judul });
+    async update(idInformasi: number, foto: string | null, judul: string, isi: string): Promise<void> {
+        const existingInformasi = await this.findOne({ idInformasi });
 
         if (existingInformasi) {
             existingInformasi.foto = foto;
@@ -21,11 +21,13 @@ export class InformasiRepository extends EntityRepository<Informasi> {
             existingInformasi.isi = isi;
 
             this.em.persist(existingInformasi);
-        } else {
-            const newInformasi = new Informasi(foto, judul, isi);
-            this.create(newInformasi);
         }
+        await this.em.flush();
+    }
 
+    async save(foto: string | null, judul: string, isi: string): Promise<void> {
+        const newInformasi = new Informasi(foto, judul, isi);
+        this.create(newInformasi);
         await this.em.flush();
     }
 

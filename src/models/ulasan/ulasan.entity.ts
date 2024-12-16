@@ -13,15 +13,22 @@ export class Ulasan {
     @Property({ nullable: false })
         isi!: string;
 
+    @Property({ nullable: true })
+        balasan!: string;
+
+    @Property({ nullable: true, onUpdate: () => new Date() })
+        balasanCreated!: string;
+
     @Property({ onCreate: () => new Date() })
         created!: Date;
 
     @ManyToOne(() => Pasien, { nullable: false })
         fk!: number;
 
-    constructor(rating: number, isi: string, fk: number) {
+    constructor(rating: number, isi: string, balasan: string, fk: number) {
         this.rating = rating;
         this.isi = isi;
+        this.balasan = balasan;
         this.fk = fk;
     }
 }

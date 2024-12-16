@@ -12,10 +12,10 @@
   <title>PuskeSmart</title>
 
   <!-- My Main CSS -->
-  <link rel="stylesheet" href="../css/myCSS/main-admin.css">
+  <link rel="stylesheet" href="../css/myCSS/main-admin.css" />
 
-  <!-- My CSS -->
-  <link rel="stylesheet" href="../css/myCSS/detail-informasi-admin.css">
+  <!-- My Main CSS -->
+  <link rel="stylesheet" href="../css/myCSS/akun-admin.css">
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -54,7 +54,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="dashboard.html">
+        <a class="nav-link" href="/dashboard-admin">
           <i class="fa-solid fa-house"></i>
           <span>Dashboard</span></a>
       </li>
@@ -103,73 +103,110 @@
           <!-- Title -->
           <div class="d-flex align-items-center mt-2">
             <h1 style="font-size: 1.5rem; font-weight: 600; color: black;">
-              Informasi
+              Akun Admin
             </h1>
           </div>
 
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="admin-name"></span>
-                <img class="img-profile rounded-circle" src="../img/undraw_profile_2.svg">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
-          </ul>
         </nav>
 
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid d-flex justify-content-center">
-          <div style="width: 900px;">
-            <div class="d-flex justify-content-center mt-3">
-              <img
-                src="https://images.pexels.com/photos/28860862/pexels-photo-28860862/free-photo-of-vibrant-nightlife-on-fremont-street-las-vegas.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt="" class="img-fluid responsive-img" height="200" width="auto">
+        <!-- Section Profile -->
+        <form class="container-lg mt-4 mb-5">
+          <div class="p-5" style="background-color: #c6dcfa; border-radius: 20px">
+            <div class="row align-items-center">
+              <div class="col-md-3">
+                <img src="../img/asset/kosong.jpg" class="img-thumbnail rounded-circle mx-auto d-block mb-3"
+                  alt="Foto Profil" style="width: 180px; height: 180px" id="profile-pic" />
+              </div>
+              <div class="col-md-9 d-flex">
+                <div class="d-block d-sm-flex">
+                  <div class="gambar mr-sm-3">
+                    <label class="labelFoto btn" for="foto">Perbarui Foto</label>
+                    <input class="btn d-none" type="file" accept="image/*" id="foto" name="fotoProfil" />
+                  </div>
+                  <div class="gambar">
+                    <button class="hapusFoto btn" id="hapus-foto">Hapus Foto</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h1 style="font-weight: bold; color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Corporis,
-                mollitia.</h1>
-              <h5 style="margin-bottom: 10px; font-weight: 600; color: black;">2024-12-11</h5>
-              <p style="color: black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo commodi
-                ut
-                dolorem fuga architecto possimus ipsam perspiciatis illo quos quo quidem, optio aliquid maiores eius
-                ipsa
-                ullam
-                incidunt reiciendis.
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum nulla possimus officiis, sint nobis
-                repudiandae
-                harum alias odio repellendus expedita eos tenetur! Laboriosam inventore accusamus est expedita veniam
-                doloribus
-                dolores?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid ad velit dolor eligendi earum
-                accusamus,
-                impedit id iure, esse nesciunt ipsum sunt recusandae iusto blanditiis! Delectus officiis aspernatur
-                libero
-                nemo.
-              </p>
+            <!-- rows input -->
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <!-- NIP -->
+                <div class="form-group">
+                  <label for="nip" style="font-weight: bold; color: black">NIP</label>
+                  <input type="type" class="form-control" id="nip" style="border: 1px solid black" name="nip"
+                    minlength="16" maxlength="16" required />
+                  <small id="nip" class="form-text text-muted">Pastikan Anda Memasukan NIP Yang Benar.</small>
+                </div>
+                <!-- nama Lengkap -->
+                <div class="form-group">
+                  <label for="nama" style="font-weight: bold; color: black">Nama Lengkap</label>
+                  <input type="text" class="form-control" id="nama" style="border: 1px solid black" name="nama"
+                    minlength="1" maxlength="128" required />
+                </div>
+                <!-- Jenis Kelamin -->
+                <div class="form-group">
+                  <label for="form-check-label" class="col-form-label" style="color: black;">Jenis Kelamin</label>
+                  <div class="d-flex">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="jenisKelamin" id="jenisKelamin0"
+                        value="laki-laki" required>
+                      <label class="form-check-label mr-3" for="jenisKelamin0" style="color: black;">
+                        Laki-Laki
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="jenisKelamin" id="jenisKelamin1"
+                        value="perempuan" required>
+                      <label class="form-check-label" for="jenisKelamin1" style="color: black;">
+                        Perempuan
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- Username -->
+                <div class="form-group">
+                  <label for="userName" style="font-weight: bold; color: black">Username</label>
+                  <input type="text" class="form-control" id="username" style="border: 1px solid black" name="username"
+                    disabled="true" />
+                </div>
+                <!-- email -->
+                <div class="form-group">
+                  <label for="email" style="font-weight: bold; color: black">Email</label>
+                  <input type="email" class="form-control" id="email" style="border: 1px solid black" name="email"
+                    disabled="true" />
+                </div>
+                <!-- Alamat -->
+                <div class="form-group">
+                  <label for="alamat" style="font-weight: bold; color: black">Alamat</label>
+                  <input type="text" class="form-control" id="alamat" style="border: 1px solid black" name="alamat"
+                    minlength="1" maxlength="128" required />
+                </div>
+              </div>
 
-              <a href="info-admin.html" class="btn btn-primary mb-5">← Kembali</a>
+              <div class="col-md-6">
+                <!-- No Telp -->
+                <div class="form-group">
+                  <label for="noTel" style="font-weight: bold; color: black">No Telp</label>
+                  <input type="tel" class="form-control" id="noTel" style="border: 1px solid black; margin-bottom: 39px"
+                    name="noTel" minlength="11" maxlength="16" required />
+                </div>
+                <!-- Tanggal Lahir -->
+                <div class="form-group">
+                  <label for="tanggalLahir" style="font-weight: bold; color: black">Tanggal Lahir</label>
+                  <input type="date" class="form-control" id="tanggalLahir" style="border: 1px solid black"
+                    name="tanggalLahir" required />
+                </div>
+                <button type="submit" class="btn btn-success float-right" style="margin-top: 250px; font-weight: 600"
+                  id="update-btn">
+                  Update Profil
+                </button>
+              </div>
             </div>
           </div>
-
-        </div>
-        <!-- /.container-fluid -->
+        </form>
+        <!-- End Section -->
 
       </div>
       <!-- End of Main Content -->
@@ -219,7 +256,7 @@
   <!-- My Main JS -->
   <script src="../js/myJS/main-admin.js"></script>
   <!-- My JS -->
-  <script src="../js/myJS/detail-informasi-admin.js"></script>
+  <script src="../js/myJS/akun-admin.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->

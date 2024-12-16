@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { isAdmin, isAuthenticated } from "../utils/auth";
-import { getInformasiPage } from "../controllers/informasi.controller";
+import { getInformasiPage, getInformasiPageAdmin } from "../controllers/informasi.controller";
 import { resetPasswordPage } from "../controllers/auth.controller";
 
 export async function publicViewRouter(fastify: FastifyInstance) {
@@ -46,8 +46,8 @@ export async function adminViewRouter(fastify: FastifyInstance) {
     fastify.get("/dashboard-admin", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/dashboard-admin.html");
     });
-    fastify.get("/info-admin", (request: FastifyRequest, reply: FastifyReply) => {
-        reply.sendFile("view/info-admin.html");
+    fastify.get("/informasi-admin", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/informasi-admin.html");
     });
     fastify.get("/pendaftaran-admin", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/pendaftaran-admin.html");
@@ -55,4 +55,8 @@ export async function adminViewRouter(fastify: FastifyInstance) {
     fastify.get("/ulasan-admin", (request: FastifyRequest, reply: FastifyReply) => {
         reply.sendFile("view/ulasan-admin.html");
     });
+    fastify.get("/akun-admin", (request: FastifyRequest, reply: FastifyReply) => {
+        reply.sendFile("view/akun-admin.html");
+    });
+    fastify.get("/informasi-admin/:idInformasi", getInformasiPageAdmin);
 }

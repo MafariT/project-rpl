@@ -7,7 +7,7 @@ export class Informasi {
         idInformasi!: number;
 
     @Property({ nullable: false })
-        foto!: string;
+        foto!: string | null;
 
     @Property({ nullable: false })
         judul!: string;
@@ -18,7 +18,7 @@ export class Informasi {
     @Property({ onCreate: () => new Date() })
         created!: Date;
 
-    constructor(foto: string, judul: string, isi: string) {
+    constructor(foto: string | null, judul: string, isi: string) {
         this.foto = foto;
         this.judul = judul;
         this.isi = isi;

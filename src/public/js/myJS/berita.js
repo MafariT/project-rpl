@@ -86,7 +86,7 @@ const fetchData = async () => {
                 const cardHTML = `
             <!-- Card 1 -->
             <div class="kartuInforma mb-4 p-3 card-container">
-              <img src="${item.foto}" class="card-img-top custom-img" alt="" width="300" height="190">
+              <img src="/uploads/informasi/${item.foto}" class="card-img-top custom-img" alt="" width="300" height="190">
               <div class="card-content">
                 <!-- Judul dengan text truncation -->
                 <h5 class="mt-3 mb-3 card-title" style="color: black; font-weight: bold;">${item.judul}</h5>

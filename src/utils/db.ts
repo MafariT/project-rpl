@@ -2,12 +2,14 @@ import { MikroORM, Options, EntityManager } from "@mikro-orm/mysql";
 import config from "./mikro-orm.config";
 import { User } from "../models/user/user.entity";
 import { Pasien } from "../models/pasien/pasien.entity";
+import { Admin } from "../models/admin/admin.entity";
 import { PendaftaranBerobat } from "../models/pendaftaran-berobat/pendaftaran-berobat.entity";
 import { Informasi } from "../models/informasi/informasi.entity";
 import { Dokter } from "../models/dokter/dokter.entity";
 import { Ulasan } from "../models/ulasan/ulasan.entity";
 import { UserRepository } from "../models/user/user.repository";
 import { PasienRepository } from "../models/pasien/pasien.repository";
+import { AdminRepository } from "../models/admin/admin.repository";
 import { PendaftaranBerobatRepository } from "../models/pendaftaran-berobat/pendaftaran-berobat.repository";
 import { InformasiRepository } from "../models/informasi/informasi.repository";
 import { DokterRepository } from "../models/dokter/dokter.repository";
@@ -23,6 +25,7 @@ export interface Services {
     orm: MikroORM;
     em: EntityManager;
     pasien: PasienRepository;
+    admin: AdminRepository;
     user: UserRepository;
     pendaftaranBerobat: PendaftaranBerobatRepository;
     informasi: InformasiRepository;
@@ -49,6 +52,7 @@ export async function initORM(options?: Options): Promise<Services> {
         orm,
         em: orm.em,
         pasien: orm.em.fork().getRepository(Pasien),
+        admin: orm.em.fork().getRepository(Admin),
         user: orm.em.fork().getRepository(User),
         pendaftaranBerobat: orm.em.fork().getRepository(PendaftaranBerobat),
         informasi: orm.em.fork().getRepository(Informasi),

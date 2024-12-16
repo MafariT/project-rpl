@@ -13,9 +13,8 @@
 
   <!-- My Main CSS -->
   <link rel="stylesheet" href="../css/myCSS/main-admin.css" />
-
-  <!-- My Main CSS -->
-  <link rel="stylesheet" href="../css/myCSS/profile-admin.css">
+  <!-- My CSS -->
+  <link rel="stylesheet" href="../css/myCSS/informasi-admin.css">
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -53,8 +52,8 @@
       <hr class="sidebar-divider my-0 shadow" style="border: 1px solid white; border-radius: 10px;">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="dashboard.html">
+      <li class="nav-item">
+        <a class="nav-link" href="/dashboard-admin">
           <i class="fa-solid fa-house"></i>
           <span>Dashboard</span></a>
       </li>
@@ -67,8 +66,8 @@
       </li>
 
       <!-- Nav Item - Informasi -->
-      <li class="nav-item">
-        <a class="nav-link" href="/info-admin" style="font-weight: 600;">
+      <li class="nav-item active">
+        <a class="nav-link" href="/informasi-admin" style="font-weight: 600;">
           <i class="fa-solid fa-circle-info"></i>
           <span>Informasi</span></a>
       </li>
@@ -103,110 +102,87 @@
           <!-- Title -->
           <div class="d-flex align-items-center mt-2">
             <h1 style="font-size: 1.5rem; font-weight: 600; color: black;">
-              Akun Admin
+              Informasi
             </h1>
           </div>
 
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="admin-name"></span>
+                <img class="img-profile rounded-circle" src="../img/undraw_profile_2.svg" id="profile-pic">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/akun-admin">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+          </ul>
         </nav>
 
-        <!-- Section Profile -->
-        <form class="container-lg mt-4 mb-5">
-          <div class="p-5" style="background-color: #c6dcfa; border-radius: 20px">
-            <div class="row align-items-center">
-              <div class="col-md-3">
-                <img src="../img/asset/kosong.jpg" class="img-thumbnail rounded-circle mx-auto d-block mb-3"
-                  alt="Foto Profil" style="width: 180px; height: 180px" id="profile-pic" />
-              </div>
-              <div class="col-md-9 d-flex">
-                <div class="d-block d-sm-flex">
-                  <div class="gambar mr-sm-3">
-                    <label class="labelFoto btn" for="foto">Perbarui Foto</label>
-                    <input class="btn d-none" type="file" accept="image/*" id="foto" name="fotoProfil" />
-                  </div>
-                  <div class="gambar">
-                    <button class="hapusFoto btn" id="hapus-foto">Hapus Foto</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- rows input -->
-            <div class="row mt-3">
-              <div class="col-md-6">
-                <!-- NIP -->
-                <div class="form-group">
-                  <label for="nip" style="font-weight: bold; color: black">NIP</label>
-                  <input type="type" class="form-control" id="nip" style="border: 1px solid black" name="nip"
-                    minlength="16" maxlength="16" required />
-                  <small id="nip" class="form-text text-muted">Pastikan Anda Memasukan NIP Yang Benar.</small>
-                </div>
-                <!-- nama Lengkap -->
-                <div class="form-group">
-                  <label for="nama" style="font-weight: bold; color: black">Nama Lengkap</label>
-                  <input type="text" class="form-control" id="nama" style="border: 1px solid black" name="nama"
-                    minlength="1" maxlength="128" required />
-                </div>
-                <!-- Jenis Kelamin -->
-                <div class="form-group">
-                  <label for="form-check-label" class="col-form-label" style="color: black;">Jenis Kelamin</label>
-                  <div class="d-flex">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="jenisKelamin" id="jenisKelamin0"
-                        value="laki-laki" required>
-                      <label class="form-check-label mr-3" for="jenisKelamin0" style="color: black;">
-                        Laki-Laki
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="jenisKelamin" id="jenisKelamin1"
-                        value="perempuan" required>
-                      <label class="form-check-label" for="jenisKelamin1" style="color: black;">
-                        Perempuan
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <!-- Username -->
-                <div class="form-group">
-                  <label for="userName" style="font-weight: bold; color: black">Username</label>
-                  <input type="text" class="form-control" id="username" style="border: 1px solid black" name="username"
-                    disabled="true" />
-                </div>
-                <!-- email -->
-                <div class="form-group">
-                  <label for="email" style="font-weight: bold; color: black">Email</label>
-                  <input type="email" class="form-control" id="email" style="border: 1px solid black" name="email"
-                    disabled="true" />
-                </div>
-                <!-- Alamat -->
-                <div class="form-group">
-                  <label for="alamat" style="font-weight: bold; color: black">Alamat</label>
-                  <input type="text" class="form-control" id="alamat" style="border: 1px solid black" name="alamat"
-                    minlength="1" maxlength="128" required />
-                </div>
-              </div>
 
-              <div class="col-md-6">
-                <!-- No Telp -->
-                <div class="form-group">
-                  <label for="noTel" style="font-weight: bold; color: black">No Telp</label>
-                  <input type="tel" class="form-control" id="noTel" style="border: 1px solid black; margin-bottom: 39px"
-                    name="noTel" minlength="11" maxlength="16" required />
-                </div>
-                <!-- Tanggal Lahir -->
-                <div class="form-group">
-                  <label for="tanggalLahir" style="font-weight: bold; color: black">Tanggal Lahir</label>
-                  <input type="date" class="form-control" id="tanggalLahir" style="border: 1px solid black"
-                    name="tanggalLahir" required />
-                </div>
-                <button type="submit" class="btn btn-success float-right" style="margin-top: 250px; font-weight: 600"
-                  id="update-btn">
-                  Update Profil
+        <!-- Add Button -->
+        <div class="container-fluid mt-3 d-flex justify-content-end">
+          <button class="btn btn-sm btn-success shadow-sm" style="font-weight: 600; color: white;"
+            data-toggle="modal" data-target="#tambahinfo">
+            <i class="fas fa-plus fa-sm text-white-50" style="font-weight: 600; color: white;"></i> Tambah Informasi
+          </button>
+        </div>
+        <div class="container-fluid mt-3">
+          <hr style="border: 1px solid; border-radius: 10px;">
+        </div>
+        
+        
+        <!-- informasi part -->
+        <div class="container-fluid mt-3" id="tempatInformasi">
+        </div>
+
+
+        <!-- Modal isi -->
+        <div class="modal fade" id="tambahinfo" tabindex="-1" aria-labelledby="tambahinfoLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="tambahinfoLabel" style="font-weight: 600;">Tambah Data Informasi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
                 </button>
+              </div>
+              <div class="modal-body">
+                <!-- Form -->
+                <form id="submit-form">
+                  <div class="form-group">
+                    <label for="foto">File Gambar</label>
+                    <input type="file" class="" id="foto" name="foto">
+                  </div>
+                  <div class="form-group">
+                    <label for="judul">Judul</label>
+                    <input type="text" class="form-control" id="judul" name="judul">
+                  </div>
+                  <div class="form-group">
+                    <label for="isi">Isi</label>
+                    <textarea class="form-control" id="isi" name="isi"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" style="font-weight: 600;">Submit</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-        </form>
-        <!-- End Section -->
+        </div>
+        <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
@@ -245,7 +221,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <button class="btn btn-primary" type="button" id="logout">Logout</button>
         </div>
       </div>
     </div>
@@ -256,7 +232,7 @@
   <!-- My Main JS -->
   <script src="../js/myJS/main-admin.js"></script>
   <!-- My JS -->
-  <script src="../js/myJS/profile-akun.js"></script>
+  <script src="../js/myJS/informasi-admin.js"></script>
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3659f450a4.js" crossorigin="anonymous"></script>
   <!-- Bootstrap core JavaScript-->

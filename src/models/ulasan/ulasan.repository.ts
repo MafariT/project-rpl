@@ -12,8 +12,22 @@ export class UlasanRepository extends EntityRepository<Ulasan> {
         }
     }
 
-    async save(rating: number, isi: string, fk: number): Promise<void> {
-        const newUlasan = new Ulasan(rating, isi, fk);
+    async update(idUlasan: number, rating: number, isi: string, balasan: string, fk: number): Promise<void> {
+        const existingUlasan = await this.findOne({ idUlasan });
+
+        if (existingUlasan) {
+            existingUlasan.rating = rating;
+            existingUlasan.isi = isi;
+            existingUlasan.balasan = balasan;
+            existingUlasan.fk = fk;
+
+            this.em.persist(existingUlasan);
+        }
+        await this.em.flush();
+    }
+
+    async save(rating: number, isi: string, balasan: string, fk: number): Promise<void> {
+        const newUlasan = new Ulasan(rating, isi, balasan, fk);
         this.create(newUlasan);
         await this.em.flush();
     }
