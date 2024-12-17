@@ -12,14 +12,13 @@ export class UlasanRepository extends EntityRepository<Ulasan> {
         }
     }
 
-    async update(idUlasan: number, rating: number, isi: string, balasan: string, fk: number): Promise<void> {
+    async update(idUlasan: number, rating: number, isi: string, balasan: string): Promise<void> {
         const existingUlasan = await this.findOne({ idUlasan });
 
         if (existingUlasan) {
             existingUlasan.rating = rating;
             existingUlasan.isi = isi;
             existingUlasan.balasan = balasan;
-            existingUlasan.fk = fk;
 
             this.em.persist(existingUlasan);
         }

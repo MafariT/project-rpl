@@ -1,126 +1,168 @@
-import Fastify from "fastify";
 import { getUser, getUserById, createUser, deleteUser } from "../controllers/user.controller";
 import { initORM } from "../utils/db";
 import { EntityExistsError, EntityNotFound } from "../utils/erros";
-import { User } from "../models/user/user.entity";
+import { ZodError } from "zod";
 
-jest.mock("../utils/db", () => ({
-    initORM: jest.fn(),
-}));
+jest.mock("../utils/db");
+const mockDB = {
+    user: {
+        fetch: jest.fn(),
+        findOne: jest.fn(),
+        save: jest.fn(),
+        delete: jest.fn(),
+    },
+};
 
-jest.mock("../models/user/user.entity", () => ({
-    User: jest.fn(),
-}));
+beforeEach(() => {
+    jest.clearAllMocks();
+    (initORM as jest.Mock).mockResolvedValue(mockDB);
+});
 
-jest.mock("../utils/erros", () => ({
-    EntityExistsError: jest.fn(),
-    EntityNotFound: jest.fn(),
-}));
+describe("User Controller", () => {
+    describe("getUser", () => {
+        it("should fetch users based on filter and value", async () => {
+            const mockUsers = [{ id: 1, username: "JohnDoe" }];
+            mockDB.user.fetch.mockResolvedValue(mockUsers);
 
-describe("User API tests", () => {
-    let fastify: any;
+            const request = { query: { filter: "username", value: "John" } } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
 
-    beforeEach(() => {
-        fastify = Fastify();
-        fastify.get("/admin", getUser);
-        fastify.get("/", getUserById);
-        fastify.post("/", createUser);
-        fastify.delete("/:id", deleteUser);
-    });
+            await getUser(request, reply);
 
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
-    test("GET /api/user/admin should return all users", async () => {
-        const mockDb = {
-            user: {
-                fetch: jest.fn().mockResolvedValue([
-                    { id: 1, username: "user1" },
-                    { id: 2, username: "user2" },
-                ]),
-            },
-        };
-        (initORM as jest.Mock).mockResolvedValue(mockDb);
-
-        const response = await fastify.inject({
-            method: "GET",
-            url: "/admin",
+            expect(mockDB.user.fetch).toHaveBeenCalledWith("username", "John");
+            expect(reply.status).toHaveBeenCalledWith(200);
+            expect(reply.send).toHaveBeenCalledWith(mockUsers);
         });
 
-        expect(response.statusCode).toBe(200);
-        expect(JSON.parse(response.body)).toEqual([
-            { id: 1, username: "user1" },
-            { id: 2, username: "user2" },
-        ]);
+        it("should return 500 on error", async () => {
+            mockDB.user.fetch.mockRejectedValue(new Error("Database error"));
+
+            const request = { query: { filter: "username", value: "John" } } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await getUser(request, reply);
+
+            expect(reply.status).toHaveBeenCalledWith(500);
+        });
     });
 
-    // test("GET /api/user should return user by session ID", async () => {
-    //   const mockDb = { user: { findOne: jest.fn().mockResolvedValue({ id: 1, username: "user1" }) } };
-    //   (initORM as jest.Mock).mockResolvedValue(mockDb);
+    describe("getUserById", () => {
+        it("should fetch a user by ID", async () => {
+            const mockUser = { id: 1, username: "JohnDoe" };
+            mockDB.user.findOne.mockResolvedValue(mockUser);
 
-    //   const request = {
-    //     method: "GET",
-    //     url: "/",
-    //     headers: { authorization: "Bearer valid-token" },
-    //   };
+            const request = { user: { id: 1 } } as any;
+            const reply = { send: jest.fn() } as any;
 
-    //   const response = await fastify.inject(request);
+            await getUserById(request, reply);
 
-    //   expect(response.statusCode).toBe(200);
-    //   expect(JSON.parse(response.body)).toEqual({ id: 1, username: "user1" });
-    // });
-
-    test("POST /api/user should create a new user", async () => {
-        const mockDb = { user: { save: jest.fn().mockResolvedValue({ id: 1, username: "user1" }) } };
-        (initORM as jest.Mock).mockResolvedValue(mockDb);
-
-        const request = {
-            method: "POST",
-            url: "/",
-            payload: { username: "user1", email: "user1@example.com", password: "password123" },
-        };
-
-        const response = await fastify.inject(request);
-
-        expect(response.statusCode).toBe(201);
-        expect(JSON.parse(response.body).message).toBe("User user1 successfully created");
-    });
-
-    test("POST /api/user should return validation error", async () => {
-        const response = await fastify.inject({
-            method: "POST",
-            url: "/",
-            payload: { username: "", email: "user1@example.com", password: "password123" },
+            expect(mockDB.user.findOne).toHaveBeenCalledWith(1);
+            expect(reply.send).toHaveBeenCalledWith(mockUser);
         });
 
-        expect(response.statusCode).toBe(400);
-        expect(JSON.parse(response.body).message).toBe("Validation failed");
-    });
+        it("should return 401 if user ID is not provided", async () => {
+            const request = { user: null } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
 
-    test("DELETE /api/user/:id should delete a user by ID", async () => {
-        const mockDb = { user: { delete: jest.fn().mockResolvedValue({}) } };
-        (initORM as jest.Mock).mockResolvedValue(mockDb);
+            await getUserById(request, reply);
 
-        const response = await fastify.inject({
-            method: "DELETE",
-            url: "/1",
+            expect(reply.status).toHaveBeenCalledWith(401);
+            expect(reply.send).toHaveBeenCalledWith({ message: "Unauthorized" });
         });
 
-        expect(response.statusCode).toBe(201);
-        expect(JSON.parse(response.body).message).toBe("User 1 successfully deleted");
+        it("should return 404 if user is not found", async () => {
+            mockDB.user.findOne.mockResolvedValue(null);
+
+            const request = { user: { id: 1 } } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await getUserById(request, reply);
+
+            expect(reply.status).toHaveBeenCalledWith(404);
+            expect(reply.send).toHaveBeenCalledWith({ message: "User record not found" });
+        });
     });
 
-    test("DELETE /api/user/:id should return not found error", async () => {
-        const mockDb = { user: { delete: jest.fn().mockRejectedValue(new EntityNotFound(1)) } };
-        (initORM as jest.Mock).mockResolvedValue(mockDb);
+    describe("createUser", () => {
+        it("should create a new user", async () => {
+            const request = {
+                body: { username: "JohnDoe", email: "john@example.com", password: "12345" },
+            } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
 
-        const response = await fastify.inject({
-            method: "DELETE",
-            url: "/1",
+            await createUser(request, reply);
+
+            expect(mockDB.user.save).toHaveBeenCalledWith("JohnDoe", "john@example.com", "12345");
+            expect(reply.status).toHaveBeenCalledWith(201);
+            expect(reply.send).toHaveBeenCalledWith({
+                message: "User JohnDoe successfully created",
+            });
         });
 
-        expect(response.statusCode).toBe(404);
-        // expect(JSON.parse(response.body).message).toBe("1 Not Found");
+        it("should return 400 for validation errors", async () => {
+            const request = {
+                body: { username: "", email: "", password: "" },
+            } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await createUser(request, reply);
+
+            expect(reply.status).toHaveBeenCalledWith(400);
+            expect(reply.send).toHaveBeenCalledWith({
+                message: "Validation failed",
+                errors: expect.any(Array),
+            });
+        });
+
+        it("should return 409 if user already exists", async () => {
+            mockDB.user.save.mockRejectedValue(new EntityExistsError("User"));
+
+            const request = {
+                body: { username: "JohnDoe", email: "john@example.com", password: "12345" },
+            } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await createUser(request, reply);
+
+            expect(reply.status).toHaveBeenCalledWith(409);
+            expect(reply.send).toHaveBeenCalledWith({ message: "User already exists" });
+        });
+    });
+
+    describe("deleteUser", () => {
+        it("should delete a user by ID", async () => {
+            const request = { params: { id: 1 } } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await deleteUser(request, reply);
+
+            expect(mockDB.user.delete).toHaveBeenCalledWith(1);
+            expect(reply.status).toHaveBeenCalledWith(201);
+            expect(reply.send).toHaveBeenCalledWith({
+                message: "User 1 successfully deleted",
+            });
+        });
+
+        it("should return 400 if ID is not a number", async () => {
+            const request = { params: { id: "abc" } } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await deleteUser(request, reply);
+
+            expect(reply.status).toHaveBeenCalledWith(400);
+            expect(reply.send).toHaveBeenCalledWith({ message: "User abc must be a number" });
+        });
+
+        it("should return 404 if user is not found", async () => {
+            mockDB.user.delete.mockRejectedValue(new EntityNotFound(1));
+
+            const request = { params: { id: 99 } } as any;
+            const reply = { status: jest.fn().mockReturnThis(), send: jest.fn() } as any;
+
+            await deleteUser(request, reply);
+
+            expect(reply.status).toHaveBeenCalledWith(404);
+            expect(reply.send).toHaveBeenCalledWith({ message: "1 Not Found" });
+        });
     });
 });

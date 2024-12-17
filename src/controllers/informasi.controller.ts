@@ -9,7 +9,7 @@ import { pipeline } from "stream/promises";
 
 const informasiSchema = z.object({
     judul: z.string().min(1).max(255),
-    isi: z.string().min(1).max(255),
+    isi: z.string().min(1),
 });
 
 export async function getInformasi(request: FastifyRequest<{ Querystring: QueryParams }>, reply: FastifyReply) {
@@ -133,7 +133,7 @@ export async function getInformasiPage(request: FastifyRequest<{ Querystring: Qu
         <div class="container-lg">
             <div class="d-flex justify-content-center mt-3">
             <img
-                src="${item.foto}"
+                src="/uploads/informasi/${item.foto}"
                 alt="" class="img-fluid responsive-img">
             </div>
             <div>

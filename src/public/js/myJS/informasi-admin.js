@@ -1,4 +1,5 @@
 const form = document.getElementById("submit-form");
+const submitButton = document.getElementById("submit-btn");
 
 const addEditButtonListeners = () => {
     const editButtons = document.querySelectorAll(".btnEdit");
@@ -38,18 +39,18 @@ const addEditButtonListeners = () => {
                                     <form id="submit-form">
                                         <div class="form-group">
                                             <label for="foto">File Gambar</label>
-                                            <input type="file" id="foto" name="foto">
+                                            <input type="file" id="foto" name="foto accept="image/* required"
                                         </div>
                                         <div class="form-group">
                                             <label for="judul">Judul</label>
-                                            <input type="text" class="form-control" id="judul" name="judul" value="${data.judul}">
+                                            <input type="text" class="form-control" id="judul" name="judul" value="${data.judul}" min="1" max="255" required">
                                         </div>
                                         <div class="form-group">
                                             <label for="isi">Isi</label>
-                                            <textarea class="form-control" id="isi" name="isi">${data.isi}</textarea>
+                                            <textarea class="form-control" id="isi" name="isi" min="1" required>${data.isi}</textarea>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-success" style="font-weight: 600;">Submit</button>
+                                            <button type="submit" class="btn btn-success" style="font-weight: 600;" id="submit-btn">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -64,6 +65,7 @@ const addEditButtonListeners = () => {
                     submitForm.addEventListener("submit", async (e) => {
                         e.preventDefault();
                         const formData = new FormData(submitForm);
+                        showLoading();
 
                         try {
                             const updateResponse = await fetch(`/api/informasi/${idInformasi}`, {
@@ -97,6 +99,7 @@ const addEditButtonListeners = () => {
                         } finally {
                             $(`#tambahinfo`).modal("hide");
                             fetchData();
+                            resetButtons();
                         }
                     });
                 } else {
@@ -180,7 +183,7 @@ form.addEventListener("submit", async (event) => {
     console.log("Form submit event triggered");
     event.preventDefault();
     const formData = new FormData(form);
-    // showLoading();
+    showLoading();
 
     try {
         const response = await fetch("/api/informasi", {
@@ -220,6 +223,7 @@ form.addEventListener("submit", async (event) => {
     } finally {
         $(`#tambahinfo`).modal("hide");
         fetchData();
+        resetButtons();
     }
 });
 
@@ -247,8 +251,8 @@ const fetchData = async () => {
                             ${item.judul}
                         </h5>
                         <h6 style="color: gray; margin-bottom: 8px;">${new Date(item.created).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" })}</h6>
-                        <p class="card-text" style="color: #555; font-size: 0.9em; margin: 0;">
-                            ${item.isi}
+                        <p class="card-text limit-text" style="color: #555; font-size: 0.9em; margin: 0;">
+                            ${limitText(item.isi, 200)}
                         </p>
                     </div>
                     <div class="card-actions" style="flex: 0 0 auto; display: flex; flex-direction: column; gap: 10px; align-items: center;">
@@ -264,14 +268,32 @@ const fetchData = async () => {
                     </div>
                 </div>`;
                 tempatInformasi.insertAdjacentHTML("beforeend", cardHTML);
-                addEditButtonListeners();
-                addDeleteButtonListeners();
             });
         }
     } catch (error) {
         console.error("Error fetching data:", error);
+    } finally {
+        addEditButtonListeners();
+        addDeleteButtonListeners();
     }
 };
+
+function showLoading() {
+    submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+    submitButton.disabled = true;
+}
+
+function resetButtons() {
+    submitButton.innerHTML = "Submit";
+    submitButton.disabled = false;
+}
+
+function limitText(text, limit) {
+    if (text.length > limit) {
+        return text.substring(0, limit) + "...";
+    }
+    return text;
+}
 
 function adjustLayout() {
     const cardContainers = document.querySelectorAll(".card-container");

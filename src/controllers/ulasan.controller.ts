@@ -85,16 +85,12 @@ export async function updateUlasan(
 ) {
     const db = await initORM();
     const userId = request.user?.id;
-    const fk: any = await db.admin.findOne({ fk: userId });
     const { idUlasan } = request.params;
     const { rating, isi, balasan } = request.body;
-    if (!fk) {
-        return reply.status(404).send({ message: `admin not Found` });
-    }
 
     try {
         ulasanSchema.parse({ rating, isi, balasan });
-        await db.ulasan.update(idUlasan, rating, isi, balasan, fk);
+        await db.ulasan.update(idUlasan, rating, isi, balasan);
         return reply.status(201).send({ message: `Ulasan successfully created` });
     } catch (error) {
         if (error instanceof ZodError) {

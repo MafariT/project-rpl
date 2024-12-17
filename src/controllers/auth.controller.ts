@@ -80,7 +80,10 @@ export async function forgotPassword(request: FastifyRequest<{ Body: { email: st
         },
     });
 
-    const resetLink = `${request.protocol}://${request.hostname}:${request.port}/reset-password/${token}`;
+    const resetLink =
+        request.port === 3000
+            ? `${request.protocol}://${request.hostname}:${request.port}/reset-password/${token}`
+            : `${request.protocol}://${request.hostname}/reset-password/${token}`;
 
     await transporter.sendMail({
         from: `"PuskeSmart" <${process.env.SENDER_EMAIL}>`,

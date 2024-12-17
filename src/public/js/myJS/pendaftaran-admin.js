@@ -46,6 +46,7 @@ const pilihButtonListeners = () => {
 
                 document.getElementById(`kirim-${idPendaftaran}`).addEventListener("click", async () => {
                     const jenisKehadiran = document.getElementById(`jenisKehadiran-${idPendaftaran}`).value;
+                    showLoading(idPendaftaran);
 
                     try {
                         const response = await fetch(
@@ -85,6 +86,7 @@ const pilihButtonListeners = () => {
                         });
                     } finally {
                         fetchData();
+                        resetButtons(idPendaftaran);
                         modalInstance.hide();
                     }
                 });
@@ -95,114 +97,6 @@ const pilihButtonListeners = () => {
     });
 };
 
-// const verifikasiButtonListeners = () => {
-//     const btnYa = document.querySelectorAll(".btnYa");
-//     const btnTidak = document.querySelectorAll(".btnTidak");
-
-//     btnYa.forEach((button) => {
-//         button.addEventListener("click", async (event) => {
-//             const button = event.target;
-//             const id = button.getAttribute("data-id");
-
-//             Swal.fire({
-//                 title: "Konfirmasi",
-//                 icon: "warning",
-//                 showCancelButton: true,
-//                 cancelButtonColor: "#e74a3b",
-//                 cancelButtonText: "Tidak",
-//                 confirmButtonColor: "#68A3F3",
-//                 confirmButtonText: "Ya",
-//             }).then(async (result) => {
-//                 if (result.isConfirmed) {
-//                     try {
-//                         const response = await fetch(`/api/admin/set-verified?filter=yes&id=${id}`, {
-//                             method: "GET",
-//                         });
-
-//                         const data = await response.json();
-//                         if (response.ok) {
-//                             Swal.fire({
-//                                 title: "Success",
-//                                 icon: "success",
-//                                 showConfirmButton: false,
-//                                 timer: 1500,
-//                                 timerProgressBar: true,
-//                             });
-//                             fetchData();
-//                         } else {
-//                             Swal.fire({
-//                                 title: "Error!",
-//                                 text: data.message,
-//                                 icon: "error",
-//                                 confirmButtonText: "OK",
-//                             });
-//                         }
-//                     } catch (error) {
-//                         console.error("Error during GET request:", error);
-//                         Swal.fire({
-//                             title: "An error occurred",
-//                             text: error,
-//                         });
-//                     } finally {
-//                         initDataTable();
-//                     }
-//                 }
-//             });
-//         });
-//     });
-//     btnTidak.forEach((button) => {
-//         button.addEventListener("click", async (event) => {
-//             const button = event.target;
-//             const id = button.getAttribute("data-id");
-
-//             Swal.fire({
-//                 title: "Konfirmasi",
-//                 icon: "warning",
-//                 showCancelButton: true,
-//                 cancelButtonColor: "#e74a3b",
-//                 cancelButtonText: "Tidak",
-//                 confirmButtonColor: "#68A3F3",
-//                 confirmButtonText: "Ya",
-//             }).then(async (result) => {
-//                 if (result.isConfirmed) {
-//                     try {
-//                         const response = await fetch(`/api/admin/set-verified?filter=no&id=${id}`, {
-//                             method: "GET",
-//                         });
-
-//                         const data = await response.json();
-//                         if (response.ok) {
-//                             Swal.fire({
-//                                 title: "Success",
-//                                 icon: "success",
-//                                 showConfirmButton: false,
-//                                 timer: 1500,
-//                                 timerProgressBar: true,
-//                             });
-//                             fetchData();
-//                         } else {
-//                             Swal.fire({
-//                                 title: "Error!",
-//                                 text: data.message,
-//                                 icon: "error",
-//                                 confirmButtonText: "OK",
-//                             });
-//                         }
-//                     } catch (error) {
-//                         console.error("Error during GET request:", error);
-//                         Swal.fire({
-//                             title: "An error occurred",
-//                             text: error,
-//                         });
-//                     } finally {
-//                         initDataTable();
-//                     }
-//                 }
-//             });
-//         });
-//     });
-// };
-
 let dataTableInstance = null;
 
 async function fetchData(filter = "") {
@@ -212,7 +106,6 @@ async function fetchData(filter = "") {
         // Handle Pendaftaran Data
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             const tbody = document.querySelector("tbody");
 
             document.getElementById("hadir").textContent = data.present || 0;
@@ -280,7 +173,7 @@ async function fetchData(filter = "") {
                                     <p><strong>Keluhan:</strong> ${pendaftaran.keluhan}</p>
                                     <p><strong>Nama Dokter:</strong> ${pendaftaran.namaDokter}</p>
                                     <p><strong>Jam:</strong> ${pendaftaran.jam}</p>
-                                    <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran  === 'Cash' ? 'Cash' : 'Bank BRI'}</p>
+                                    <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran === "Cash" ? "Cash" : "Bank BRI"}</p>
                                     <p><strong>Total Pembayaran:</strong> ${pendaftaran.totalPembayaran}</p>
                                     <p><strong>No Tagihan:</strong> ${pendaftaran.noTagihan}</p>
                                     <p><strong>Mulai Bayar:</strong> ${mulaiBayar}</p>
@@ -319,6 +212,18 @@ async function fetchData(filter = "") {
 function updateHeading(filterType) {
     const heading = document.getElementById("filter-heading");
     heading.textContent = `Tabel Kunjungan Pasien - ${filterType}`;
+}
+
+function showLoading(idPendaftaran) {
+    const kirimButton = document.getElementById(`kirim-${idPendaftaran}`);
+    kirimButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+    kirimButton.disabled = true;
+}
+
+function resetButtons(idPendaftaran) {
+    const kirimButton = document.getElementById(`kirim-${idPendaftaran}`);
+    kirimButton.innerHTML = "Kirim";
+    kirimButton.disabled = false;
 }
 
 document.getElementById("toggle-weekly").addEventListener("click", () => {
