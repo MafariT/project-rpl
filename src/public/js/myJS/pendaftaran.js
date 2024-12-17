@@ -343,11 +343,10 @@ const fetchData = async () => {
                     month: "long",
                     year: "numeric",
                 });
-
                 tr.innerHTML = `
                         <td>${pendaftaran.nama}</td>
                         <td>${pendaftaran.noTagihan}</td>
-                        <td>${pendaftaran.jenisPembayaran}</td>
+                        <td>${pendaftaran.jenisPembayaran  === 'Cash' ? 'Cash' : 'Bank BRI'}</td>
                         <td>${pendaftaran.totalPembayaran}</td>
                         <td >${mulaiBayar}</td>
                         <td>
@@ -377,7 +376,7 @@ const fetchData = async () => {
                                         <p><strong>Keluhan:</strong> ${pendaftaran.keluhan}</p>
                                         <p><strong>Nama Dokter:</strong> ${pendaftaran.namaDokter}</p>
                                         <p><strong>Jam:</strong> ${pendaftaran.jam}</p>
-                                        <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran}</p>
+                                        <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran  === 'Cash' ? 'Cash' : 'Bank BRI'}</p>
                                         <p><strong>Total Pembayaran:</strong> ${pendaftaran.totalPembayaran}</p>
                                         <p><strong>No Tagihan:</strong> ${pendaftaran.noTagihan}</p>
                                         <p><strong>Mulai Bayar:</strong> ${mulaiBayar}</p>

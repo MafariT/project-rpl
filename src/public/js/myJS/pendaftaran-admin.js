@@ -280,7 +280,7 @@ async function fetchData(filter = "") {
                                     <p><strong>Keluhan:</strong> ${pendaftaran.keluhan}</p>
                                     <p><strong>Nama Dokter:</strong> ${pendaftaran.namaDokter}</p>
                                     <p><strong>Jam:</strong> ${pendaftaran.jam}</p>
-                                    <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran}</p>
+                                    <p><strong>Jenis Pembayaran:</strong> ${pendaftaran.jenisPembayaran  === 'Cash' ? 'Cash' : 'Bank BRI'}</p>
                                     <p><strong>Total Pembayaran:</strong> ${pendaftaran.totalPembayaran}</p>
                                     <p><strong>No Tagihan:</strong> ${pendaftaran.noTagihan}</p>
                                     <p><strong>Mulai Bayar:</strong> ${mulaiBayar}</p>
