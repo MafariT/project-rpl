@@ -91,7 +91,7 @@ export async function updateUlasan(
     try {
         ulasanSchema.parse({ rating, isi, balasan });
         await db.ulasan.update(idUlasan, rating, isi, balasan);
-        return reply.status(201).send({ message: `Ulasan successfully created` });
+        return reply.status(201).send({ message: `Ulasan successfully updated` });
     } catch (error) {
         if (error instanceof ZodError) {
             console.error(error);

@@ -142,12 +142,10 @@ export async function getUlasanAdmin(request: FastifyRequest<{ Querystring: Quer
     const { filter } = request.query;
 
     try {
-        // Fetch all records from the database
         const ulasan = await db.ulasan.findAll();
 
         let filteredRecords = ulasan;
 
-        // Apply filter if valid filter is provided
         if (filter && validFilter.safeParse(filter).success) {
             const now = new Date();
             const cutoffDate = filter === "weekly" ? subWeeks(now, 1) : subMonths(now, 1);
@@ -158,7 +156,6 @@ export async function getUlasanAdmin(request: FastifyRequest<{ Querystring: Quer
             });
         }
 
-        // Fetch pasien details for each ulasan item using Promise.all
         const ulasanDetails = await Promise.all(
             filteredRecords.map(async (ulasanItem) => {
                 const pasien = await db.pasien.findOne({ idPasien: ulasanItem.fk });
@@ -178,7 +175,6 @@ export async function getUlasanAdmin(request: FastifyRequest<{ Querystring: Quer
             }),
         );
 
-        // Count filtered records
         const recordsCount = ulasanDetails.length;
 
         return reply.send({ ulasanCount: recordsCount, ulasanDetails });

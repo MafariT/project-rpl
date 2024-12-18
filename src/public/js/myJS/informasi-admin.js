@@ -43,7 +43,7 @@ const addEditButtonListeners = () => {
                                         </div>
                                         <div class="form-group">
                                             <label for="judul">Judul</label>
-                                            <input type="text" class="form-control" id="judul" name="judul" value="${data.judul}" min="1" max="255" required">
+                                            <input type="text" class="form-control" id="judul" name="judul" value="${data.judul}" min="1" max="255" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="isi">Isi</label>

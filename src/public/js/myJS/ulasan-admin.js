@@ -114,8 +114,7 @@ async function fetchData(filter = "") {
                     } else {
                         Swal.fire({
                             icon: "warning",
-                            title: "Empty Response",
-                            text: "Please enter a response before submitting.",
+                            text: "Harap isi balasan terlbi dahulu",
                         });
                     }
                 });
