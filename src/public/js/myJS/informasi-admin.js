@@ -259,10 +259,10 @@ const fetchData = async () => {
                         <a href="/informasi-admin/${item.idInformasi}" class="btn btn-primary" style="padding: 8px; font-size: 0.9em;">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        <button class="btnEdit btn-success" data-id="${item.idInformasi}" style="padding: 8px; font-size: 0.9em;">
+                        <button class="btn btn-success" data-id="${item.idInformasi}" style="padding: 8px; font-size: 0.9em;">
                             <i class="fa-solid fa-pen-to-square" id="${item.idInformasi}"></i>
                         </button>
-                        <button class="btnDelete btn-danger" data-id="${item.idInformasi}" style="padding: 8px; font-size: 0.9em;">
+                        <button class="btn btn-danger" data-id="${item.idInformasi}" style="padding: 8px; font-size: 0.9em;">
                             <i class="fa-solid fa-trash" id="${item.idInformasi}"></i>
                         </button>
                     </div>
